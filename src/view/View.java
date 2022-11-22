@@ -1,17 +1,20 @@
 package view;
 
+import controller.Features;
+import controller.GUIController;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.TreeMap;
+import javax.swing.JFrame;
 
 
 /**
  * View for the MVC interface.
  */
-public class View implements IView {
+public class View extends JFrame implements TextUI {
 
   private Appendable out;
   private Scanner scanner;
@@ -105,6 +108,11 @@ public class View implements IView {
     sb.append("9. QUIT\n");
     sb.append("------------------------------");
     displayInput(sb.toString());
+  }
+
+  @Override
+  public void addFeatures(GUIController guiController) {
+
   }
 
   @Override
@@ -342,5 +350,10 @@ public class View implements IView {
         displayInput("ENTER DATE IN YYYY-MM-DD FORMAT.");
       }
     }
+  }
+
+  @Override
+  public void addFeatures(Features features) {
+
   }
 }

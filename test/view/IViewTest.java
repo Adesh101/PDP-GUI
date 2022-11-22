@@ -23,7 +23,7 @@ public class IViewTest {
 
   @Test
   public void checkMenuOption() {
-    IView view = new View(in, out);
+    TextUI view = new View(in, out);
     view.showMenu();
     String expectedString = "----------------------------\n"
         + "          STOCKS\n"

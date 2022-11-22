@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import model.operation.IOperation;
 import model.MockModel;
-import view.IView;
+import view.TextUI;
 import view.View;
 import java.io.StringReader;
 import org.junit.Before;
@@ -17,7 +17,7 @@ public class ControllerTest {
 
   private IOperation model;
   private Controller controller;
-  private IView view;
+  private TextUI view;
   private Readable in;
   private StringBuilder log;
   private Appendable out;

@@ -1,6 +1,7 @@
 package controller;
 
 import model.operation.IOperation;
+import view.IView;
 
 /**
  * This is an interface for the Controller.
@@ -80,4 +81,6 @@ public interface IController {
    * @return: menuOption
    */
   String menuHelper();
+
+  void setView(IView view);
 }

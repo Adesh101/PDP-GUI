@@ -14,15 +14,16 @@ import controller.actions.ShowExistingPortfolios;
 import java.util.TreeMap;
 import model.operation.IOperation;
 import view.IView;
+import view.TextUI;
 
 /**
  * This is the main controller of the program. This controller will handle input and pass them to
  * the appropriate child controllers.
  */
-public class Controller implements IController {
+public class Controller implements IController, Features {
 
   private IOperation operation;
-  private IView view;
+  private TextUI view;
   private IActions action;
 
   /**
@@ -32,7 +33,7 @@ public class Controller implements IController {
    * @param: view
    * @throws: IllegalArgumentException
    */
-  public Controller(IOperation operation, IView view) throws IllegalArgumentException {
+  public Controller(IOperation operation, TextUI view) throws IllegalArgumentException {
     if (operation == null || view == null) {
       throw new IllegalArgumentException();
     }
@@ -233,5 +234,15 @@ public class Controller implements IController {
   public String menuHelper() {
     view.showMenu();
     return view.fetchInput();
+  }
+
+  @Override
+  public void setView(IView view) {
+
+  }
+
+  @Override
+  public void showMenu() {
+
   }
 }
