@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>D:/PDP/PDP-Part 2/src/model</OriginalElement>
+  <nodes>
+    <node x="-82.61738566435906" y="370.3601151332289">model.portfolio.IFlexiblePortfolio</node>
+    <node x="1016.3826143356409" y="392.3601151332289">model.portfolio.IInflexiblePortfolio</node>
+    <node x="-77.61738566435906" y="1241.3601151332289">model.plot.LineChart</node>
+    <node x="-82.61738566435906" y="650.3601151332289">model.portfolio.FlexiblePortfolio</node>
+    <node x="517.8826143356409" y="331.3601151332289">model.operation.IOperation</node>
+    <node x="-53.11738566435906" y="1115.3601151332289">model.plot.ILineChart</node>
+    <node x="513.8826143356409" y="1053.3601151332289">model.operation.Operation</node>
+    <node x="593.3826143356409" y="-14.639884866771126">model.stocks.IStocks</node>
+    <node x="1070.882614335641" y="1296.3601151332289">model.filehandling.CsvFiles</node>
+    <node x="593.3826143356409" y="155.36011513322887">model.stocks.Stocks</node>
+    <node x="1092.382614335641" y="994.3601151332289">model.filehandling.FileHandling</node>
+    <node x="1016.3826143356409" y="628.3601151332289">model.portfolio.InflexiblePortfolio</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.filehandling.CsvFiles" target="model.filehandling.FileHandling" relationship="REALIZATION">
+      <point x="0.0" y="-137.0" />
+      <point x="0.0" y="126.0" />
+    </edge>
+    <edge source="model.portfolio.InflexiblePortfolio" target="model.portfolio.IInflexiblePortfolio" relationship="REALIZATION">
+      <point x="0.0" y="-104.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="model.operation.Operation" target="model.operation.IOperation" relationship="REALIZATION">
+      <point x="0.0" y="-380.0" />
+      <point x="0.0" y="336.0" />
+    </edge>
+    <edge source="model.stocks.Stocks" target="model.stocks.IStocks" relationship="REALIZATION">
+      <point x="0.0" y="-60.0" />
+      <point x="0.0" y="60.0" />
+    </edge>
+    <edge source="model.portfolio.FlexiblePortfolio" target="model.portfolio.IFlexiblePortfolio" relationship="REALIZATION">
+      <point x="0.0" y="-159.0" />
+      <point x="0.0" y="115.0" />
+    </edge>
+    <edge source="model.plot.LineChart" target="model.plot.ILineChart" relationship="REALIZATION">
+      <point x="0.0" y="-192.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.3698903290129611" showDependencies="false" x="1421.5" y="694.5" />
+  <SelectedNodes>
+    <node>model.operation.IOperation</node>
+    <node>model.portfolio.IInflexiblePortfolio</node>
+    <node>model.stocks.IStocks</node>
+    <node>model.portfolio.FlexiblePortfolio</node>
+    <node>model.portfolio.IFlexiblePortfolio</node>
+    <node>model.stocks.Stocks</node>
+    <node>model.filehandling.FileHandling</node>
+    <node>model.plot.ILineChart</node>
+    <node>model.portfolio.InflexiblePortfolio</node>
+    <node>model.plot.LineChart</node>
+    <node>model.operation.Operation</node>
+    <node>model.filehandling.CsvFiles</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>D:/PDP/PDP-Part 2/src</OriginalElement>
+  <nodes>
+    <node x="1880.3259175518342" y="2194.8587049371527">controller.ControllerTest</node>
+    <node x="2529.7678207067584" y="611.3587049371524">model.portfolio.IInflexiblePortfolio</node>
+    <node x="2376.825917551834" y="2940.8587049371527">UpdateStockData</node>
+    <node x="1856.2678207067584" y="150.3587049371522">controller.actions.AddStockToFlexiblePortfolio</node>
+    <node x="89.26782070675836" y="150.3587049371522">controller.actions.CreateNewPortfolio</node>
+    <node x="3115.2678207067584" y="1458.8587049371524">model.operation.IOperation</node>
+    <node x="3131.2678207067584" y="419.3587049371522">model.plot.ILineChart</node>
+    <node x="-126.73217929324164" y="150.3587049371522">controller.actions.CreateNewPortfolioCSV</node>
+    <node x="727.2678207067584" y="150.3587049371522">controller.actions.AddStockToPortfolio</node>
+    <node x="515.2678207067584" y="150.3587049371522">controller.actions.SellStock</node>
+    <node x="2703.7678207067584" y="2952.5599930195476">MVCStocks</node>
+    <node x="2383.2678207067584" y="891.3587049371524">model.filehandling.CsvFiles</node>
+    <node x="2404.7678207067584" y="1215.3587049371524">model.filehandling.FileHandling</node>
+    <node x="2204.7678207067584" y="117.3587049371522">model.stocks.Stocks</node>
+    <node x="2529.7678207067584" y="353.3587049371524">model.portfolio.InflexiblePortfolio</node>
+    <node x="1761.7678207067584" y="913.3587049371524">model.portfolio.IFlexiblePortfolio</node>
+    <node x="1427.2678207067584" y="150.3587049371522">controller.actions.ShowExistingPortfolios</node>
+    <node x="3106.7678207067584" y="-14.641295062847803">model.plot.LineChart</node>
+    <node x="1761.7678207067584" y="545.3587049371524">model.portfolio.FlexiblePortfolio</node>
+    <node x="1859.8259175518342" y="2533.8587049371527">model.IOperationTest</node>
+    <node x="2579.2678207067584" y="2154.3587049371527">model.MockModel</node>
+    <node x="301.26782070675836" y="150.3587049371522">controller.actions.CreateFlexiblePortfolio</node>
+    <node x="2587.7678207067584" y="3794.8587049371527">view.View</node>
+    <node x="1478.3259175518342" y="2797.8587049371527">controller.IController</node>
+    <node x="3111.2678207067584" y="647.8587049371524">model.operation.Operation</node>
+    <node x="849.2678207067584" y="254.3587049371522">controller.actions.IActions</node>
+    <node x="2204.7678207067584" y="287.3587049371522">model.stocks.IStocks</node>
+    <node x="1215.2678207067584" y="150.3587049371522">controller.actions.CostBasisByDate</node>
+    <node x="939.2678207067584" y="150.3587049371522">controller.actions.ShowAmountOfPortfolioByDate</node>
+    <node x="2367.325917551834" y="3032.8587049371527">view.IViewTest</node>
+    <node x="2587.7678207067584" y="3162.8587049371527">view.IView</node>
+    <node x="1644.2678207067584" y="150.3587049371522">controller.actions.ShowComposition</node>
+    <node x="1478.3259175518342" y="3187.8587049371527">controller.Controller</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.filehandling.CsvFiles" target="model.filehandling.FileHandling" relationship="REALIZATION">
+      <point x="-0.0" y="137.0" />
+      <point x="-0.0" y="-126.0" />
+    </edge>
+    <edge source="controller.actions.CreateNewPortfolio" target="controller.actions.IActions" relationship="REALIZATION">
+      <point x="1.7929324167198502E-4" y="27.000295062847727" />
+      <point x="185.26800000000003" y="229.0" />
+      <point x="945.268" y="229.0" />
+      <point x="1.7929324167198502E-4" y="-26.999704937152273" />
+    </edge>
+    <edge source="controller.actions.ShowAmountOfPortfolioByDate" target="controller.actions.IActions" relationship="REALIZATION">
+      <point x="1.7929324167198502E-4" y="27.000295062847727" />
+      <point x="1067.268" y="229.0" />
+      <point x="945.268" y="229.0" />
+      <point x="1.7929324167198502E-4" y="-26.999704937152273" />
+    </edge>
+    <edge source="controller.actions.CreateFlexiblePortfolio" target="controller.actions.IActions" relationship="REALIZATION">
+      <point x="1.7929324167198502E-4" y="27.000295062847727" />
+      <point x="398.26800000000003" y="229.0" />
+      <point x="945.268" y="229.0" />
+      <point x="1.7929324167198502E-4" y="-26.999704937152273" />
+    </edge>
+    <edge source="model.MockModel" target="model.operation.IOperation" relationship="REALIZATION">
+      <point x="194.23217929324164" y="-336.4997049371524" />
+      <point x="2974.5" y="1433.0" />
+      <point x="3316.268" y="1433.0" />
+      <point x="1.7929324167198502E-4" y="-336.4997049371524" />
+    </edge>
+    <edge source="model.portfolio.InflexiblePortfolio" target="model.portfolio.IInflexiblePortfolio" relationship="REALIZATION">
+      <point x="-0.0" y="104.0" />
+      <point x="-0.0" y="-93.0" />
+    </edge>
+    <edge source="model.operation.Operation" target="model.operation.IOperation" relationship="REALIZATION">
+      <point x="1.7929324167198502E-4" y="380.5002950628476" />
+      <point x="1.7929324167198502E-4" y="-336.4997049371524" />
+    </edge>
+    <edge source="controller.actions.AddStockToPortfolio" target="controller.actions.IActions" relationship="REALIZATION">
+      <point x="1.7929324167198502E-4" y="27.000295062847727" />
+      <point x="823.268" y="229.0" />
+      <point x="945.268" y="229.0" />
+      <point x="1.7929324167198502E-4" y="-26.999704937152273" />
+    </edge>
+    <edge source="controller.Controller" target="controller.IController" relationship="REALIZATION">
+      <point x="0.0" y="-170.0" />
+      <point x="0.0" y="170.0" />
+    </edge>
+    <edge source="model.plot.LineChart" target="model.plot.ILineChart" relationship="REALIZATION">
+      <point x="-0.0" y="192.0" />
+      <point x="-0.0" y="-38.0" />
+    </edge>
+    <edge source="controller.actions.ShowComposition" target="controller.actions.IActions" relationship="REALIZATION">
+      <point x="1.792932416435633E-4" y="27.000295062847727" />
+      <point x="1740.268" y="229.0" />
+      <point x="945.268" y="229.0" />
+      <point x="1.7929324167198502E-4" y="-26.999704937152273" />
+    </edge>
+    <edge source="controller.actions.SellStock" target="controller.actions.IActions" relationship="REALIZATION">
+      <point x="1.7929324167198502E-4" y="27.000295062847727" />
+      <point x="611.268" y="229.0" />
+      <point x="945.268" y="229.0" />
+      <point x="1.7929324167198502E-4" y="-26.999704937152273" />
+    </edge>
+    <edge source="controller.actions.CreateNewPortfolioCSV" target="controller.actions.IActions" relationship="REALIZATION">
+      <point x="1.7929324167198502E-4" y="27.000295062847727" />
+      <point x="-28.73199999999997" y="229.0" />
+      <point x="945.268" y="229.0" />
+      <point x="1.7929324167198502E-4" y="-26.999704937152273" />
+    </edge>
+    <edge source="view.View" target="view.IView" relationship="REALIZATION">
+      <point x="0.0" y="-302.0" />
+      <point x="0.0" y="291.0" />
+    </edge>
+    <edge source="model.stocks.Stocks" target="model.stocks.IStocks" relationship="REALIZATION">
+      <point x="-0.0" y="60.0" />
+      <point x="-0.0" y="-60.0" />
+    </edge>
+    <edge source="controller.actions.CostBasisByDate" target="controller.actions.IActions" relationship="REALIZATION">
+      <point x="1.792932416151416E-4" y="27.000295062847727" />
+      <point x="1311.268" y="229.0" />
+      <point x="945.268" y="229.0" />
+      <point x="1.7929324167198502E-4" y="-26.999704937152273" />
+    </edge>
+    <edge source="model.portfolio.FlexiblePortfolio" target="model.portfolio.IFlexiblePortfolio" relationship="REALIZATION">
+      <point x="-0.0" y="159.0" />
+      <point x="-0.0" y="-115.0" />
+    </edge>
+    <edge source="controller.actions.ShowExistingPortfolios" target="controller.actions.IActions" relationship="REALIZATION">
+      <point x="1.792932416435633E-4" y="27.000295062847727" />
+      <point x="1525.768" y="229.0" />
+      <point x="945.268" y="229.0" />
+      <point x="1.7929324167198502E-4" y="-26.999704937152273" />
+    </edge>
+    <edge source="controller.actions.AddStockToFlexiblePortfolio" target="controller.actions.IActions" relationship="REALIZATION">
+      <point x="1.792932416151416E-4" y="27.000295062847727" />
+      <point x="1969.768" y="229.0" />
+      <point x="945.268" y="229.0" />
+      <point x="1.7929324167198502E-4" y="-26.999704937152273" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.32767999999999997" showDependencies="false" x="2378.30322265625" y="744.6059570312501" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
