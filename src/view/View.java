@@ -10,7 +10,6 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import javax.swing.JFrame;
 
-
 /**
  * View for the MVC interface.
  */

@@ -418,7 +418,6 @@ public class Operation implements IOperation {
       flexiblePortfolio = new FlexiblePortfolio();
       flexiblePortfolio.createPortfolio(portfolioName, date);
     }
-
   }
 
   @Override
