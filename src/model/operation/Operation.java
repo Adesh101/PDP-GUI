@@ -441,4 +441,20 @@ public class Operation implements IOperation {
   public int getLineChartScale() {
     return lineChart.scale();
   }
+
+  @Override
+  public String checkValidDate(String date) {
+    String dateFormat = "yyyy-MM-dd";
+    if (date.length() != 10) {
+      return "Enter a valid date.";
+    }
+    try {
+      DateFormat df = new SimpleDateFormat(dateFormat);
+      df.setLenient(false);
+      df.parse(date);
+    } catch (ParseException e) {
+      return "Enter a valid date.";
+    }
+    return "";
+  }
 }

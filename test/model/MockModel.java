@@ -181,4 +181,9 @@ public class MockModel implements IOperation {
   public int getLineChartScale() {
     return 0;
   }
+
+  @Override
+  public String checkValidDate(String date) {
+    return null;
+  }
 }

@@ -1,28 +1,20 @@
 package controller;
 
-import controller.actions.IActions;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import model.operation.IOperation;
 import view.FunctionalView.MainView;
 import view.TextFieldView.BuyStock;
 import view.TextFieldView.CreateFlexiblePortfolio;
 import view.FunctionalView.MainViewFunction;
-import view.IView;
 import view.TextFieldView.ReadPortfolio;
 import view.TextFieldView.SavePortfolio;
 import view.TextFieldView.SellStock;
 import view.TextFieldView.TextField;
-import view.TextUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.time.LocalDate;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
@@ -35,10 +27,8 @@ public class GUIController implements IController, ActionListener{
   private TextField sellStock;
   private TextField savePortfolio;
   private TextField readPortfolio;
-  private IView view;
-  private IActions action;
   private String str;
-  private Map<String, Runnable> actionMap;
+  private Map<String, Runnable> operationMap;
 
   /**
    * Constructor for the main controller.
@@ -54,22 +44,18 @@ public class GUIController implements IController, ActionListener{
     str = "";
   }
 
-  public void setView(TextUI v) {
-    view = v;
-    //provide view with all the callbacks
-    view.addFeatures(this);
-  }
-
   private Map<String, Runnable> initializeMap() {
-    Map<String, Runnable> actionMap = new HashMap<>();
-    actionMap.put("createFlexiblePortfolio", () -> {
+    operationMap = new HashMap<>();
+
+
+    operationMap.put("createFlexiblePortfolio", () -> {
       createView = new CreateFlexiblePortfolio("Create Portfolio");
       createView.addActionListener(this);
-      ((JFrame) createView).setLocation(((JFrame) this.mainView).getLocation());
       ((JFrame) this.mainView).dispose();
     });
 
-    actionMap.put("createPortfolioButton", () -> {
+
+    operationMap.put("createPortfolioButton", () -> {
       if (createView.getInput().length() == 1) {
         createView.setHintMess("Enter valid portfolio details.");
         return;
@@ -81,20 +67,7 @@ public class GUIController implements IController, ActionListener{
         createView.setHintMess("Portfolio name cannot be empty.");
         return;
       }
-
-      String dateFormat = "yyyy-MM-dd";
-      if (portfolioDate.length() != 10) {
-          createView.setHintMess("Enter a valid date.");
-        }
-      try {
-        DateFormat df = new SimpleDateFormat(dateFormat);
-        df.setLenient(false);
-        df.parse(portfolioDate);
-      } catch (ParseException e) {
-        createView.setHintMess("Enter a valid date.");
-        return;
-      }
-
+      createView.setHintMess(operation.checkValidDate(portfolioDate));
       try {
         operation.createFlexiblePortfolio(portfolioName, portfolioDate);
         createView.setHintMess("Portfolio " + portfolioName + " on " + portfolioDate + " created.");
@@ -105,14 +78,15 @@ public class GUIController implements IController, ActionListener{
       }
     });
 
-    actionMap.put("buyStock", () -> {
+
+    operationMap.put("buyStock", () -> {
       buyStock = new BuyStock("Buy Stock");
       buyStock.addActionListener(this);
-      ((JFrame) buyStock).setLocation(((JFrame) this.mainView).getLocation());
       ((JFrame) this.mainView).dispose();
     });
 
-    actionMap.put("addStock", () -> {
+
+    operationMap.put("addStock", () -> {
       if (buyStock.getInput().length() == 4) {
         buyStock.setHintMess("Enter valid portfolio details.");
         return;
@@ -153,22 +127,8 @@ public class GUIController implements IController, ActionListener{
         buyStock.setHintMess("Commission fee cannot be empty or negative");
         return;
       }
-
-      String dateFormat = "yyyy-MM-dd";
-      if (buyDate.length() != 10) {
-        buyStock.setHintMess("Enter a valid date.");
-      }
-      try {
-        DateFormat df = new SimpleDateFormat(dateFormat);
-        df.setLenient(false);
-        df.parse(buyDate);
-      } catch (ParseException e) {
-        buyStock.setHintMess("Enter a valid date.");
-        return;
-      }
-
+      buyStock.setHintMess(operation.checkValidDate(buyDate));
       double price = Double.parseDouble(operation.callStockAPI(ticker, buyDate)[3]);
-
       try {
         operation.addStockToFlexiblePortfolio(portfolioName, ticker, quantity, price, buyDate, commissionFee);
         buyStock.setHintMess(quantity + " units of " + " stock " + ticker + " added to portfolio "
@@ -180,14 +140,15 @@ public class GUIController implements IController, ActionListener{
       }
     });
 
-    actionMap.put("sellStock", () -> {
+
+    operationMap.put("sellStock", () -> {
       sellStock = new SellStock("Sell Stock");
       sellStock.addActionListener(this);
-      ((JFrame) sellStock).setLocation(((JFrame) this.mainView).getLocation());
       ((JFrame) this.mainView).dispose();
     });
 
-    actionMap.put("sellStockButton", () -> {
+
+    operationMap.put("sellStockButton", () -> {
       if (sellStock.getInput().length() == 4) {
         sellStock.setHintMess("Enter valid portfolio details.");
         return;
@@ -212,9 +173,6 @@ public class GUIController implements IController, ActionListener{
       }
 
       String sellDate = sellStockDetails[3];
-
-      //create a function to check if any of the above quantities are empty
-
       if (ticker.length() == 0) {
         sellStock.setHintMess("Ticker cannot be empty.");
         return;
@@ -228,22 +186,8 @@ public class GUIController implements IController, ActionListener{
         sellStock.setHintMess("Commission fee cannot be empty or negative");
         return;
       }
-
-      String dateFormat = "yyyy-MM-dd";
-      if (sellDate.length() != 10) {
-        sellStock.setHintMess("Enter a valid date.");
-      }
-      try {
-        DateFormat df = new SimpleDateFormat(dateFormat);
-        df.setLenient(false);
-        df.parse(sellDate);
-      } catch (ParseException e) {
-        sellStock.setHintMess("Enter a valid date.");
-        return;
-      }
-
+      sellStock.setHintMess(operation.checkValidDate(sellDate));
       double price = Double.parseDouble(operation.callStockAPI(ticker, sellDate)[3]);
-
       try {
         operation.sellStock(portfolioName, ticker, quantity, price, sellDate, commissionFee);
         sellStock.setHintMess(quantity + " units of " + " stock " + ticker + " added to portfolio "
@@ -255,14 +199,15 @@ public class GUIController implements IController, ActionListener{
       }
     });
 
-    actionMap.put("savePortfolio", () -> {
+
+    operationMap.put("savePortfolio", () -> {
       savePortfolio = new SavePortfolio("Save Portfolio");
       savePortfolio.addActionListener(this);
-      ((JFrame) savePortfolio).setLocation(((JFrame) this.mainView).getLocation());
       ((JFrame) this.mainView).dispose();
     });
 
-    actionMap.put("savePortfolioButton", () -> {
+
+    operationMap.put("savePortfolioButton", () -> {
       String portfolioName = savePortfolio.getInput();
       if (portfolioName.length() == 1) {
         savePortfolio.setHintMess("Portfolio name cannot be empty.");
@@ -281,19 +226,17 @@ public class GUIController implements IController, ActionListener{
       catch (IllegalArgumentException e) {
         savePortfolio.setHintMess(e.getMessage());
       }
-
-      ((JFrame) savePortfolio).setLocation(((JFrame) this.mainView).getLocation());
       ((JFrame) this.mainView).dispose();
     });
 
-    actionMap.put("readPortfolio", () -> {
+    operationMap.put("readPortfolio", () -> {
       readPortfolio = new ReadPortfolio("Read Portfolio");
       readPortfolio.addActionListener(this);
-      ((JFrame) readPortfolio).setLocation(((JFrame) this.mainView).getLocation());
       ((JFrame) this.mainView).dispose();
     });
 
-    actionMap.put("readPortfolioButton", () -> {
+
+    operationMap.put("readPortfolioButton", () -> {
       String portfolioName = readPortfolio.getInput();
       if (portfolioName.length() == 1) {
         readPortfolio.setHintMess("Portfolio name cannot be empty.");
@@ -309,132 +252,60 @@ public class GUIController implements IController, ActionListener{
         readPortfolio.setHintMess(e.getMessage());
       }
 
-      ((JFrame) readPortfolio).setLocation(((JFrame) this.mainView).getLocation());
       ((JFrame) this.mainView).dispose();
     });
 
-    actionMap.put("createHomeButton", () -> {
+
+    operationMap.put("createHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
-      ((JFrame) mainView).setLocation(((JFrame) this.createView).getLocation());
       ((JFrame) this.createView).dispose();
     });
 
-    actionMap.put("addHomeButton", () -> {
+
+    operationMap.put("addHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
-      ((JFrame) mainView).setLocation(((JFrame) this.buyStock).getLocation());
       ((JFrame) this.buyStock).dispose();
     });
 
-    actionMap.put("sellHomeButton", () -> {
+
+    operationMap.put("sellHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
-      ((JFrame) mainView).setLocation(((JFrame) this.sellStock).getLocation());
       ((JFrame) this.sellStock).dispose();
     });
 
-    actionMap.put("saveHomeButton", () -> {
+
+    operationMap.put("saveHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
-      ((JFrame) mainView).setLocation(((JFrame) this.savePortfolio).getLocation());
       ((JFrame) this.savePortfolio).dispose();
     });
 
-    actionMap.put("readHomeButton", () -> {
+
+    operationMap.put("readHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
-      ((JFrame) mainView).setLocation(((JFrame) this.readPortfolio).getLocation());
       ((JFrame) this.readPortfolio).dispose();
     });
 
-    actionMap.put("quit", () -> {
+
+    operationMap.put("quit", () -> {
       System.exit(0);
     });
 
-    return actionMap;
-  }
-
-  @Override
-  public void operate(IOperation operation) {
-    actionMap = initializeMap();
-  }
-
-  @Override
-  public void createPortfolioHelper() {
-
-  }
-
-  @Override
-  public void createFlexiblePortfolio() {
-
-  }
-
-  @Override
-  public void createInflexiblePortfolio() {
-
-  }
-
-  @Override
-  public void showExistingPortfolioHelper() {
-
-  }
-
-  @Override
-  public void showAmountByDateHelper() {
-
-  }
-
-  @Override
-  public void showCompositionHelper() {
-
-  }
-
-  @Override
-  public void showCostBasisByDateHelper() {
-
-  }
-
-  @Override
-  public void sellStockHelper() {
-
-  }
-
-  @Override
-  public void createPortfolioCSV() {
-
-  }
-
-  @Override
-  public void addStocksHelper(String portfolioName) {
-
-  }
-
-  @Override
-  public void addStocksToFlexiblePortfolioHelper() {
-
-  }
-
-  @Override
-  public void showGraph() {
-
-  }
-
-  @Override
-  public String menuHelper() {
-    return null;
-  }
-
-  @Override
-  public void setView(IView v) {
-    view = v;
-    //provide view with all the callbacks
-    view.addFeatures(this);
+    return operationMap;
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
     this.str = e.getActionCommand();
-    actionMap.get(str).run();
+    operationMap.get(str).run();
+  }
+
+  @Override
+  public void operate(IOperation operation) {
+    initializeMap();
   }
 }

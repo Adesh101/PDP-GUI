@@ -1,6 +1,5 @@
 package view;
 
-import controller.Features;
 import controller.GUIController;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -349,10 +348,5 @@ public class View extends JFrame implements TextUI {
         displayInput("ENTER DATE IN YYYY-MM-DD FORMAT.");
       }
     }
-  }
-
-  @Override
-  public void addFeatures(Features features) {
-
   }
 }

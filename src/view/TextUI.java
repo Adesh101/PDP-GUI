@@ -1,7 +1,6 @@
 package view;
 
 import java.util.TreeMap;
-import controller.Features;
 
 /**
  * Interface for view class.
@@ -174,6 +173,4 @@ public interface TextUI extends IView {
    * @return date
    */
   String showPortfolioValueByDate();
-
-  void addFeatures(Features features);
 }

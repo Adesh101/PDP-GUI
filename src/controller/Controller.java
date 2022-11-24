@@ -13,15 +13,13 @@ import controller.actions.ShowComposition;
 import controller.actions.ShowExistingPortfolios;
 import java.util.TreeMap;
 import model.operation.IOperation;
-import view.IView;
 import view.TextUI;
 
 /**
  * This is the main controller of the program. This controller will handle input and pass them to
  * the appropriate child controllers.
  */
-public class Controller implements IController, Features {
-
+public class Controller implements IController{
   private IOperation operation;
   private TextUI view;
   private IActions action;
@@ -86,8 +84,7 @@ public class Controller implements IController, Features {
     }
   }
 
-  @Override
-  public void createPortfolioHelper() {
+  private void createPortfolioHelper() {
     String typeOption = view.showPortfolioTypeMenu();
     if (typeOption.equals("1")) {
       createFlexiblePortfolio();
@@ -96,8 +93,7 @@ public class Controller implements IController, Features {
     }
   }
 
-  @Override
-  public void createFlexiblePortfolio() {
+  private void createFlexiblePortfolio() {
     String option = view.showPortfolioMenuOption();
     if (option.equals("1")) {
       String portfolioName = view.showEnterNewPortfolioName();
@@ -111,8 +107,7 @@ public class Controller implements IController, Features {
     }
   }
 
-  @Override
-  public void createInflexiblePortfolio() {
+  private void createInflexiblePortfolio() {
     String option = view.showPortfolioMenuOption();
     if (option.equals("1")) {
       String portfolioName = view.showEnterNewPortfolioName();
@@ -125,29 +120,25 @@ public class Controller implements IController, Features {
     }
   }
 
-  @Override
-  public void showExistingPortfolioHelper() {
+  private void showExistingPortfolioHelper() {
     action = new ShowExistingPortfolios();
     view.displayInput(action.operate(operation));
   }
 
-  @Override
-  public void showAmountByDateHelper() {
+  private void showAmountByDateHelper() {
     String portfolioName = view.showEnterNewPortfolioName();
     String date = view.showPortfolioValueByDate();
     action = new ShowAmountOfPortfolioByDate(portfolioName, date);
     view.displayInput(action.operate(operation));
   }
 
-  @Override
-  public void showCompositionHelper() {
+  private void showCompositionHelper() {
     String portfolioName = view.showEnterNewPortfolioName();
     action = new ShowComposition(portfolioName);
     view.displayInput(action.operate(operation));
   }
 
-  @Override
-  public void showCostBasisByDateHelper() {
+  private void showCostBasisByDateHelper() {
     String portfolioName = view.showEnterNewPortfolioName();
     if (operation.checkWhetherFlexible(portfolioName)) {
       String costBasisDate = view.showCostBasisDate();
@@ -158,8 +149,7 @@ public class Controller implements IController, Features {
     }
   }
 
-  @Override
-  public void sellStockHelper() {
+  private void sellStockHelper() {
     String continueSellingOfStocks = "Y";
     String portfolioName = view.showEnterNewPortfolioName();
     if (operation.checkWhetherFlexible(portfolioName)) {
@@ -177,15 +167,13 @@ public class Controller implements IController, Features {
     }
   }
 
-  @Override
-  public void createPortfolioCSV() {
+  private void createPortfolioCSV() {
     String fileName = view.showFileName();
     action = new CreateNewPortfolioCSV(fileName);
     view.displayInput(action.operate(operation));
   }
 
-  @Override
-  public void addStocksHelper(String portfolioName) {
+  private void addStocksHelper(String portfolioName) {
     String addStocks = "Y";
     StringBuilder input = new StringBuilder();
     while (addStocks.equalsIgnoreCase("Y") || addStocks.equalsIgnoreCase("y")) {
@@ -207,8 +195,7 @@ public class Controller implements IController, Features {
     operation.writeToCSV(portfolioName);
   }
 
-  @Override
-  public void addStocksToFlexiblePortfolioHelper() {
+  private void addStocksToFlexiblePortfolioHelper() {
     String portfolioName = view.showEnterNewPortfolioName();
     if (operation.checkWhetherFlexible(portfolioName)) {
       addStocksHelper(portfolioName);
@@ -217,8 +204,7 @@ public class Controller implements IController, Features {
     }
   }
 
-  @Override
-  public void showGraph() {
+  private void showGraph() {
     String portfolioName = view.showEnterNewPortfolioName();
     if (operation.checkWhetherFlexible(portfolioName)) {
       String startDate = view.showGraphStartDate();
@@ -230,19 +216,8 @@ public class Controller implements IController, Features {
     }
   }
 
-  @Override
-  public String menuHelper() {
+  private String menuHelper() {
     view.showMenu();
     return view.fetchInput();
-  }
-
-  @Override
-  public void setView(IView view) {
-
-  }
-
-  @Override
-  public void showMenu() {
-
   }
 }

@@ -225,4 +225,6 @@ public interface IOperation {
    * @return: line chart
    */
   int getLineChartScale();
+
+  String checkValidDate(String date);
 }
