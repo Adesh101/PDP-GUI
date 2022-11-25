@@ -3,6 +3,9 @@ package model.operation;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -402,7 +405,14 @@ public class Operation implements IOperation {
 
   @Override
   public String[] callStockAPI(String ticker, String date) {
-    return stocks.callStockAPI(ticker, date);
+    String[] resultStock = stocks.callStockAPI(ticker, date);
+    if (resultStock[0] == null) {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      LocalDate dt = LocalDate.parse(date, formatter);
+      String result = dt.minusDays(1).format(formatter);
+      resultStock = callStockAPI(ticker, result);
+    }
+    return resultStock;
   }
 
   @Override

@@ -12,8 +12,6 @@ import model.stocks.IStocks;
 import model.stocks.Stocks;
 import view.FunctionalView.MainView;
 import view.FunctionalView.MainViewFunction;
-import view.IView;
-import view.JFrameView;
 
 
 /**
@@ -36,7 +34,7 @@ public class MVCStocks {
     ILineChart lineChart = new LineChart();
     IOperation operation = new Operation(inflexiblePortfolio, flexiblePortfolio, stocks, lineChart);
     //IView view = new View(new InputStreamReader(System.in), System.out);
-    mainViewFunction = new MainView("Hello World");
+    mainViewFunction = new MainView("Menu");
 
     IController controller = new GUIController(operation, mainViewFunction);
     controller.operate(operation);

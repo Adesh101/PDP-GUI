@@ -1,6 +1,6 @@
 package controller;
 
-import java.text.ParseException;
+import java.util.TreeMap;
 import model.operation.IOperation;
 import view.FunctionalView.MainView;
 import view.TextFieldView.BuyStock;
@@ -9,6 +9,7 @@ import view.FunctionalView.MainViewFunction;
 import view.TextFieldView.ReadPortfolio;
 import view.TextFieldView.SavePortfolio;
 import view.TextFieldView.SellStock;
+import view.TextFieldView.ShowPortfolioPerformance;
 import view.TextFieldView.TextField;
 
 import java.awt.event.ActionEvent;
@@ -27,6 +28,7 @@ public class GUIController implements IController, ActionListener{
   private TextField sellStock;
   private TextField savePortfolio;
   private TextField readPortfolio;
+  private TextField showPortfolioPerformance;
   private String str;
   private Map<String, Runnable> operationMap;
 
@@ -111,9 +113,6 @@ public class GUIController implements IController, ActionListener{
       }
 
       String buyDate = addStockDetails[3];
-
-      //create a function to check if any of the above quantities are empty
-
       if (ticker.length() == 0) {
         buyStock.setHintMess("Ticker cannot be empty.");
         return;
@@ -256,6 +255,52 @@ public class GUIController implements IController, ActionListener{
     });
 
 
+    operationMap.put("showPortfolioPerformance", () -> {
+      showPortfolioPerformance = new ShowPortfolioPerformance("Portfolio Performance");
+      showPortfolioPerformance.addActionListener(this);
+      ((JFrame) this.mainView).dispose();
+    });
+
+    operationMap.put("showPortfolioPerformanceButton", () -> {
+      String[] performanceDetails = showPortfolioPerformance.getInput().split(":");
+      if (performanceDetails.length == 2) {
+        showPortfolioPerformance.setHintMess("Enter valid portfolio details.");
+        return;
+      }
+      String portfolioName = performanceDetails[0];
+      String startDate = performanceDetails[1];
+      String endDate = performanceDetails[2];
+
+      if (portfolioName.length() == 0 || !operation.checkWhetherFlexible(portfolioName)) {
+        showPortfolioPerformance.setHintMess("Enter valid portfolio name");
+        return;
+      }
+
+      showPortfolioPerformance.setHintMess(operation.checkValidDate(startDate));
+      showPortfolioPerformance.setHintMess(operation.checkValidDate(endDate));
+
+      try {
+        TreeMap<String, Integer> map = operation.getGraph(portfolioName, startDate, endDate);
+        StringBuilder sb = new StringBuilder();
+        sb.append(
+            "Performance of Portfolio " + portfolioName + " From " + startDate + " to " + endDate
+                + "\n");
+        for (String timestamp : map.keySet()) {
+          sb.append(timestamp + ": ");
+          for (int i = 0; i < map.get(timestamp); i++) {
+            sb.append("*");
+          }
+          sb.append("\n");
+        }
+        sb.append("\n");
+        sb.append("Scale: *= $" + operation.getLineChartScale());
+        showPortfolioPerformance.setHintMess(sb.toString());
+      } catch (Exception ex) {
+        readPortfolio.setHintMess(ex.getMessage());
+      }
+    });
+
+
     operationMap.put("createHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
@@ -288,6 +333,13 @@ public class GUIController implements IController, ActionListener{
       mainView = new MainView("Home");
       mainView.addActionListener(this);
       ((JFrame) this.readPortfolio).dispose();
+    });
+
+
+    operationMap.put("showHomeButton", () -> {
+      mainView = new MainView("Home");
+      mainView.addActionListener(this);
+      ((JFrame) this.showPortfolioPerformance).dispose();
     });
 
 
