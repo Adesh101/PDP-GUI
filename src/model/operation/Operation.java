@@ -220,9 +220,9 @@ public class Operation implements IOperation {
   @Override
   public void writeToCSV(String portfolioName) {
     if (checkWhetherFlexible(portfolioName)) {
-      files.writeToCSV(portfolioName, this.flexibleMap, "Flexible");
+      files.writeToCSV(portfolioName, this.flexibleMap, "Flexible", this.creationDateMap);
     } else if (checkWhetherInflexible(portfolioName)) {
-      files.writeToCSV(portfolioName, this.inflexibleMap, "Inflexible");
+      files.writeToCSV(portfolioName, this.inflexibleMap, "Inflexible", this.creationDateMap);
     }
   }
 
@@ -230,9 +230,11 @@ public class Operation implements IOperation {
   public String readFromFile(String fileName) {
     CsvFiles files = new CsvFiles();
     if (files.checkMapType("./res/" + fileName + ".csv") == 1) {
+      this.creationDateMap = files.setCreationDateMap("./res/" + fileName + ".csv");
       this.flexibleMap = files.readFromFile("./res/" + fileName + ".csv");
       return "PORTFOLIO " + fileName + " SUCCESSFULLY CREATED.";
     } else if (files.checkMapType("./res/" + fileName + ".csv") == 2) {
+      this.creationDateMap = files.setCreationDateMap("./res/" + fileName + ".csv");
       this.inflexibleMap = files.readFromFile("./res/" + fileName + ".csv");
       return "PORTFOLIO " + fileName + " SUCCESSFULLY CREATED.";
     }

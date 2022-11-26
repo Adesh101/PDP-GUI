@@ -154,7 +154,8 @@ public class CsvFiles implements FileHandling {
 
   @Override
   public void writeToCSV(String portfolioName,
-      HashMap<String, HashMap<String, HashMap<String, List<String>>>> map, String portfolioType) {
+      HashMap<String, HashMap<String, HashMap<String, List<String>>>> map, String portfolioType,
+      HashMap<String, String> creationDateMap) {
     String csvSeparator = ",";
     try {
       BufferedWriter bw = new BufferedWriter(
@@ -168,6 +169,10 @@ public class CsvFiles implements FileHandling {
         oneLine.append("Portfolio Name");
         oneLine.append(csvSeparator);
         oneLine.append(portfolioName);
+        oneLine.append("\n");
+        oneLine.append("Portfolio Date");
+        oneLine.append(csvSeparator);
+        oneLine.append(creationDateMap.get(portfolioName));
         oneLine.append("\n");
         for (String date : map.get(individualPortfolioName).keySet()) {
           oneLine.append("Date");
@@ -254,6 +259,38 @@ public class CsvFiles implements FileHandling {
     }
     return map;
   }
+
+
+  @Override
+  public HashMap<String, String> setCreationDateMap(String fileName) {
+    String line = "";
+    String splitBy = ",";
+    StringBuilder input = new StringBuilder();
+    HashMap<String, String> map = new HashMap<>();
+    String portfolioName= "";
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(fileName));
+      while ((line = br.readLine()) != null) {
+        String[] portfolioNames = line.split(splitBy);
+        if (portfolioNames.length == 2) {
+          if (portfolioNames[0].equals("Portfolio Name")) {
+            portfolioName = portfolioNames[1];
+            map.put(portfolioName, "");
+          }
+          if (portfolioNames[0].equals("Portfolio Date")) {
+            map.put(portfolioName, portfolioNames[1]);
+            break;
+            }
+          } else {
+            throw new IllegalArgumentException();
+          }
+        }
+      } catch (Exception ex) {
+        return new HashMap<String, String>();
+      }
+    return map;
+  }
+
 
   private HashMap<String, HashMap<String, HashMap<String, List<String>>>> flexibleHelper(
       String fileName, String input) {

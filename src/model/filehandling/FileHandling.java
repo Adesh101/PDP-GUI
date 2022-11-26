@@ -72,7 +72,8 @@ public interface FileHandling {
    * @param: portfolioType
    */
   void writeToCSV(String portfolioName,
-      HashMap<String, HashMap<String, HashMap<String, List<String>>>> map, String portfolioType);
+      HashMap<String, HashMap<String, HashMap<String, List<String>>>> map, String portfolioType,
+      HashMap<String, String> creationDateMap);
 
   /**
    * Method to read from file the hashmap data.
@@ -81,4 +82,6 @@ public interface FileHandling {
    */
   HashMap<String, HashMap<String, HashMap<String, List<String>>>> readFromFile(
       String portfolioName);
+
+  HashMap<String, String> setCreationDateMap(String fileName);
 }

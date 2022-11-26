@@ -7,6 +7,8 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import model.filehandling.CsvFiles;
@@ -111,8 +113,12 @@ public class Stocks implements IStocks {
             break;
           }
         }
-        newData = output.substring(output.indexOf("\n") + 1, output.lastIndexOf("\r"));
-        files.updateFile(file, newData);
+        try{
+          newData = output.substring(output.indexOf("\n") + 1, output.lastIndexOf("\r"));
+          files.updateFile(file, newData);
+        } catch (IndexOutOfBoundsException ex) {
+          System.out.println(ex.getMessage());
+        }
       } catch (IOException e) {
         throw new IllegalArgumentException("No price data found for: " + file);
       }
@@ -127,18 +133,22 @@ public class Stocks implements IStocks {
       price = Double.parseDouble(file.readFromLocalData(ticker, date)[4]);
       return price;
     } catch (NullPointerException e) {
-      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-      Date newDate;
-      Calendar c = Calendar.getInstance();
-      try {
-        c.setTime(sdf.parse(date));
-        c.add(Calendar.DATE, -1);
-        newDate = sdf.parse(sdf.format(c.getTime()));
-        String validDate = sdf.format(newDate);
-        price = getPriceByDate(ticker, validDate);
-      } catch (ParseException ex) {
-        System.out.println(ex.getMessage());
-      }
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      LocalDate dt = LocalDate.parse(date, formatter);
+      String result = dt.minusDays(1).format(formatter);
+      price = getPriceByDate(ticker, result);
+//      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//      Date newDate;
+//      Calendar c = Calendar.getInstance();
+//      try {
+//        c.setTime(sdf.parse(date));
+//        c.add(Calendar.DATE, -1);
+//        newDate = sdf.parse(sdf.format(c.getTime()));
+//        String validDate = sdf.format(newDate);
+//        price = getPriceByDate(ticker, validDate);
+//      } catch (ParseException ex) {
+//        System.out.println(ex.getMessage());
+//      }
     }
     return price;
   }

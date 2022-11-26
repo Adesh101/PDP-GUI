@@ -6,6 +6,7 @@ import view.FunctionalView.MainView;
 import view.TextFieldView.BuyStock;
 import view.TextFieldView.CreateFlexiblePortfolio;
 import view.FunctionalView.MainViewFunction;
+import view.TextFieldView.LineChartEx;
 import view.TextFieldView.ReadPortfolio;
 import view.TextFieldView.SavePortfolio;
 import view.TextFieldView.SellStock;
@@ -29,6 +30,7 @@ public class GUIController implements IController, ActionListener{
   private TextField savePortfolio;
   private TextField readPortfolio;
   private TextField showPortfolioPerformance;
+  private TextField graph;
   private String str;
   private Map<String, Runnable> operationMap;
 
@@ -270,31 +272,16 @@ public class GUIController implements IController, ActionListener{
       String portfolioName = performanceDetails[0];
       String startDate = performanceDetails[1];
       String endDate = performanceDetails[2];
-
       if (portfolioName.length() == 0 || !operation.checkWhetherFlexible(portfolioName)) {
         showPortfolioPerformance.setHintMess("Enter valid portfolio name");
         return;
       }
-
       showPortfolioPerformance.setHintMess(operation.checkValidDate(startDate));
       showPortfolioPerformance.setHintMess(operation.checkValidDate(endDate));
-
       try {
         TreeMap<String, Integer> map = operation.getGraph(portfolioName, startDate, endDate);
-        StringBuilder sb = new StringBuilder();
-        sb.append(
-            "Performance of Portfolio " + portfolioName + " From " + startDate + " to " + endDate
-                + "\n");
-        for (String timestamp : map.keySet()) {
-          sb.append(timestamp + ": ");
-          for (int i = 0; i < map.get(timestamp); i++) {
-            sb.append("*");
-          }
-          sb.append("\n");
-        }
-        sb.append("\n");
-        sb.append("Scale: *= $" + operation.getLineChartScale());
-        showPortfolioPerformance.setHintMess(sb.toString());
+        graph = new LineChartEx(map, operation.getLineChartScale());
+        graph.addActionListener(this);
       } catch (Exception ex) {
         readPortfolio.setHintMess(ex.getMessage());
       }
@@ -340,6 +327,12 @@ public class GUIController implements IController, ActionListener{
       mainView = new MainView("Home");
       mainView.addActionListener(this);
       ((JFrame) this.showPortfolioPerformance).dispose();
+    });
+
+    operationMap.put("graphHomeButton", () -> {
+      mainView = new MainView("Home");
+      mainView.addActionListener(this);
+      ((JFrame) this.graph).dispose();
     });
 
 

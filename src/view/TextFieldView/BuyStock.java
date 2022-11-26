@@ -10,7 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class BuyStock extends JFrame implements TextField{
+public class BuyStock extends JFrame implements TextField {
+
   private JLabel portfolioNameText;
   private JLabel stockTickerText;
   private JLabel stockQuantityText;
@@ -68,7 +69,7 @@ public class BuyStock extends JFrame implements TextField{
 
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");
-    displayText.setPreferredSize(new Dimension(350, 20));
+    displayText.setPreferredSize(new Dimension(400, 20));
     displayPanel.add(displayText);
 
     JPanel buttonPanel = new JPanel();
