@@ -186,4 +186,15 @@ public class MockModel implements IOperation {
   public String checkValidDate(String date) {
     return null;
   }
+
+  @Override
+  public String[] returnTickerNames(String portfolioName) {
+    return new String[0];
+  }
+
+  @Override
+  public void implementFixedDCAExistingPortfolio(String portfolioName, Double amount, String date,
+      List<String> tickerNames, List<String> proportions, List<String> commissionFee) {
+
+  }
 }

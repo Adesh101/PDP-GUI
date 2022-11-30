@@ -48,7 +48,7 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
   }
 
   @Override
-  public void buyStock(String portfolioName, String ticker, int quantity, double price, String date,
+  public void buyStock(String portfolioName, String ticker, String quantity, double price, String date,
       double fee) {
     this.commissionFee = fee;
     if (!map.containsKey(portfolioName)) {
@@ -61,7 +61,7 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
         int existingNoOfStocks = Integer.parseInt(
             map.get(portfolioName).get(date).get(ticker).get(0));
         map.get(portfolioName).get(date).get(ticker)
-            .set(0, String.valueOf(existingNoOfStocks + quantity));
+            .set(0, String.valueOf(existingNoOfStocks + Double.parseDouble(quantity)));
         double existingPrice = Double.parseDouble(
             map.get(portfolioName).get(date).get(ticker).get(1));
         map.get(portfolioName).get(date).get(ticker)
@@ -69,11 +69,11 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
         double existingTotalStockValue = Double.parseDouble(
             map.get(portfolioName).get(date).get(ticker).get(2));
         map.get(portfolioName).get(date).get(ticker)
-            .set(2, String.valueOf(existingTotalStockValue + (quantity * price)));
-        this.totalValue = totalValue + Math.round(quantity * price) + commissionFee;
+            .set(2, String.valueOf(existingTotalStockValue + (Double.parseDouble(quantity) * price)));
+        this.totalValue = totalValue + Math.round(Double.parseDouble(quantity) * price) + commissionFee;
       } else {
-        addStockDataHelper(portfolioName, ticker, quantity, price, date, 0);
-        this.totalValue = totalValue + (quantity * price) + commissionFee;
+        addStockDataHelper(portfolioName, ticker, Double.parseDouble(quantity), price, date, 0);
+        this.totalValue = totalValue + (Double.parseDouble(quantity) * price) + commissionFee;
       }
 
     } else {
@@ -100,26 +100,26 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
           double existingTotalValue = Integer.parseInt(
               map.get(portfolioName).get(date).get(ticker).get(2));
           map.get(portfolioName).get(date).get(ticker).set(1, String.valueOf(
-              (existingTotalValue + (quantity * price)) / (existingQuantity + quantity)));
+              (existingTotalValue + (Double.parseDouble(quantity) * price)) / (existingQuantity + Double.parseDouble(quantity))));
           map.get(portfolioName).get(date).get(ticker)
-              .set(2, String.valueOf((existingTotalValue + (quantity * price))));
-          this.totalValue = totalValue + (quantity * price) + commissionFee;
+              .set(2, String.valueOf((existingTotalValue + (Double.parseDouble(quantity) * price))));
+          this.totalValue = totalValue + (Double.parseDouble(quantity) * price) + commissionFee;
         } else {
-          addStockDataHelper(portfolioName, ticker, quantity, price, date, 0);
-          this.totalValue = totalValue + (quantity * price) + commissionFee;
+          addStockDataHelper(portfolioName, ticker, Double.parseDouble(quantity), price, date, 0);
+          this.totalValue = totalValue + (Double.parseDouble(quantity) * price) + commissionFee;
         }
       } else {
         map.get(portfolioName).put(date, new HashMap<>());
-        addStockDataHelper(portfolioName, ticker, quantity, price, date, 0);
-        this.totalValue = totalValue + (quantity * price) + commissionFee;
+        addStockDataHelper(portfolioName, ticker, Double.parseDouble(quantity), price, date, 0);
+        this.totalValue = totalValue + (Double.parseDouble(quantity) * price) + commissionFee;
       }
     }
     costBasis.get(portfolioName).put(date, totalValue); // check if overwrties
     updateCostBasisRecords(portfolioName, date, totalValue);
-    updateFutureRecords(portfolioName, ticker, date, quantity, price);
+    updateFutureRecords(portfolioName, ticker, date, Double.parseDouble(quantity), price);
   }
 
-  private void updateFutureRecords(String portfolioName, String ticker, String date, int quantity,
+  private void updateFutureRecords(String portfolioName, String ticker, String date, Double quantity,
       double price) {
     List<String> dates = sortDateHelper(map.get(portfolioName).keySet(), portfolioName);
     for (String s : dates) {
@@ -157,7 +157,7 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
     return dates;
   }
 
-  private void addStockDataHelper(String portfolioName, String ticker, int quantity, double price,
+  private void addStockDataHelper(String portfolioName, String ticker, Double quantity, double price,
       String date, int previousQuantity) {
     map.get(portfolioName).get(date).put(ticker, new ArrayList<>());
     map.get(portfolioName).get(date).get(ticker).add(String.valueOf(previousQuantity + quantity));
@@ -193,7 +193,7 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
             .set(2, String.valueOf(existingTotalStockValue - (quantity * price)));
         this.totalValue = totalValue - Math.round(quantity * price);
       }
-      updateFutureRecords(portfolioName, ticker, date, quantity, price);
+      updateFutureRecords(portfolioName, ticker, date, Double.parseDouble(String.valueOf(quantity)), price);
     } else {
       throw new IllegalArgumentException("No such stock present.");
     }

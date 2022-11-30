@@ -1,12 +1,19 @@
 package controller;
 
+import java.util.List;
 import java.util.TreeMap;
 import model.operation.IOperation;
 import view.FunctionalView.MainView;
+import view.TextFieldView.AddStockDCA;
 import view.TextFieldView.BuyStock;
 import view.TextFieldView.CreateFlexiblePortfolio;
 import view.FunctionalView.MainViewFunction;
+import view.TextFieldView.DollarCostAveragingView;
+import view.TextFieldView.ExistingPortfolioFixedDCA;
+import view.TextFieldView.InvestmentStrategy;
 import view.TextFieldView.LineChartEx;
+import view.TextFieldView.NewPortfolioWithFiniteRangeDCA;
+import view.TextFieldView.NewPortfolioWithoutEndDateDCA;
 import view.TextFieldView.ReadPortfolio;
 import view.TextFieldView.SavePortfolio;
 import view.TextFieldView.SellStock;
@@ -31,7 +38,24 @@ public class GUIController implements IController, ActionListener{
   private TextField readPortfolio;
   private TextField showPortfolioPerformance;
   private TextField graph;
+  private TextField investmentStrategy;
+  private TextField dollarCostAveraging;
+  private TextField existingPortfolioStrategy;
+  private TextField newPortfolioWithFiniteRange;
+  private TextField newPortfolioWithoutEndDate;
+  private TextField nextStock;
+  private TextField implementStrategy;
+  private TextField newPortfolioWithFiniteRangeDCA;
+  private TextField newPortfolioWithoutEndDateDCA;
+  private TextField existingPortfolioDCAMainWindow;
+  private TextField selectStocks;
   private String str;
+  private String portfolioName;
+  private Double amount;
+  private String date;
+  private List<String> tickerNames;
+  private List<String> proportions;
+  private List<String> fee;
   private Map<String, Runnable> operationMap;
 
   /**
@@ -150,7 +174,7 @@ public class GUIController implements IController, ActionListener{
 
 
     operationMap.put("sellStockButton", () -> {
-      if (sellStock.getInput().length() == 4) {
+      if (sellStock.getInput().length() != 4) {
         sellStock.setHintMess("Enter valid portfolio details.");
         return;
       }
@@ -164,13 +188,13 @@ public class GUIController implements IController, ActionListener{
       try{
         quantity = Integer.parseInt(sellStockDetails[2]);
       } catch (Exception ex) {
-        buyStock.setHintMess("Quantity should be numeric value.");
+        sellStock.setHintMess("Quantity should be numeric value.");
       }
 
       try{
         commissionFee = Integer.parseInt(sellStockDetails[4]);
       } catch (Exception ex) {
-        buyStock.setHintMess("Commission fee should be numeric value.");
+        sellStock.setHintMess("Commission fee should be numeric value.");
       }
 
       String sellDate = sellStockDetails[3];
@@ -193,10 +217,10 @@ public class GUIController implements IController, ActionListener{
         operation.sellStock(portfolioName, ticker, quantity, price, sellDate, commissionFee);
         sellStock.setHintMess(quantity + " units of " + " stock " + ticker + " added to portfolio "
             + portfolioName + " on " + sellDate);
-        buyStock.clearField();
+        sellStock.clearField();
       }
       catch (IllegalArgumentException e) {
-        buyStock.setHintMess(e.getMessage());
+        sellStock.setHintMess(e.getMessage());
       }
     });
 
@@ -287,6 +311,114 @@ public class GUIController implements IController, ActionListener{
       }
     });
 
+    operationMap.put("investmentStrategy", () -> {
+      investmentStrategy = new InvestmentStrategy("Investment Strategy");
+      investmentStrategy.addActionListener(this);
+      ((JFrame) this.mainView).dispose();
+    });
+
+    operationMap.put("dollarCostAveraging", () -> {
+      dollarCostAveraging = new DollarCostAveragingView("Dollar Cost Averaging");
+      dollarCostAveraging.addActionListener(this);
+      ((JFrame) this.mainView).dispose();
+    });
+
+    operationMap.put("existingPortfolioDCA", () -> {
+      existingPortfolioStrategy = new ExistingPortfolioFixedDCA("Existing Portfolio Fixed Amount");
+      existingPortfolioStrategy.addActionListener(this);
+      ((JFrame) this.mainView).dispose();
+    });
+
+    operationMap.put("selectStocks", () -> {
+      if(existingPortfolioStrategy.getInput().length() != 3){
+        existingPortfolioStrategy.setHintMess("Enter Valid Details");
+      }
+      String[] details= existingPortfolioStrategy.getInput().split(":");
+      this.portfolioName = details[0];
+      this.date = details[2];
+
+      try{
+        amount=Double.parseDouble(details[1]);
+      }
+      catch (Exception e){
+        existingPortfolioStrategy.setHintMess("Amount should be numeric value");
+      }
+
+      if(!(amount>0.0)){
+        existingPortfolioStrategy.setHintMess("Amount should be greater than Zero");
+        return;
+      }
+      else if(date.length() == 0){
+        existingPortfolioStrategy.setHintMess("Date cannot be empty.");
+        return;
+      }
+      existingPortfolioStrategy.setHintMess(operation.checkValidDate(date));
+
+      selectStocks = new AddStockDCA("Add Stock");
+      selectStocks.addActionListener(this);
+      ((JFrame) this.mainView).dispose();
+    });
+
+    operationMap.put("nextStock", () -> {
+      // get input from select stocks
+      // store ticker names in array
+      if(selectStocks.getInput().length()!=3){
+        selectStocks.setHintMess("Enter valid portfolio details.");
+        return;
+      }
+      String[] details = selectStocks.getInput().split(":");
+      tickerNames.add(details[0]); // validate
+      double proportion=0.0;
+      double comFee=0.0;
+      try{
+        proportion=Double.parseDouble(details[1]);
+        proportions.add(details[1]);
+      }
+      catch (Exception e){
+        selectStocks.setHintMess("Proportion should be numeric value");
+      }
+      try {
+        comFee=Double.parseDouble(details[2]);
+        fee.add(details[2]);
+      }catch (Exception e){
+        selectStocks.setHintMess("Commission fee should be a numeric value");
+      }
+
+      if(details[0].length()==0){
+        selectStocks.setHintMess("Ticker cannot be empty");
+      } else if (comFee == 0 || comFee < 0) {
+        selectStocks.setHintMess("Commission fee cannot be empty or negative");
+      } else if (proportion ==0 || proportion < 0) {
+        selectStocks.setHintMess("Weightage cannot be empty or negative");
+      }
+    });
+
+
+
+
+    operationMap.put("implementStrategy", () ->{
+      try {
+        operation.implementFixedDCAExistingPortfolio(portfolioName, amount, date, tickerNames, proportions, fee);
+        nextStock.setHintMess("Strategy applied successfully");
+        nextStock.clearField();
+      }
+      catch (IllegalArgumentException e){
+        nextStock.setHintMess(e.getMessage());
+      }
+    });
+
+    operationMap.put("newPortfolioWithFiniteRangeDCA", () -> {
+      newPortfolioWithFiniteRange = new NewPortfolioWithFiniteRangeDCA("New Portfolio with End Date");
+      newPortfolioWithFiniteRange.addActionListener(this);
+      ((JFrame) this.mainView).dispose();
+    });
+
+    operationMap.put("newPortfolioWithoutEndDateDCA", () -> {
+      newPortfolioWithoutEndDate = new NewPortfolioWithoutEndDateDCA("New Portfolio without End Date");
+      newPortfolioWithoutEndDate.addActionListener(this);
+      ((JFrame) this.mainView).dispose();
+    });
+
 
     operationMap.put("createHomeButton", () -> {
       mainView = new MainView("Home");
@@ -333,6 +465,36 @@ public class GUIController implements IController, ActionListener{
       mainView = new MainView("Home");
       mainView.addActionListener(this);
       ((JFrame) this.graph).dispose();
+    });
+
+    operationMap.put("strategyHomeButton", () -> {
+      mainView = new MainView("Home");
+      mainView.addActionListener(this);
+      ((JFrame) this.investmentStrategy).dispose();
+    });
+
+    operationMap.put("dollarCostAveragingHomeButton", () -> {
+      mainView = new MainView("Home");
+      mainView.addActionListener(this);
+      ((JFrame) this.dollarCostAveraging).dispose();
+    });
+
+    operationMap.put("existingPortfolioFixedDCAHomeButton", () -> {
+      mainView = new MainView("Home");
+      mainView.addActionListener(this);
+      ((JFrame) this.existingPortfolioStrategy).dispose();
+    });
+
+    operationMap.put("newPortfolioWithFiniteRangeDCAHomeButton", () -> {
+      mainView = new MainView("Home");
+      mainView.addActionListener(this);
+      ((JFrame) this.newPortfolioWithFiniteRangeDCA).dispose();
+    });
+
+    operationMap.put("newPortfolioWithoutEndDateDCAHomeButton", () -> {
+      mainView = new MainView("Home");
+      mainView.addActionListener(this);
+      ((JFrame) this.newPortfolioWithoutEndDateDCA).dispose();
     });
 
 

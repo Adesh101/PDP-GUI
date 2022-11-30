@@ -15,6 +15,7 @@ public class MainView extends JFrame implements MainViewFunction {
   private JButton showPortfolioPerformance;
   private JButton savePortfolio;
   private JButton readPortfolio;
+  private JButton investmentStrategy;
   private JButton quit;
 
   public MainView (String str) {
@@ -24,7 +25,7 @@ public class MainView extends JFrame implements MainViewFunction {
     setLayout(new BorderLayout(5, 5));
 
     JPanel panel = new JPanel();;
-    panel.setLayout(new GridLayout(7, 1, 10, 0));
+    panel.setLayout(new GridLayout(8, 1, 10, 0));
 
     createFlexiblePortfolio = new JButton("Create Flexible Portfolio");
     buyStock = new JButton("Buy Stock");
@@ -32,6 +33,7 @@ public class MainView extends JFrame implements MainViewFunction {
     savePortfolio = new JButton("Save Portfolio");
     readPortfolio = new JButton("Read Portfolio from File");
     showPortfolioPerformance = new JButton("Show Portfolio Performance");
+    investmentStrategy = new JButton("Invest using Strategy");
     quit = new JButton("Quit");
 
     createFlexiblePortfolio.setActionCommand("createFlexiblePortfolio");
@@ -40,6 +42,7 @@ public class MainView extends JFrame implements MainViewFunction {
     savePortfolio.setActionCommand("savePortfolio");
     readPortfolio.setActionCommand("readPortfolio");
     showPortfolioPerformance.setActionCommand("showPortfolioPerformance");
+    investmentStrategy.setActionCommand("investmentStrategy");
     quit.setActionCommand("quit");
 
     panel.add(createFlexiblePortfolio);
@@ -48,6 +51,7 @@ public class MainView extends JFrame implements MainViewFunction {
     panel.add(savePortfolio);
     panel.add(readPortfolio);
     panel.add(showPortfolioPerformance);
+    panel.add(investmentStrategy);
     panel.add(quit);
 
     this.getContentPane().add(panel);
@@ -64,6 +68,7 @@ public class MainView extends JFrame implements MainViewFunction {
     showPortfolioPerformance.addActionListener(listener);
     savePortfolio.addActionListener(listener);
     readPortfolio.addActionListener(listener);
+    investmentStrategy.addActionListener(listener);
     quit.addActionListener(listener);
   }
 

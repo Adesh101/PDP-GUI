@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import model.stocks.Stocks;
+import model.strategy.DollarCostAveraging;
+import model.strategy.IDollarCostAveraging;
 
 /**
  * This class contains all the major methods that are required for the stock software.
@@ -44,6 +46,7 @@ public class Operation implements IOperation {
   protected HashMap<String, String> creationDateMap = new HashMap<>();
   protected IFlexiblePortfolio flexiblePortfolio;
   protected IInflexiblePortfolio inflexiblePortfolio;
+  protected IDollarCostAveraging dca;
   private static final String CSV_SEPARATOR = ",";
 
 
@@ -60,6 +63,7 @@ public class Operation implements IOperation {
     this.inflexiblePortfolio = inflexiblePortfolio;
     this.flexiblePortfolio = flexiblePortfolio;
     this.lineChart = lineChart;
+    this.dca = new DollarCostAveraging(flexiblePortfolio);
   }
 
   @Override
@@ -370,7 +374,7 @@ public class Operation implements IOperation {
           "Date should le after portfolio creation date and before current date");
     }
     this.portfolioName = portfolioName;
-    flexiblePortfolio.buyStock(portfolioName, ticker, quantity, price, date, fee);
+    flexiblePortfolio.buyStock(portfolioName, ticker, String.valueOf(quantity), price, date, fee);
   }
 
   @Override
@@ -468,5 +472,30 @@ public class Operation implements IOperation {
       return "Enter a valid date.";
     }
     return "";
+  }
+
+  @Override
+  public String[] returnTickerNames(String portfolioName){
+    StringBuilder sb = new StringBuilder();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date d = new Date();
+    String cdate = dateFormat.format(d);
+    cdate = getPreviousDate(flexibleMap, cdate, portfolioName);
+    String[] names= new String[flexibleMap.get(portfolioName).get(cdate).keySet().size()];
+    int i=0;
+    for (String stockName : flexibleMap.get(portfolioName).get(cdate).keySet()) {
+      names[i]=stockName;
+      i++;
+    }
+    return names;
+
+
+
+  }
+
+  @Override
+  public void implementFixedDCAExistingPortfolio(String portfolioName, Double amount, String date,
+      List<String> tickerNames, List<String> proportions, List<String> commissionFee) {
+    dca.strategyForExistingPortfolio(portfolioName, tickerNames, amount, proportions, date, commissionFee);
   }
 }

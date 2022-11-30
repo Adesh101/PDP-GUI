@@ -10,6 +10,8 @@ import model.portfolio.IInflexiblePortfolio;
 import model.portfolio.InflexiblePortfolio;
 import model.stocks.IStocks;
 import model.stocks.Stocks;
+import model.strategy.DollarCostAveraging;
+import model.strategy.IDollarCostAveraging;
 import view.FunctionalView.MainView;
 import view.FunctionalView.MainViewFunction;
 
@@ -32,6 +34,7 @@ public class MVCStocks {
     IInflexiblePortfolio inflexiblePortfolio = new InflexiblePortfolio();
     IFlexiblePortfolio flexiblePortfolio = new FlexiblePortfolio();
     ILineChart lineChart = new LineChart();
+    IDollarCostAveraging dollarCostAveraging= new DollarCostAveraging(flexiblePortfolio);
     IOperation operation = new Operation(inflexiblePortfolio, flexiblePortfolio, stocks, lineChart);
     //IView view = new View(new InputStreamReader(System.in), System.out);
     mainViewFunction = new MainView("Menu");

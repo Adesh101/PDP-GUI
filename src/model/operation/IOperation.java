@@ -227,4 +227,6 @@ public interface IOperation {
   int getLineChartScale();
 
   String checkValidDate(String date);
+  String[] returnTickerNames(String portfolioName);
+  void implementFixedDCAExistingPortfolio(String portfolioName, Double amount, String date, List<String> tickerNames, List<String> proportions, List<String> commissionFee );
 }

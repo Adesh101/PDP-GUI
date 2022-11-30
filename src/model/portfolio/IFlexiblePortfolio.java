@@ -31,7 +31,7 @@ public interface IFlexiblePortfolio {
    * @param date date of purchase
    * @param fee commission fee for the transaction
    */
-  void buyStock(String portfolioName, String ticker, int quantity,
+  void buyStock(String portfolioName, String ticker, String quantity,
       double price, String date, double fee);
 
   /**
