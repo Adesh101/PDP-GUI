@@ -12,21 +12,22 @@ import javax.swing.JTextField;
 
 public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
   private JLabel portfolioNameText;
-  private JLabel stockTickerText;
+  //private JLabel stockTickerText;
   private JLabel amountText;
-  private JLabel proportionsText;
+  //private JLabel proportionsText;
   private JLabel startDateText;
   private JLabel intervalText;
-  private JLabel commissionFeeText;
+  //private JLabel commissionFeeText;
   private JTextField portfolioName;
-  private JTextField stockTicker;
+  //private JTextField stockTicker;
   private JTextField amount;
-  private JTextField proportions;
+  //private JTextField proportions;
   private JTextField startDate;
   private JTextField interval;
-  private JTextField commissionFee;
+  //private JTextField commissionFee;
   private JLabel displayText;
-  private JButton implementStrategy;
+  //private JButton implementStrategy;
+  private JButton addStocks;
   private JButton home;
 
   public NewPortfolioWithoutEndDateDCA(String caption){
@@ -42,12 +43,12 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     firstPanel.add(portfolioNameText);
     firstPanel.add(portfolioName);
 
-    JPanel secondPanel = new JPanel();
-    stockTickerText = new JLabel("Stock Name: ");
-    stockTickerText.setPreferredSize(new Dimension(100,20));
-    stockTicker = new JTextField(20);
-    secondPanel.add(stockTickerText);
-    secondPanel.add(stockTicker);
+//    JPanel secondPanel = new JPanel();
+//    stockTickerText = new JLabel("Stock Name: ");
+//    stockTickerText.setPreferredSize(new Dimension(100,20));
+//    stockTicker = new JTextField(20);
+//    secondPanel.add(stockTickerText);
+//    secondPanel.add(stockTicker);
 
     JPanel thirdPanel = new JPanel();
     amountText = new JLabel("Total Amount: ");
@@ -55,13 +56,13 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     amount = new JTextField(20);
     thirdPanel.add(amountText);
     thirdPanel.add(amount);
-
-    JPanel fourthPanel = new JPanel();
-    proportionsText = new JLabel("Weightage: ");
-    proportionsText.setPreferredSize(new Dimension(100,20));
-    proportions = new JTextField(20);
-    fourthPanel.add(proportionsText);
-    fourthPanel.add(proportions);
+//
+//    JPanel fourthPanel = new JPanel();
+//    proportionsText = new JLabel("Weightage: ");
+//    proportionsText.setPreferredSize(new Dimension(100,20));
+//    proportions = new JTextField(20);
+//    fourthPanel.add(proportionsText);
+//    fourthPanel.add(proportions);
 
     JPanel fifthPanel = new JPanel();
     startDateText = new JLabel("Start Date: ");
@@ -78,12 +79,12 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     sixthPanel.add(intervalText);
     sixthPanel.add(interval);
 
-    JPanel seventhPanel = new JPanel();
-    commissionFeeText = new JLabel("Commission Fee: ");
-    commissionFeeText.setPreferredSize(new Dimension(100,20));
-    commissionFee = new JTextField(20);
-    seventhPanel.add(commissionFeeText);
-    seventhPanel.add(commissionFee);
+//    JPanel seventhPanel = new JPanel();
+//    commissionFeeText = new JLabel("Commission Fee: ");
+//    commissionFeeText.setPreferredSize(new Dimension(100,20));
+//    commissionFee = new JTextField(20);
+//    seventhPanel.add(commissionFeeText);
+//    seventhPanel.add(commissionFee);
 
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");
@@ -91,21 +92,24 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     displayPanel.add(displayText);
 
     JPanel buttonPanel =new JPanel();
-    implementStrategy = new JButton("Implement Strategy");
+    //implementStrategy = new JButton("Implement Strategy");
+    addStocks = new JButton("Select Stocks");
     home = new JButton("Home");
-    implementStrategy.setActionCommand("newPortfolioWithoutEndDateDCA");
+    //implementStrategy.setActionCommand("newPortfolioWithoutEndDateDCA");
+    addStocks.setActionCommand("selectStocks");
     home.setActionCommand("newPortfolioWithoutEndDateDCAHomeButton");
-    buttonPanel.add(implementStrategy);
+    //buttonPanel.add(implementStrategy);
+    buttonPanel.add(addStocks);
     buttonPanel.add(home);
 
     JPanel panelStructure = new JPanel(new GridLayout(9,1));
     panelStructure.add(firstPanel);
-    panelStructure.add(secondPanel);
+    //panelStructure.add(secondPanel);
     panelStructure.add(thirdPanel);
-    panelStructure.add(fourthPanel);
+    //panelStructure.add(fourthPanel);
     panelStructure.add(fifthPanel);
     panelStructure.add(sixthPanel);
-    panelStructure.add(seventhPanel);
+    //panelStructure.add(seventhPanel);
 
     this.add(panelStructure, BorderLayout.PAGE_START);
     this.add(displayPanel, BorderLayout.CENTER);
@@ -118,16 +122,14 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
   }
   @Override
   public void addActionListener(ActionListener listener) {
-    implementStrategy.addActionListener(listener);
+    //implementStrategy.addActionListener(listener);
+    addStocks.addActionListener(listener);
     home.addActionListener(listener);
   }
 
   @Override
   public String getInput() {
-    return portfolioName.getText() + ":" + stockTicker.getText()
-        + ":" + amount.getText() + ":" + proportions.getText()
-        + ":" + startDate.getText() + ":" + interval.getText()
-        + ":" + commissionFee.getText();
+    return portfolioName.getText() + ":" + amount.getText() + ":"  + startDate.getText() + ":" + interval.getText();
   }
 
   @Override
@@ -138,12 +140,12 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
   @Override
   public void clearField() {
     portfolioName.setText("");
-    stockTicker.setText("");
+    //stockTicker.setText("");
     amount.setText("");
-    proportions.setText("");
+    //proportions.setText("");
     startDate.setText("");
     interval.setText("");
-    commissionFee.setText("");
+    //commissionFee.setText("");
   }
 
   @Override

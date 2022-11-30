@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 import model.operation.IOperation;
@@ -57,9 +58,9 @@ public class GUIController implements IController, ActionListener{
   private String portfolioName;
   private Double amount;
   private String date;
-  private List<String> tickerNames;
-  private List<String> proportions;
-  private List<String> fee;
+  private List<String> tickerNames = new ArrayList<>();
+  private List<String> proportions = new ArrayList<>();
+  private List<String> fee = new ArrayList<>();
   private Map<String, Runnable> operationMap;
 
   /**
@@ -465,16 +466,19 @@ public class GUIController implements IController, ActionListener{
       } else if (proportion ==0 || proportion < 0) {
         selectStocks.setHintMess("Weightage cannot be empty or negative");
       }
+      implementStrategy = new AddStockDCA("Add Stock");
+      implementStrategy.addActionListener(this);
+      ((JFrame) this.mainView).dispose();
     });
 
     operationMap.put("implementStrategy", () ->{
       try {
-        operation.implementFixedDCAExistingPortfolio(portfolioName, amount, date, tickerNames, proportions, fee);
-        nextStock.setHintMess("Strategy applied successfully");
-        nextStock.clearField();
+        operation. implementFixedDCAExistingPortfolio(portfolioName, amount, date, tickerNames, proportions, fee);
+        existingPortfolioStrategy.setHintMess("Strategy applied successfully");
+        existingPortfolioStrategy.clearField();
       }
       catch (IllegalArgumentException e){
-        nextStock.setHintMess(e.getMessage());
+        existingPortfolioStrategy.setHintMess(e.getMessage());
       }
     });
 
@@ -547,25 +551,25 @@ public class GUIController implements IController, ActionListener{
     operationMap.put("dollarCostAveragingHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
-      ((JFrame) this.dollarCostAveraging).dispose();
+      ((JFrame) this.investmentStrategy).dispose();
     });
 
     operationMap.put("existingPortfolioFixedDCAHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
-      ((JFrame) this.existingPortfolioStrategy).dispose();
+      ((JFrame) this.investmentStrategy).dispose();
     });
 
     operationMap.put("newPortfolioWithFiniteRangeDCAHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
-      ((JFrame) this.newPortfolioWithFiniteRangeDCA).dispose();
+      ((JFrame) this.investmentStrategy).dispose();
     });
 
     operationMap.put("newPortfolioWithoutEndDateDCAHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
-      ((JFrame) this.newPortfolioWithoutEndDateDCA).dispose();
+      ((JFrame) this.investmentStrategy).dispose();
     });
 
     operationMap.put("portfolioHomeButton", () -> {

@@ -22,6 +22,13 @@ public interface IStocks {
   String isWeekend(String date);
 
   /**
+   * A method to check if a holiday is followed by weekend.
+   * @param date date
+   * @return new date
+   */
+  String isWeekendAfterHoliday(String date);
+
+  /**
    * Method to update files.
    *
    * @param: file

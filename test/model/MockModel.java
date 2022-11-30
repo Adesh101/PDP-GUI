@@ -197,4 +197,18 @@ public class MockModel implements IOperation {
       List<String> tickerNames, List<String> proportions, List<String> commissionFee) {
 
   }
+
+  @Override
+  public void implementRecurringDCANewPortfolioFinite(String portfolioName, List<String> stockNames,
+      double amount, List<String> proportions, String startDate, String endDate, int interval,
+      List<String> commissionFee) {
+
+  }
+
+  @Override
+  public void implementRecurringDCANewPortfolioInfinite(String portfolioName,
+      List<String> stockNames, double amount, List<String> proportions, String startDate,
+      int interval, List<String> commissionFee) {
+
+  }
 }

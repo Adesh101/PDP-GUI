@@ -412,10 +412,18 @@ public class Operation implements IOperation {
   @Override
   public String[] callStockAPI(String ticker, String date) {
     String[] resultStock = stocks.callStockAPI(ticker, date);
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date d = new Date();
+    String cdate = dateFormat.format(d);
+    if (date.compareTo(cdate)>0)
+      throw new IllegalArgumentException("DATA NOT AVAILABLE FOR THE GIVEN DATE");
     if (resultStock[0] == null) {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
       LocalDate dt = LocalDate.parse(date, formatter);
-      String result = dt.minusDays(1).format(formatter);
+      String result = dt.plusDays(1).format(formatter);
+      result=stocks.isWeekendAfterHoliday(result);
+
+      //String result = dt.minusDays(1).format(formatter);
       resultStock = callStockAPI(ticker, result);
     }
     return resultStock;
@@ -498,4 +506,20 @@ public class Operation implements IOperation {
       List<String> tickerNames, List<String> proportions, List<String> commissionFee) {
     dca.strategyForExistingPortfolio(portfolioName, tickerNames, amount, proportions, date, commissionFee);
   }
+
+  @Override
+  public void implementRecurringDCANewPortfolioFinite(String portfolioName, List<String> stockNames,
+      double amount, List<String> proportions, String startDate, String endDate, int interval,
+      List<String> commissionFee) {
+    dca.strategyForNewPortfolioWithEndDate(portfolioName, stockNames, amount, proportions, startDate, endDate, interval, commissionFee);
+  }
+
+  @Override
+  public void implementRecurringDCANewPortfolioInfinite(String portfolioName,
+      List<String> stockNames, double amount, List<String> proportions, String startDate,
+      int interval, List<String> commissionFee) {
+    dca.strategyForNewPortfolioWithoutEndDate(portfolioName, stockNames, amount, proportions,startDate, interval, commissionFee);
+  }
+
+
 }

@@ -84,6 +84,25 @@ public class Stocks implements IStocks {
   }
 
   @Override
+  public String isWeekendAfterHoliday(String date){
+    try {
+      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      Calendar c1 = Calendar.getInstance();
+      Date d1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+      c1.setTime(d1);
+      if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+        c1.add(Calendar.DAY_OF_WEEK, 2);
+        date = dateFormat.format(c1.getTime());
+      } else if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+        c1.add(Calendar.DAY_OF_WEEK, 1);
+        date = dateFormat.format(c1.getTime());
+      }
+    } catch (ParseException ex) {
+      System.out.println(ex.getMessage());
+    }
+    return date;
+  }
+  @Override
   public void updateFile(String file) {
     CsvFiles files = new CsvFiles();
     String apiKey = "FIR1DN0VB7SQ4SGD";

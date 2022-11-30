@@ -12,12 +12,14 @@ public interface IOperation {
 
   /**
    * A method to add a new portfolio name to the hashmap.
+   *
    * @param: portfolioName name of the new portfolio
    */
   void createNewPortfolio(String portfolioName);
 
   /**
    * A method to add  a stock to the existing portfolio.
+   *
    * @param: portfolioName name of the portfolio in which stock is to be added
    * @param: ticker symbol of the stock to be added
    * @param: quantity of the stock to be added
@@ -28,13 +30,15 @@ public interface IOperation {
 
   /**
    * A method that gives all the existing portfolios.
+   *
    * @return: portfolios
    */
   String getExistingPortfolios();
 
   /**
    * A method that gives the number of stocks stored in a portfolio.
-   * @return:  the count as integer
+   *
+   * @return: the count as integer
    * @param: portfolioName name of the portfolio
    */
   int getMapSize(String portfolioName);
@@ -42,26 +46,30 @@ public interface IOperation {
 
   /**
    * A method to check whether a portfolio already exists.
-   * @return:  true if the portfolio already exists else returns false
+   *
+   * @return: true if the portfolio already exists else returns false
    * @param: name of the portfolio to be checked
    */
   boolean checkPortfolioAlreadyExists(String name);
 
   /**
    * A method to check whether the ticker is valid.
-   * @return:  true if ticker is valid else returns false
+   *
+   * @return: true if ticker is valid else returns false
    * @param: ticker stock of the symbol
    */
   boolean isTickerValid(String ticker);
 
   /**
    * A method to write the portfolio data to a csv file.
+   *
    * @param: portfolios (hashmap)
    */
   void writeToCSV(String portfolioName);
 
   /**
    * A method to read input from a particular file.
+   *
    * @param: fileName
    * @return: parsed string input
    */
@@ -69,12 +77,14 @@ public interface IOperation {
 
   /**
    * Returns a list of portfolio names.
+   *
    * @return: arraylist of portfolios
    */
   List<String> getStockNamesFromPortfolio();
 
   /**
    * Fetches data of a particular portfolio.
+   *
    * @return: portfolio data
    */
   HashMap<String, HashMap<String, List<String>>> getPortfolioMap();
@@ -82,6 +92,7 @@ public interface IOperation {
 
   /**
    * Fetches the data of a particular portfolio.
+   *
    * @param: portfolioName
    * @return: string parsed data
    */
@@ -89,6 +100,7 @@ public interface IOperation {
 
   /**
    * Fetches portfolio data on a particular date.
+   *
    * @param: portfolioName
    * @param: date
    * @return: total value of portfolio
@@ -97,6 +109,7 @@ public interface IOperation {
 
   /**
    * Method to fetch API data.
+   *
    * @param: ticker
    * @param: date
    * @return: string array
@@ -105,6 +118,7 @@ public interface IOperation {
 
   /**
    * Method to create flexible portfolio.
+   *
    * @param: portfolioName
    * @param: date
    */
@@ -112,18 +126,21 @@ public interface IOperation {
 
   /**
    * Method to create locked portfolio.
+   *
    * @param: portfolioName
    */
   void createLockedPortfolio(String portfolioName);
 
   /**
    * Method to check yesterday's date.
+   *
    * @return: date
    */
   Date yesterdaysDate();
 
   /**
    * Method to check flexible portfolio.
+   *
    * @param: portFolioName
    * @return: true/false value
    */
@@ -131,6 +148,7 @@ public interface IOperation {
 
   /**
    * Method to check inflexible portfolio.
+   *
    * @param: portFolioName
    * @return: inflexible portfolio
    */
@@ -148,6 +166,7 @@ public interface IOperation {
 
   /**
    * Method to add stock.
+   *
    * @param: portfolioName
    * @param: ticker
    * @param: quantity
@@ -156,10 +175,11 @@ public interface IOperation {
    * @param: fee
    */
   void addStockToFlexiblePortfolio(String portfolioName, String ticker, int quantity,
-      double price, String date,double fee);
+      double price, String date, double fee);
 
   /**
    * Method to add stock.
+   *
    * @param: portfolioName
    * @param: ticker
    * @param: quantity
@@ -170,6 +190,7 @@ public interface IOperation {
 
   /**
    * Method to check cost basis.
+   *
    * @param: portfolioName
    * @param: date
    * @return: cost basis map
@@ -178,12 +199,14 @@ public interface IOperation {
 
   /**
    * Method to get flexible map size.
+   *
    * @return: map size
    */
   int getFlexibleMapSize();
 
   /**
    * Method to sell stock.
+   *
    * @param: portfolioName
    * @param: ticker
    * @param: quantity
@@ -196,6 +219,7 @@ public interface IOperation {
 
   /**
    * Method to return portfolio data.
+   *
    * @param: portfolioName
    * @return: portfolio data
    */
@@ -203,6 +227,7 @@ public interface IOperation {
 
   /**
    * Method to fetch previous date.
+   *
    * @param: map
    * @param: currentDate
    * @param: name
@@ -213,6 +238,7 @@ public interface IOperation {
 
   /**
    * Method to store graph data.
+   *
    * @param: portfolioName
    * @param: startDate
    * @param: endDate
@@ -222,11 +248,23 @@ public interface IOperation {
 
   /**
    * Method to fetch line chart.
+   *
    * @return: line chart
    */
   int getLineChartScale();
 
   String checkValidDate(String date);
+
   String[] returnTickerNames(String portfolioName);
-  void implementFixedDCAExistingPortfolio(String portfolioName, Double amount, String date, List<String> tickerNames, List<String> proportions, List<String> commissionFee );
+
+  void implementFixedDCAExistingPortfolio(String portfolioName, Double amount, String date,
+      List<String> tickerNames, List<String> proportions, List<String> commissionFee);
+
+  void implementRecurringDCANewPortfolioFinite(String portfolioName, List<String> stockNames,
+      double amount, List<String> proportions, String startDate, String endDate, int interval,
+      List<String> commissionFee);
+
+  void implementRecurringDCANewPortfolioInfinite(String portfolioName, List<String> stockNames,
+      double amount, List<String> proportions, String startDate, int interval, List<String> commissionFee);
 }
+
