@@ -50,7 +50,7 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     secondPanel.add(stockTicker);
 
     JPanel thirdPanel = new JPanel();
-    amountText = new JLabel("Total Amount to be invested: ");
+    amountText = new JLabel("Total Amount: ");
     amountText.setPreferredSize(new Dimension(100,20));
     amount = new JTextField(20);
     thirdPanel.add(amountText);
@@ -72,7 +72,7 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
 
 
     JPanel sixthPanel = new JPanel();
-    intervalText= new JLabel("Interval in days: ");
+    intervalText= new JLabel("Interval in Days: ");
     intervalText.setPreferredSize(new Dimension(100,20));
     interval = new JTextField(20);
     sixthPanel.add(intervalText);

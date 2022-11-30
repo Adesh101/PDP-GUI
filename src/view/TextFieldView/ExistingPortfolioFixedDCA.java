@@ -44,7 +44,7 @@ public class ExistingPortfolioFixedDCA extends JFrame implements TextField {
     firstPanel.add(portfolioName);
 
     JPanel thirdPanel = new JPanel();
-    amountText = new JLabel("Total Amount to be invested: ");
+    amountText = new JLabel("Total Amount: ");
     amountText.setPreferredSize(new Dimension(100,20));
     amount = new JTextField(20);
     thirdPanel.add(amountText);

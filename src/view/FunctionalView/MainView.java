@@ -16,6 +16,8 @@ public class MainView extends JFrame implements MainViewFunction {
   private JButton savePortfolio;
   private JButton readPortfolio;
   private JButton investmentStrategy;
+  private JButton queryCostBasis;
+  private JButton portfolioValueByDate;
   private JButton quit;
 
   public MainView (String str) {
@@ -25,7 +27,7 @@ public class MainView extends JFrame implements MainViewFunction {
     setLayout(new BorderLayout(5, 5));
 
     JPanel panel = new JPanel();;
-    panel.setLayout(new GridLayout(8, 1, 10, 0));
+    panel.setLayout(new GridLayout(10, 1, 10, 0));
 
     createFlexiblePortfolio = new JButton("Create Flexible Portfolio");
     buyStock = new JButton("Buy Stock");
@@ -34,6 +36,8 @@ public class MainView extends JFrame implements MainViewFunction {
     readPortfolio = new JButton("Read Portfolio from File");
     showPortfolioPerformance = new JButton("Show Portfolio Performance");
     investmentStrategy = new JButton("Invest using Strategy");
+    queryCostBasis = new JButton("Query Cost Basis");
+    portfolioValueByDate = new JButton("Portfolio Value by Date");
     quit = new JButton("Quit");
 
     createFlexiblePortfolio.setActionCommand("createFlexiblePortfolio");
@@ -43,6 +47,8 @@ public class MainView extends JFrame implements MainViewFunction {
     readPortfolio.setActionCommand("readPortfolio");
     showPortfolioPerformance.setActionCommand("showPortfolioPerformance");
     investmentStrategy.setActionCommand("investmentStrategy");
+    queryCostBasis.setActionCommand("queryCostBasis");
+    portfolioValueByDate.setActionCommand("portfolioValueByDate");
     quit.setActionCommand("quit");
 
     panel.add(createFlexiblePortfolio);
@@ -51,6 +57,8 @@ public class MainView extends JFrame implements MainViewFunction {
     panel.add(savePortfolio);
     panel.add(readPortfolio);
     panel.add(showPortfolioPerformance);
+    panel.add(queryCostBasis);
+    panel.add(portfolioValueByDate);
     panel.add(investmentStrategy);
     panel.add(quit);
 
@@ -69,6 +77,8 @@ public class MainView extends JFrame implements MainViewFunction {
     savePortfolio.addActionListener(listener);
     readPortfolio.addActionListener(listener);
     investmentStrategy.addActionListener(listener);
+    queryCostBasis.addActionListener(listener);
+    portfolioValueByDate.addActionListener(listener);
     quit.addActionListener(listener);
   }
 

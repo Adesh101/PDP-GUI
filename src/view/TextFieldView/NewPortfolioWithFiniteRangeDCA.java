@@ -54,7 +54,7 @@ public class NewPortfolioWithFiniteRangeDCA extends JFrame implements TextField 
 //    secondPanel.add(stockTicker);
 
     JPanel thirdPanel = new JPanel();
-    amountText = new JLabel("Total Amount to be invested: ");
+    amountText = new JLabel("Total Amount: ");
     amountText.setPreferredSize(new Dimension(100,20));
     amount = new JTextField(20);
     thirdPanel.add(amountText);
@@ -82,7 +82,7 @@ public class NewPortfolioWithFiniteRangeDCA extends JFrame implements TextField 
     sixthPanel.add(endDate);
 
     JPanel seventhPanel = new JPanel();
-    intervalText= new JLabel("Interval in days: ");
+    intervalText= new JLabel("Interval in Days: ");
     intervalText.setPreferredSize(new Dimension(100,20));
     interval = new JTextField(20);
     seventhPanel.add(intervalText);

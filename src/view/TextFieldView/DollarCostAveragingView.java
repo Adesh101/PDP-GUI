@@ -2,6 +2,7 @@ package view.TextFieldView;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,7 +31,7 @@ public class DollarCostAveragingView extends JFrame implements TextField {
     JPanel buttonPanel = new JPanel();
     existingPortfolioStrategy = new JButton("Strategy on Existing Portfolio");
     newPortfolioWithFiniteRange = new JButton("Strategy on New Portfolio having"
-        + " Start Date and End Date");
+        + " Start/End Date");
     newPortfolioWithoutEndDate = new JButton("Strategy on New Portfolio"
         + " having only Start Date");
     home = new JButton("Home");
@@ -38,6 +39,7 @@ public class DollarCostAveragingView extends JFrame implements TextField {
     newPortfolioWithFiniteRange.setActionCommand("newPortfolioWithFiniteRangeDCA");
     newPortfolioWithoutEndDate.setActionCommand("newPortfolioWithoutEndDateDCA");
     home.setActionCommand("dollarCostAveragingHome");
+
     buttonPanel.add(existingPortfolioStrategy);
     buttonPanel.add(newPortfolioWithFiniteRange);
     buttonPanel.add(newPortfolioWithoutEndDate);
@@ -50,6 +52,17 @@ public class DollarCostAveragingView extends JFrame implements TextField {
     this.pack();
     setLocationRelativeTo(null);
     this.setVisible(true);
+
+
+//    JPanel panelStructure = new JPanel(new GridLayout(4, 4));
+//    panelStructure.add(buttonPanel);
+//
+//    this.add(panelStructure, BorderLayout.PAGE_START);
+//    this.add(displayPanel, BorderLayout.CENTER);
+//
+//    this.pack();
+//    setLocationRelativeTo(null);
+//    this.setVisible(true);
   }
 
   @Override

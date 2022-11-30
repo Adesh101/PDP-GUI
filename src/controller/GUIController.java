@@ -14,6 +14,8 @@ import view.TextFieldView.InvestmentStrategy;
 import view.TextFieldView.LineChartEx;
 import view.TextFieldView.NewPortfolioWithFiniteRangeDCA;
 import view.TextFieldView.NewPortfolioWithoutEndDateDCA;
+import view.TextFieldView.PortfolioValueByDate;
+import view.TextFieldView.QueryCostBasis;
 import view.TextFieldView.ReadPortfolio;
 import view.TextFieldView.SavePortfolio;
 import view.TextFieldView.SellStock;
@@ -35,6 +37,8 @@ public class GUIController implements IController, ActionListener{
   private TextField buyStock;
   private TextField sellStock;
   private TextField savePortfolio;
+  private TextField queryCostBasis;
+  private TextField portfolioValueByDate;
   private TextField readPortfolio;
   private TextField showPortfolioPerformance;
   private TextField graph;
@@ -308,6 +312,66 @@ public class GUIController implements IController, ActionListener{
         graph.addActionListener(this);
       } catch (Exception ex) {
         readPortfolio.setHintMess(ex.getMessage());
+      }
+    });
+
+    operationMap.put("queryCostBasis", () -> {
+      queryCostBasis = new QueryCostBasis("Cost Basis");
+      queryCostBasis.addActionListener(this);
+      ((JFrame) this.mainView).dispose();
+    });
+
+    operationMap.put("costBasisButton", () -> {
+      String[] costBasis = queryCostBasis.getInput().split(":");
+      if (costBasis.length == 1) {
+        queryCostBasis.setHintMess("Enter valid details.");
+        return;
+      }
+      String portfolioName = costBasis[0];
+      String costBasisDate = costBasis[1];
+
+      if (portfolioName.length() == 0 || !operation.checkWhetherFlexible(portfolioName)) {
+        queryCostBasis.setHintMess("Enter valid portfolio name");
+        return;
+      }
+
+      queryCostBasis.setHintMess(operation.checkValidDate(costBasisDate));
+
+      try{
+        queryCostBasis.setHintMess("Cost Basis on " + costBasisDate + " is: "
+            + operation.costBasisByDate(portfolioName, costBasisDate));
+      } catch (IllegalArgumentException ex) {
+        queryCostBasis.setHintMess(ex.getMessage());
+      }
+    });
+
+    operationMap.put("portfolioValueByDate", () -> {
+      portfolioValueByDate = new PortfolioValueByDate("Portfolio Value");
+      portfolioValueByDate.addActionListener(this);
+      ((JFrame) this.mainView).dispose();
+    });
+
+    operationMap.put("portfolioValueByDateButton", () -> {
+      String[] portfolioValue = portfolioValueByDate.getInput().split(":");
+      if (portfolioValue.length == 1) {
+        portfolioValueByDate.setHintMess("Enter valid details.");
+        return;
+      }
+      String portfolioName = portfolioValue[0];
+      String portfolioDate = portfolioValue[1];
+
+      if (portfolioName.length() == 0 || !operation.checkWhetherFlexible(portfolioName)) {
+        portfolioValueByDate.setHintMess("Enter valid portfolio name");
+        return;
+      }
+
+      portfolioValueByDate.setHintMess(operation.checkValidDate(portfolioDate));
+
+      try {
+        portfolioValueByDate.setHintMess("Value of " + portfolioName + " on "
+            + portfolioDate + " is : " + operation.getPortfolioByDate(portfolioName, portfolioDate));
+      } catch (IllegalArgumentException ex) {
+        portfolioValueByDate.setHintMess(ex.getMessage());
       }
     });
 
