@@ -40,7 +40,7 @@ public class PortfolioValueByDate extends JFrame implements TextField {
     portfolioValueDateText.setPreferredSize(new Dimension(100, 20));
     portfolioValueDate = new JTextField(20);
     secondPanel.add(portfolioValueDateText);
-    secondPanel.add(portfolioValue);
+    secondPanel.add(portfolioValueDate);
 
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");
@@ -81,7 +81,7 @@ public class PortfolioValueByDate extends JFrame implements TextField {
 
   @Override
   public void setHintMess(String message) {
-    displayText.setText("");
+    displayText.setText(message);
   }
 
   @Override

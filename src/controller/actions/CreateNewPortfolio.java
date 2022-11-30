@@ -17,5 +17,4 @@ public class CreateNewPortfolio implements IActions {
     operation.createLockedPortfolio(this.portfolioName);
     return "Portfolio " + this.portfolioName + " successfully created. \n";
   }
-
 }

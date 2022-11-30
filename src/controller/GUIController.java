@@ -142,6 +142,11 @@ public class GUIController implements IController, ActionListener{
         buyStock.setHintMess("Commission fee should be numeric value.");
       }
 
+      if (portfolioName.length() == 0 || !operation.checkWhetherFlexible(portfolioName)) {
+        buyStock.setHintMess("Enter valid portfolio name");
+        return;
+      }
+
       String buyDate = addStockDetails[3];
       if (ticker.length() == 0) {
         buyStock.setHintMess("Ticker cannot be empty.");
@@ -199,6 +204,11 @@ public class GUIController implements IController, ActionListener{
         commissionFee = Integer.parseInt(sellStockDetails[4]);
       } catch (Exception ex) {
         sellStock.setHintMess("Commission fee should be numeric value.");
+      }
+
+      if (portfolioName.length() == 0 || !operation.checkWhetherFlexible(portfolioName)) {
+        sellStock.setHintMess("Enter valid portfolio name");
+        return;
       }
 
       String sellDate = sellStockDetails[3];
@@ -334,12 +344,11 @@ public class GUIController implements IController, ActionListener{
         queryCostBasis.setHintMess("Enter valid portfolio name");
         return;
       }
-
       queryCostBasis.setHintMess(operation.checkValidDate(costBasisDate));
-
       try{
+        double costBasisValue = operation.costBasisByDate(portfolioName, costBasisDate);
         queryCostBasis.setHintMess("Cost Basis on " + costBasisDate + " is: "
-            + operation.costBasisByDate(portfolioName, costBasisDate));
+            + costBasisValue);
       } catch (IllegalArgumentException ex) {
         queryCostBasis.setHintMess(ex.getMessage());
       }
@@ -368,8 +377,9 @@ public class GUIController implements IController, ActionListener{
       portfolioValueByDate.setHintMess(operation.checkValidDate(portfolioDate));
 
       try {
+        double finalValue = operation.getPortfolioByDate(portfolioName, portfolioDate);
         portfolioValueByDate.setHintMess("Value of " + portfolioName + " on "
-            + portfolioDate + " is : " + operation.getPortfolioByDate(portfolioName, portfolioDate));
+            + portfolioDate + " is : " + finalValue);
       } catch (IllegalArgumentException ex) {
         portfolioValueByDate.setHintMess(ex.getMessage());
       }
@@ -456,9 +466,6 @@ public class GUIController implements IController, ActionListener{
         selectStocks.setHintMess("Weightage cannot be empty or negative");
       }
     });
-
-
-
 
     operationMap.put("implementStrategy", () ->{
       try {
@@ -561,6 +568,17 @@ public class GUIController implements IController, ActionListener{
       ((JFrame) this.newPortfolioWithoutEndDateDCA).dispose();
     });
 
+    operationMap.put("portfolioHomeButton", () -> {
+      mainView = new MainView("Home");
+      mainView.addActionListener(this);
+      ((JFrame) this.portfolioValueByDate).dispose();
+    });
+
+    operationMap.put("costHomeButton", () -> {
+      mainView = new MainView("Home");
+      mainView.addActionListener(this);
+      ((JFrame) this.queryCostBasis).dispose();
+    });
 
     operationMap.put("quit", () -> {
       System.exit(0);
