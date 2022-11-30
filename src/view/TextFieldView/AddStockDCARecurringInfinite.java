@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class to add stocks for DCA.
+ */
 public class AddStockDCARecurringInfinite extends JFrame implements TextField {
   private JLabel stockTickerText;
   private JLabel proportionsText;
@@ -22,6 +25,10 @@ public class AddStockDCARecurringInfinite extends JFrame implements TextField {
   private JButton implementStrategy;
   private JButton home;
 
+  /**
+   * A public constructor for AddStockDCARecurringInfinite.
+   * @param caption string
+   */
   public AddStockDCARecurringInfinite(String caption){
     super(caption);
     this.setPreferredSize(new Dimension(500,350));

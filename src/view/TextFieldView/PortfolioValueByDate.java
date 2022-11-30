@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class for fetching portfolio value by date.
+ */
 public class PortfolioValueByDate extends JFrame implements TextField {
 
   private JLabel portfolioNameText;
@@ -22,6 +25,10 @@ public class PortfolioValueByDate extends JFrame implements TextField {
   private JButton portfolioValue;
   private JButton home;
 
+  /**
+   * A public constructor for PortfolioValueByDate.
+   * @param caption string
+   */
   public PortfolioValueByDate(String caption) {
     super(caption);
     this.setPreferredSize(new Dimension(500, 350));

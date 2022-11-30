@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class for selling the stock.
+ */
 public class SellStock extends JFrame implements TextField {
   private JLabel portfolioNameText;
   private JLabel stockTickerText;
@@ -26,6 +29,10 @@ public class SellStock extends JFrame implements TextField {
   private JButton sellStock;
   private JButton home;
 
+  /**
+   * A public constructor for SellStock.
+   * @param caption string
+   */
   public SellStock(String caption) {
     super(caption);
     this.setPreferredSize(new Dimension(500, 350));

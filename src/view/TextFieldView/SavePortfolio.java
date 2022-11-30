@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class for persisting the portfolio.
+ */
 public class SavePortfolio extends JFrame implements TextField {
 
   private JLabel portfolioNameText;
@@ -20,6 +23,10 @@ public class SavePortfolio extends JFrame implements TextField {
   private JButton savePortfolio;
   private JButton home;
 
+  /**
+   * A public constructor for SavePortfolio.
+   * @param caption string
+   */
   public SavePortfolio(String caption) {
     super(caption);
     this.setPreferredSize(new Dimension(450, 300));

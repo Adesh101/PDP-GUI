@@ -2,6 +2,9 @@ package view.TextFieldView;
 
 import java.awt.event.ActionListener;
 
+/**
+ * A public interface for TextField.
+ */
 public interface TextField {
   /**
    * Add a listener to button

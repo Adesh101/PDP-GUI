@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class for DCA for new portfolio for finite range.
+ */
 public class NewPortfolioWithFiniteRangeDCA extends JFrame implements TextField {
 
   private JLabel portfolioNameText;
@@ -33,6 +36,10 @@ public class NewPortfolioWithFiniteRangeDCA extends JFrame implements TextField 
   //private JButton implementStrategy;
   private JButton home;
 
+  /**
+   * A public constructor for NewPortfolioWithFiniteRangeDCA.
+   * @param caption string
+   */
   public NewPortfolioWithFiniteRangeDCA(String caption){
     super(caption);
     this.setPreferredSize(new Dimension(500,350));

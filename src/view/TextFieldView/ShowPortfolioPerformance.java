@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class for ShowPortfolioPerformance.
+ */
 public class ShowPortfolioPerformance extends JFrame implements TextField{
   private JLabel portfolioNameText;
   private JLabel startDateText;
@@ -21,6 +24,10 @@ public class ShowPortfolioPerformance extends JFrame implements TextField{
   private JButton showPortfolio;
   private JButton home;
 
+  /**
+   * A public constructor for ShowPortfolioPerformance.
+   * @param caption string
+   */
   public ShowPortfolioPerformance (String caption) {
     super(caption);
     this.setPreferredSize(new Dimension(500, 350));

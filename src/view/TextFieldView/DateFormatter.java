@@ -6,6 +6,9 @@ import java.util.Calendar;
 
 import javax.swing.JFormattedTextField.AbstractFormatter;
 
+/**
+ * A public class to format date.
+ */
 public class DateFormatter extends AbstractFormatter {
   private String datePattern = "yyyy-MM-dd";
   private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);

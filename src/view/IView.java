@@ -2,6 +2,9 @@ package view;
 
 import controller.GUIController;
 
+/**
+ * A public interface for View.
+ */
 public interface IView {
   /**
    * A method to print welcome message.

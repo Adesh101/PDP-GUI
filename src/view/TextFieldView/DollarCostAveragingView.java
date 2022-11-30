@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * A public class for Dollar Cost Averaging view.
+ */
 public class DollarCostAveragingView extends JFrame implements TextField {
 
   private JLabel displayText;
@@ -17,6 +20,10 @@ public class DollarCostAveragingView extends JFrame implements TextField {
   private JButton newPortfolioWithoutEndDate;
   private JButton home;
 
+  /**
+   * A public constructor for DollarCostAveragingview.
+   * @param caption string
+   */
   public DollarCostAveragingView(String caption){
     super(caption);
     this.setPreferredSize(new Dimension(500,350));

@@ -31,6 +31,9 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
+/**
+ * A public class which controls the GUI flow.
+ */
 public class GUIController implements IController, ActionListener{
   private IOperation operation;
   private MainViewFunction mainView;

@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class for DCA for new portfolio for infinite range.
+ */
 public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
   private JLabel portfolioNameText;
   //private JLabel stockTickerText;
@@ -30,6 +33,10 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
   private JButton addStocks;
   private JButton home;
 
+  /**
+   * A public constructor for NewPortfolioWithoutEndDateDCA.
+   * @param caption string
+   */
   public NewPortfolioWithoutEndDateDCA(String caption){
     super(caption);
     this.setPreferredSize(new Dimension(500,350));

@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class for adding stocks for DCA.
+ */
 public class AddStockDCAFixed extends JFrame implements TextField {
   private JLabel stockTickerText;
   private JLabel proportionsText;
@@ -22,6 +25,10 @@ public class AddStockDCAFixed extends JFrame implements TextField {
   private JButton implementStrategy;
   private JButton home;
 
+  /**
+   * A public constructor for AddStockDCAFixed.
+   * @param caption string
+   */
   public AddStockDCAFixed(String caption){
     super(caption);
     this.setPreferredSize(new Dimension(500,350));

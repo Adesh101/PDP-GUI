@@ -15,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class to create flexible portfolio.
+ */
 public class CreateFlexiblePortfolio extends JFrame implements TextField{
   private JTextField portfolioName;
   private JLabel displayText;
@@ -24,6 +27,10 @@ public class CreateFlexiblePortfolio extends JFrame implements TextField{
   private JButton createPortfolio;
   private JButton homeButton;
 
+  /**
+   * A public constructor for CreateFlexiblePortfolio.
+   * @param caption string
+   */
   public CreateFlexiblePortfolio(String caption) {
     super(caption);
     this.setPreferredSize(new Dimension(450, 300));

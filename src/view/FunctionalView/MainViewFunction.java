@@ -2,6 +2,9 @@ package view.FunctionalView;
 
 import java.awt.event.ActionListener;
 
+/**
+ * A Public interface for MainViewFunction.
+ */
 public interface MainViewFunction {
 
   /**

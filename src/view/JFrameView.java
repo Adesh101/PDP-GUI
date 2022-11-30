@@ -8,12 +8,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * A public class for JFrame view.
+ */
 public class JFrameView extends JFrame implements IView {
 
   private JLabel display;
   private JButton echoButton, exitButton,toggleButton;
   private JTextField input;
 
+  /**
+   * A public constructor for JFrameView.
+   * @param caption string
+   */
   public JFrameView(String caption) {
     super(caption);
 

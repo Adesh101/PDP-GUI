@@ -28,14 +28,27 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 
+/**
+ * A public class for LineChart.
+ */
 public class LineChartEx extends JFrame implements TextField {
 
   private JButton home;
 
+  /**
+   * A public constructor for LineChartEx.
+   * @param map chart data
+   * @param scale scale
+   */
   public LineChartEx(TreeMap<String, Integer> map, int scale) {
     initUI(map, scale);
   }
 
+  /**
+   * A public method to initialise the UI.
+   * @param map chart data
+   * @param scale scale of the chart
+   */
   public void initUI(TreeMap<String, Integer> map, int scale) {
     XYDataset dataset = createDataset(map, scale);
     JFreeChart chart = createChart(dataset, map);

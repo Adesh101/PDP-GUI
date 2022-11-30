@@ -10,10 +10,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+/**
+ * A public class for investment strategy.
+ */
 public class InvestmentStrategy extends JFrame implements TextField {
   private JLabel displayText;
   private JButton dollarCostAveraging;
   private JButton home;
+
+  /**
+   * A public constructor for InvestmentStrategy.
+   * @param caption string
+   */
   public InvestmentStrategy(String caption){
     super(caption);
     this.setPreferredSize(new Dimension(500,350));

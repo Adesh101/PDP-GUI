@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class for Reading Portfolio.
+ */
 public class ReadPortfolio extends JFrame implements TextField {
 
   private JLabel portfolioNameText;
@@ -20,6 +23,10 @@ public class ReadPortfolio extends JFrame implements TextField {
   private JButton readPortfolio;
   private JButton home;
 
+  /**
+   * A public constructor for ReadPortfolio.
+   * @param caption string
+   */
   public ReadPortfolio(String caption) {
     super(caption);
     this.setPreferredSize(new Dimension(450, 300));

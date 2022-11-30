@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class for DCA for existing portfolio.
+ */
 public class ExistingPortfolioFixedDCA extends JFrame implements TextField {
   private JLabel portfolioNameText;
 //  private JLabel stockTickerText;
@@ -29,7 +32,10 @@ public class ExistingPortfolioFixedDCA extends JFrame implements TextField {
   //private JButton implementStrategy;
   private JButton home;
 
-
+  /**
+   * A public constructor for ExistingPortfolioFixeDCA.
+   * @param caption string
+   */
   public ExistingPortfolioFixedDCA(String caption){
     super(caption);
     this.setPreferredSize(new Dimension(500,350));

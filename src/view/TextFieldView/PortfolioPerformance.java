@@ -12,6 +12,9 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+/**
+ * A public class for portfolio performance.
+ */
 public class PortfolioPerformance extends JFrame implements TextField{
 
   private static final long serialVersionUID = 1L;
@@ -42,7 +45,10 @@ public class PortfolioPerformance extends JFrame implements TextField{
     return dataset;
   }
 
-
+  /**
+   * A public constructor for PortfolioPerformance.
+   * @param caption
+   */
   public PortfolioPerformance(String caption) {
     super(caption);
     // Create dataset

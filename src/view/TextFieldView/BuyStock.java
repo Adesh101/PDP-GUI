@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A public class to buy stocks.
+ */
 public class BuyStock extends JFrame implements TextField {
 
   private JLabel portfolioNameText;
@@ -26,6 +29,10 @@ public class BuyStock extends JFrame implements TextField {
   private JButton addStock;
   private JButton home;
 
+  /**
+   * A public constructor for BuyStock.
+   * @param caption string
+   */
   public BuyStock(String caption) {
     super(caption);
     this.setPreferredSize(new Dimension(500, 350));
