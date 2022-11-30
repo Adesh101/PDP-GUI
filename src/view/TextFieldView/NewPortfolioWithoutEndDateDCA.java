@@ -96,7 +96,7 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     addStocks = new JButton("Select Stocks");
     home = new JButton("Home");
     //implementStrategy.setActionCommand("newPortfolioWithoutEndDateDCA");
-    addStocks.setActionCommand("selectStocks");
+    addStocks.setActionCommand("selectStocksInfiniteRecurring");
     home.setActionCommand("newPortfolioWithoutEndDateDCAHomeButton");
     //buttonPanel.add(implementStrategy);
     buttonPanel.add(addStocks);

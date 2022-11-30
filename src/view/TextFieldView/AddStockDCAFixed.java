@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AddStockDCA extends JFrame implements TextField {
+public class AddStockDCAFixed extends JFrame implements TextField {
   private JLabel stockTickerText;
   private JLabel proportionsText;
   private JLabel commissionFeeText;
@@ -22,7 +22,7 @@ public class AddStockDCA extends JFrame implements TextField {
   private JButton implementStrategy;
   private JButton home;
 
-  public AddStockDCA(String caption){
+  public AddStockDCAFixed(String caption){
     super(caption);
     this.setPreferredSize(new Dimension(500,350));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +58,7 @@ public class AddStockDCA extends JFrame implements TextField {
     implementStrategy = new JButton("Implement Strategy");
     home = new JButton("Home");
     next.setActionCommand("selectStocks");
-    implementStrategy.setActionCommand("implementStrategy");
+    implementStrategy.setActionCommand("implementStrategyDCAFixed");
     home.setActionCommand("AddStockDCAHomeButton");
     buttonPanel.add(next);
     buttonPanel.add(implementStrategy);

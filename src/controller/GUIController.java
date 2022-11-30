@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.TreeMap;
 import model.operation.IOperation;
 import view.FunctionalView.MainView;
-import view.TextFieldView.AddStockDCA;
+import view.TextFieldView.AddStockDCAFixed;
 import view.TextFieldView.BuyStock;
 import view.TextFieldView.CreateFlexiblePortfolio;
 import view.FunctionalView.MainViewFunction;
@@ -49,7 +49,7 @@ public class GUIController implements IController, ActionListener{
   private TextField newPortfolioWithFiniteRange;
   private TextField newPortfolioWithoutEndDate;
   private TextField nextStock;
-  private TextField implementStrategy;
+  private TextField implementStrategyDCAFixed;
   private TextField newPortfolioWithFiniteRangeDCA;
   private TextField newPortfolioWithoutEndDateDCA;
   private TextField existingPortfolioDCAMainWindow;
@@ -404,7 +404,7 @@ public class GUIController implements IController, ActionListener{
       ((JFrame) this.mainView).dispose();
     });
 
-    operationMap.put("selectStocks", () -> {
+    operationMap.put("selectStocksExisting", () -> {
       if(existingPortfolioStrategy.getInput().length() != 3){
         existingPortfolioStrategy.setHintMess("Enter Valid Details");
       }
@@ -429,7 +429,7 @@ public class GUIController implements IController, ActionListener{
       }
       existingPortfolioStrategy.setHintMess(operation.checkValidDate(date));
 
-      selectStocks = new AddStockDCA("Add Stock");
+      selectStocks = new AddStockDCAFixed("Add Stock");
       selectStocks.addActionListener(this);
       ((JFrame) this.mainView).dispose();
     });
@@ -466,12 +466,12 @@ public class GUIController implements IController, ActionListener{
       } else if (proportion ==0 || proportion < 0) {
         selectStocks.setHintMess("Weightage cannot be empty or negative");
       }
-      implementStrategy = new AddStockDCA("Add Stock");
-      implementStrategy.addActionListener(this);
+      implementStrategyDCAFixed = new AddStockDCAFixed("Add Stock");
+      implementStrategyDCAFixed.addActionListener(this);
       ((JFrame) this.mainView).dispose();
     });
 
-    operationMap.put("implementStrategy", () ->{
+    operationMap.put("implementStrategyDCAFixed", () ->{
       try {
         operation. implementFixedDCAExistingPortfolio(portfolioName, amount, date, tickerNames, proportions, fee);
         existingPortfolioStrategy.setHintMess("Strategy applied successfully");

@@ -87,7 +87,7 @@ public class ExistingPortfolioFixedDCA extends JFrame implements TextField {
     addStock = new JButton("Select Stocks");
     //implementStrategy = new JButton("Implement Strategy");
     home = new JButton("Home");
-    addStock.setActionCommand("selectStocks");
+    addStock.setActionCommand("selectStocksExisting");
     //implementStrategy.setActionCommand("implementExistingPortfolioFixedDCA");
     home.setActionCommand("existingPortfolioFixedDCAHomeButton");
     buttonPanel.add(addStock);

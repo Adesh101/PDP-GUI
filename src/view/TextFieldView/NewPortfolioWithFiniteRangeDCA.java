@@ -104,7 +104,7 @@ public class NewPortfolioWithFiniteRangeDCA extends JFrame implements TextField 
     //implementStrategy = new JButton("Implement Strategy");
     addStocks = new JButton("Select Stocks");
     home = new JButton("Home");
-    addStocks.setActionCommand("selectStocks");
+    addStocks.setActionCommand("selectStocksFiniteRecurring");
     //implementStrategy.setActionCommand("newPortfolioWithFiniteRangeDCA");
     home.setActionCommand("newPortfolioWithFiniteRangeDCAHomeButton");
     buttonPanel.add(addStocks);
