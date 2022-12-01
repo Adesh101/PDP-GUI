@@ -455,8 +455,78 @@ public class IOperationTest {
     List<String> fee = new ArrayList<String>();
     fee.add("5");
     fee.add("5");
-    operation.implementFixedDCAExistingPortfolio("College Savings", 100.0, "2022-09-14", tickers, proportions, fee);
-    assertEquals("",operation.costBasisByDate("College Savings", "2022-11-30"));
+    operation.implementFixedDCAExistingPortfolio("College Savings", 100.0,
+        "2022-09-14", tickers, proportions, fee);
+    assertEquals("100.00",operation.costBasisByDate("College Savings",
+        "2022-11-30"));
+  }
+  @Test
+  public void testDCARecurringFinite(){
+    this.stocks = new Stocks();
+    this.operation = new Operation(this.inflexiblePortfolio, this.flexiblePortfolio, this.stocks,
+        this.lineChart);
+    this.dca = new DollarCostAveraging(flexiblePortfolio);
+    List<String> tickers = new ArrayList<String>();
+    tickers.add("GOOG");
+    tickers.add("AAPL");
+    List<String> proportions = new ArrayList<String>();
+    proportions.add("50");
+    proportions.add("50");
+    List<String> fee = new ArrayList<String>();
+    fee.add("5");
+    fee.add("5");
+    operation.implementRecurringDCANewPortfolioFinite("College Savings", tickers,
+        100.0, proportions,"2022-01-01", "2022-11-11", 10, fee);
+    assertEquals("3100.00",operation.costBasisByDate("College Savings",
+        "2022-09-30"));
+    assertEquals("3410.00",operation.costBasisByDate("College Savings",
+        "2022-10-30"));
+    assertEquals("3720.00",operation.costBasisByDate("College Savings",
+        "2022-11-30"));
+  }
+  @Test
+  public void testDCARecurringFiniteValue(){
+    this.stocks = new Stocks();
+    this.operation = new Operation(this.inflexiblePortfolio, this.flexiblePortfolio, this.stocks,
+        this.lineChart);
+    this.dca = new DollarCostAveraging(flexiblePortfolio);
+    List<String> tickers = new ArrayList<String>();
+    tickers.add("GOOG");
+    tickers.add("AAPL");
+    List<String> proportions = new ArrayList<String>();
+    proportions.add("50");
+    proportions.add("50");
+    List<String> fee = new ArrayList<String>();
+    fee.add("5");
+    fee.add("5");
+    operation.implementRecurringDCANewPortfolioFinite("College Savings", tickers,
+        100.0, proportions,"2022-01-01", "2022-11-11", 10, fee);
+    assertEquals("3420.3567",operation.getPortfolioByDate("College Savings",
+        "2022-09-30"));
+    assertEquals("3749.4352",operation.getPortfolioByDate("College Savings",
+        "2022-10-30"));
+    assertEquals("4215.2628",operation.getPortfolioByDate("College Savings",
+        "2022-11-30"));
+  }
+  @Test
+  public void testDCARecurringIninite(){
+    this.stocks = new Stocks();
+    this.operation = new Operation(this.inflexiblePortfolio, this.flexiblePortfolio, this.stocks,
+        this.lineChart);
+    this.dca = new DollarCostAveraging(flexiblePortfolio);
+    List<String> tickers = new ArrayList<String>();
+    tickers.add("GOOG");
+    tickers.add("AAPL");
+    List<String> proportions = new ArrayList<String>();
+    proportions.add("50");
+    proportions.add("50");
+    List<String> fee = new ArrayList<String>();
+    fee.add("5");
+    fee.add("5");
+    operation.implementRecurringDCANewPortfolioInfinite("College Savings", tickers,
+        100.0, proportions,"2022-01-01",10, fee);
+    assertEquals("4985.00",operation.costBasisByDate("College Savings",
+        "2022-11-30"));
   }
 
 }

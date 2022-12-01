@@ -37,7 +37,7 @@ public class DollarCostAveraging implements IDollarCostAveraging {
       double individualAmount = (Double.parseDouble(proportions.get(i)) / 100) * amount;
       double individualPrice = stocks.getPriceByDate(stockNames.get(i), date);
       double quantity = individualAmount / individualPrice;
-      flexiblePortfolio.buyStock(portfolioName, stockNames.get(i), String.valueOf(quantity),
+      flexiblePortfolio.buyStock(portfolioName, stockNames.get(i), String.valueOf((int) quantity),
           stocks.getPriceByDate(stockNames.get(i), date), date,
           Double.parseDouble(commissionFee.get(i)));
     }
@@ -72,7 +72,7 @@ public class DollarCostAveraging implements IDollarCostAveraging {
         double individualAmount = (Double.parseDouble(proportions.get(i)) / 100) * amount;
         double individualPrice = stocks.getPriceByDate(stockNames.get(i), date);
         double quantity = individualAmount / individualPrice;
-        flexiblePortfolio.buyStock(portfolioName, stockNames.get(i), String.valueOf(quantity),
+        flexiblePortfolio.buyStock(portfolioName, stockNames.get(i), String.valueOf((int) quantity),
             stocks.getPriceByDate(stockNames.get(i), date), date,
             Double.parseDouble(commissionFee.get(i)));
       }
@@ -106,7 +106,7 @@ public class DollarCostAveraging implements IDollarCostAveraging {
         double individualAmount = (Double.parseDouble(proportions.get(i)) / 100) * amount;
         double individualPrice = stocks.getPriceByDate(stockNames.get(i), date);
         double quantity = individualAmount / individualPrice;
-        flexiblePortfolio.buyStock(portfolioName, stockNames.get(i), String.valueOf(quantity),
+        flexiblePortfolio.buyStock(portfolioName, stockNames.get(i), String.valueOf((int) quantity),
             stocks.getPriceByDate(stockNames.get(i), date), date,
             Double.parseDouble(commissionFee.get(i)));
       }
