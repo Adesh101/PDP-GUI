@@ -53,26 +53,12 @@ public class NewPortfolioWithFiniteRangeDCA extends JFrame implements TextField 
     firstPanel.add(portfolioNameText);
     firstPanel.add(portfolioName);
 
-//    JPanel secondPanel = new JPanel();
-//    stockTickerText = new JLabel("Stock Name: ");
-//    stockTickerText.setPreferredSize(new Dimension(100,20));
-//    stockTicker = new JTextField(20);
-//    secondPanel.add(stockTickerText);
-//    secondPanel.add(stockTicker);
-
     JPanel thirdPanel = new JPanel();
     amountText = new JLabel("Total Amount: ");
     amountText.setPreferredSize(new Dimension(100,20));
     amount = new JTextField(20);
     thirdPanel.add(amountText);
     thirdPanel.add(amount);
-
-//    JPanel fourthPanel = new JPanel();
-//    proportionsText = new JLabel("Weightage: ");
-//    proportionsText.setPreferredSize(new Dimension(100,20));
-//    proportions = new JTextField(20);
-//    fourthPanel.add(proportionsText);
-//    fourthPanel.add(proportions);
 
     JPanel fifthPanel = new JPanel();
     startDateText = new JLabel("Start Date: ");
@@ -95,38 +81,25 @@ public class NewPortfolioWithFiniteRangeDCA extends JFrame implements TextField 
     seventhPanel.add(intervalText);
     seventhPanel.add(interval);
 
-//    JPanel eigthPanel = new JPanel();
-//    commissionFeeText = new JLabel("Commission Fee: ");
-//    commissionFeeText.setPreferredSize(new Dimension(100,20));
-//    commissionFee = new JTextField(20);
-//    eigthPanel.add(commissionFeeText);
-//    eigthPanel.add(commissionFee);
-
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");
     displayText.setPreferredSize(new Dimension(400,20));
     displayPanel.add(displayText);
 
     JPanel buttonPanel =new JPanel();
-    //implementStrategy = new JButton("Implement Strategy");
     addStocks = new JButton("Select Stocks");
     home = new JButton("Home");
     addStocks.setActionCommand("selectStocksFiniteRecurring");
-    //implementStrategy.setActionCommand("newPortfolioWithFiniteRangeDCA");
     home.setActionCommand("newPortfolioWithFiniteRangeDCAHomeButton");
     buttonPanel.add(addStocks);
-    //buttonPanel.add(implementStrategy);
     buttonPanel.add(home);
 
     JPanel panelStructure = new JPanel(new GridLayout(9,1));
     panelStructure.add(firstPanel);
-    //panelStructure.add(secondPanel);
     panelStructure.add(thirdPanel);
-    //panelStructure.add(fourthPanel);
     panelStructure.add(fifthPanel);
     panelStructure.add(sixthPanel);
     panelStructure.add(seventhPanel);
-    //panelStructure.add(eigthPanel);
 
     this.add(panelStructure, BorderLayout.PAGE_START);
     this.add(displayPanel, BorderLayout.CENTER);
@@ -138,15 +111,14 @@ public class NewPortfolioWithFiniteRangeDCA extends JFrame implements TextField 
   }
   @Override
   public void addActionListener(ActionListener listener) {
-    //implementStrategy.addActionListener(listener);
     addStocks.addActionListener(listener);
     home.addActionListener(listener);
   }
 
   @Override
   public String getInput() {
-    return portfolioName.getText() + ":" + ":" + amount.getText() + ":" + ":" + startDate.getText() + ":" + endDate.getText()
-        + ":" + interval.getText();
+    return portfolioName.getText() + ":" + amount.getText() + ":" + startDate.getText()
+        + ":" + endDate.getText() + ":" + interval.getText();
   }
 
   @Override

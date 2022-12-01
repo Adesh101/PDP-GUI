@@ -49,7 +49,7 @@ public class ShowPortfolioPerformance extends JFrame implements TextField{
     secondPanel.add(startDate);
 
     JPanel thirdPanel = new JPanel();
-    endDateText = new JLabel("Start Date: ");
+    endDateText = new JLabel("End Date: ");
     endDateText.setPreferredSize(new Dimension(100, 20));
     endDate = new JTextField(20);
     thirdPanel.add(endDateText);

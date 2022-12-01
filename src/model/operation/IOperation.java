@@ -253,7 +253,7 @@ public interface IOperation {
    */
   int getLineChartScale();
 
-  String checkValidDate(String date);
+  void checkValidDate(String date);
 
   String[] returnTickerNames(String portfolioName);
 

@@ -1,8 +1,12 @@
 DESIGN CHANGES
 Added FlexiblePortfolio and InflexiblePortfolio classes : We have added these classes to support Flexible portfolios. Earlier the operation model contained the methods to perform the operations but now since we have two different types of portfolios and different logic for them, we have refactored the code.
+
 Added fileHandling interface: We have created new interface so that if there is a new input source in the future, we can simply implement this interface to get input from new source with minimal design changes.
+
 Created helper methods in controller: We have created helper methods in the controller and significantly reduced the size of the switch case.
 Hash map structure changed: In the previous part, the hash map contained portfolio name along with the stocks present and their composition. But now, We have added date as a key in the hash map to keep better track of the transactions.
+
+Added GUI and GUI controller to help with GUI View: We had to implement a new controller to help with the new GUI view and we are providing user with the option to choose between the GUI view and the normal text based UI view.
 
 DESIGN README
 The application is built using MVC Design. All the functionalities are implemented in the model of the application.
@@ -28,4 +32,9 @@ Sell stock:controls the input and flow when stocks need to be sold from a given 
 
 
 The view includes the text-based interface where the input is read and output messages are displayed. A readable object is used to read the user input and an appendable object is used to return the output
+
+
+GUI:
+To implement GUI, we created two main interfaces Functional View and Text Field View. Functional View represents the main menu of our program and Text Field view represents the separate operations of the program. We have created separate classes to accomodate each feature of the code and we have created a separate Controller, GUI controller to handle GUI View. We followed command design pattern and have created keys with the button action commands that are passed through the GUI. 
+The Functional View contains subclasses that have appropriate names regarding the view they represent.
 

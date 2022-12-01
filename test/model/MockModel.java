@@ -183,8 +183,8 @@ public class MockModel implements IOperation {
   }
 
   @Override
-  public String checkValidDate(String date) {
-    return null;
+  public void checkValidDate(String date) {
+    log.append("Checked date");
   }
 
   @Override

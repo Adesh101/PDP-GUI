@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Collections;
@@ -119,8 +118,8 @@ public class Operation implements IOperation {
     HashMap<String, Integer> map = new HashMap<>();
     for (String stockDates : flexibleMap.get(portfolioName).keySet()) {
       for (String ticker : flexibleMap.get(portfolioName).get(stockDates).keySet()) {
-        int quantity = Integer.parseInt(
-            flexibleMap.get(portfolioName).get(stockDates).get(ticker).get(0));
+        Double newData = new Double(flexibleMap.get(portfolioName).get(stockDates).get(ticker).get(0));
+        int quantity = newData.intValue();
         if (map.containsKey(ticker)) {
           map.put(ticker, map.get(ticker) + quantity);
         } else {
@@ -324,11 +323,11 @@ public class Operation implements IOperation {
   private double getValueByDate(HashMap<String, HashMap<String, HashMap<String, List<String>>>> map,
       String name, String date) {
     IStocks stocks = new Stocks();
-    date = getPreviousDate(map, date, name);
+    String previousDate = getPreviousDate(map, date, name);
     double portfolioValue = 0.00;
-    for (String stock : map.get(name).get(date).keySet()) {
+    for (String stock : map.get(name).get(previousDate).keySet()) {
       portfolioValue = portfolioValue + (stocks.getPriceByDate(stock, date)
-          * Double.parseDouble(map.get(name).get(date).get(stock).get(0)));
+          * Double.parseDouble(map.get(name).get(previousDate).get(stock).get(0)));
     }
     return portfolioValue;
   }
@@ -467,19 +466,18 @@ public class Operation implements IOperation {
   }
 
   @Override
-  public String checkValidDate(String date) {
+  public void checkValidDate(String date) {
     String dateFormat = "yyyy-MM-dd";
     if (date.length() != 10) {
-      return "Enter a valid date.";
+      throw new IllegalArgumentException("Enter a valid date.");
     }
     try {
       DateFormat df = new SimpleDateFormat(dateFormat);
       df.setLenient(false);
       df.parse(date);
     } catch (ParseException e) {
-      return "Enter a valid date.";
+      throw new IllegalArgumentException("Enter a valid date.");
     }
-    return "";
   }
 
   @Override
@@ -496,9 +494,6 @@ public class Operation implements IOperation {
       i++;
     }
     return names;
-
-
-
   }
 
   @Override
