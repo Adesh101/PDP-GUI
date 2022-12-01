@@ -47,6 +47,7 @@ public class DollarCostAveraging implements IDollarCostAveraging {
   public void strategyForNewPortfolioWithEndDate(String portfolioName, List<String> stockNames,
       double amount, List<String> proportions, String startDate, String endDate, int interval,
       List<String> commissionFee) {
+    flexiblePortfolio.createPortfolio(portfolioName, startDate);
     for (String s : commissionFee) {
       amount = amount - Double.parseDouble(s);
     }
@@ -84,6 +85,7 @@ public class DollarCostAveraging implements IDollarCostAveraging {
   public void strategyForNewPortfolioWithoutEndDate(String portfolioName, List<String> stockNames,
       double amount, List<String> proportions, String startDate, int interval,
       List<String> commissionFee) {
+    flexiblePortfolio.createPortfolio(portfolioName, startDate);
     for (String s : commissionFee) {
       amount = amount - Double.parseDouble(s);
     }
