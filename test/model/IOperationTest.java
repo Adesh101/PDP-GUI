@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import model.strategy.DollarCostAveraging;
+import model.strategy.IDollarCostAveraging;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,6 +32,7 @@ public class IOperationTest {
   private IInflexiblePortfolio inflexiblePortfolio;
   private FlexiblePortfolio flexiblePortfolio;
   private ILineChart lineChart;
+  private IDollarCostAveraging dca;
 
   @Before
   public void setUp() {
@@ -37,6 +40,7 @@ public class IOperationTest {
     this.inflexiblePortfolio = new InflexiblePortfolio();
     this.flexiblePortfolio = new FlexiblePortfolio();
     this.lineChart = new LineChart();
+    this.dca = new DollarCostAveraging(flexiblePortfolio);
     this.operation = new Operation(this.inflexiblePortfolio, this.flexiblePortfolio, this.stocks,
         this.lineChart);
   }
@@ -435,6 +439,26 @@ public class IOperationTest {
     operation.addStockToFlexiblePortfolio("College Savings", "GOOG", 50, 80, "2022-09-13", 20);
     operation.getGraph("College Savings", "2022-09-14", "2032-11-15");
   }
+  @Test
+  public void testDCAFixedExisting(){
+    this.stocks = new Stocks();
+    this.operation = new Operation(this.inflexiblePortfolio, this.flexiblePortfolio, this.stocks,
+        this.lineChart);
+    this.dca = new DollarCostAveraging(flexiblePortfolio);
+    operation.createFlexiblePortfolio("College Savings", "2022-01-01");
+    List<String> tickers = new ArrayList<String>();
+    tickers.add("GOOG");
+    tickers.add("AAPL");
+    List<String> proportions = new ArrayList<String>();
+    proportions.add("50");
+    proportions.add("50");
+    List<String> fee = new ArrayList<String>();
+    fee.add("5");
+    fee.add("5");
+    operation.implementFixedDCAExistingPortfolio("College Savings", 100.0, "2022-09-14", tickers, proportions, fee);
+    assertEquals("",operation.costBasisByDate("College Savings", "2022-11-30"));
+  }
+
 }
 
 

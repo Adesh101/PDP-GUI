@@ -62,7 +62,7 @@ public class Operation implements IOperation {
     this.inflexiblePortfolio = inflexiblePortfolio;
     this.flexiblePortfolio = flexiblePortfolio;
     this.lineChart = lineChart;
-    this.dca = new DollarCostAveraging(flexiblePortfolio);
+    this.dca = new DollarCostAveraging(this.flexiblePortfolio);
   }
 
   @Override

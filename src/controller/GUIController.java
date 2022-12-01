@@ -339,7 +339,7 @@ public class GUIController implements IController, ActionListener {
       }
 
       String[] details = existingPortfolioStrategy.getInput().split(":");
-      String portfolioName = details[0];
+      this.portfolioName = details[0];
       this.date = details[2];
       this.amount = (double) 0;
 
@@ -394,7 +394,7 @@ public class GUIController implements IController, ActionListener {
           selectStocks.setHintMess("Weightage cannot be empty or negative");
           return;
         }
-        proportions.add(details[1]);
+        this.proportions.add(details[1]);
         totalProportion += proportion;
         if (totalProportion > 100) {
           selectStocks.setHintMess("Proportion cannot exceed 100.");
