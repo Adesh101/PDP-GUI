@@ -51,7 +51,8 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
   public void buyStock(String portfolioName, String ticker, String quantity, double price,
       String date, double fee) {
     this.commissionFee = fee;
-    if (!map.containsKey(portfolioName)) {
+    //this.map = operation.fetchMap();
+    if (!this.map.containsKey(portfolioName)) {
       throw new IllegalArgumentException("Enter valid portfolio name.");
     }
     IStocks stocks = new Stocks();
@@ -94,13 +95,13 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
               .add(map.get(portfolioName).get(prevDate).get(stock).get(2));
         }
         if (map.get(portfolioName).get(date).containsKey(ticker)) {
-          int existingQuantity = Integer.parseInt(
+          double existingQuantity = Double.parseDouble(
               map.get(portfolioName).get(date).get(ticker).get(0));
           map.get(portfolioName).get(date).get(ticker)
               .set(0, String.valueOf(existingQuantity + quantity));
-          double existingPrice = Integer.parseInt(
+          double existingPrice = Double.parseDouble(
               map.get(portfolioName).get(date).get(ticker).get(1));
-          double existingTotalValue = Integer.parseInt(
+          double existingTotalValue = Double.parseDouble(
               map.get(portfolioName).get(date).get(ticker).get(2));
           map.get(portfolioName).get(date).get(ticker).set(1, String.valueOf(
               (existingTotalValue + (Double.parseDouble(quantity) * price)) / (existingQuantity

@@ -267,5 +267,7 @@ public interface IOperation {
   void implementRecurringDCANewPortfolioInfinite(String portfolioName, List<String> stockNames,
       double amount, List<String> proportions, String startDate, int interval,
       List<String> commissionFee);
+
+
 }
 

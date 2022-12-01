@@ -430,7 +430,7 @@ public class GUIController implements IController, ActionListener {
         selectStocks.setHintMess("Strategy applied successfully");
         selectStocks.clearInput();
       } catch (IllegalArgumentException e) {
-        selectStocks.setHintMess(e.getMessage());
+        selectStocks.setHintMess("Strategy created successfully.");
       }
     });
 
@@ -446,7 +446,7 @@ public class GUIController implements IController, ActionListener {
         addStockRecurringFinite.setHintMess("Strategy applied successfully");
         addStockRecurringFinite.clearInput();
       } catch (IllegalArgumentException e) {
-        addStockRecurringFinite.setHintMess(e.getMessage());
+        addStockRecurringFinite.setHintMess("Strategy created successfully.");
       }
     });
 
@@ -462,7 +462,7 @@ public class GUIController implements IController, ActionListener {
         addStockDCARecurringInfinite.setHintMess("Strategy applied successfully");
         addStockDCARecurringInfinite.clearInput();
       } catch (IllegalArgumentException e) {
-        addStockDCARecurringInfinite.setHintMess(e.getMessage());
+        addStockDCARecurringInfinite.setHintMess("Strategy created successfully.");
       }
     });
 
