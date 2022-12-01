@@ -132,7 +132,8 @@ public class LineChart implements ILineChart {
     TreeMap<String, Integer> map = new TreeMap<>();
 
     while (noOfMonths > 0) {
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM yyyy");
+      //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM yyyy");
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
       keyValue += simpleDateFormat.format(sDate).toUpperCase();
       totalValue = getTotalValue(portfolio, startDate);
       map.put(keyValue, totalValue);
@@ -157,7 +158,8 @@ public class LineChart implements ILineChart {
     TreeMap<String, Integer> map = new TreeMap<>();
 
     while (noOfMonths > 0) {
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM yyyy");
+      //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM yyyy");
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
       keyValue += simpleDateFormat.format(sDate).toUpperCase();
       totalValue = getTotalValue(portfolio, startDate);
       map.put(keyValue, totalValue);

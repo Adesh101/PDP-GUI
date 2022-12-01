@@ -94,14 +94,8 @@ public class PortfolioValueByDate extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     portfolioValueDate.setText("");
     portfolioName.setText("");
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
   }
 }

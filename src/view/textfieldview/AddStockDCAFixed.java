@@ -26,7 +26,7 @@ public class AddStockDCAFixed extends JFrame implements TextField {
   /**
    * A public constructor for AddStockDCAFixed.
    *
-   * @param caption string
+   * @param: caption string
    */
   public AddStockDCAFixed(String caption) {
     super(caption);
@@ -105,15 +105,9 @@ public class AddStockDCAFixed extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     stockTicker.setText("");
     proportions.setText("");
     commissionFee.setText("");
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
   }
 }

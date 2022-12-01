@@ -84,12 +84,9 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
 
     JPanel panelStructure = new JPanel(new GridLayout(9, 1));
     panelStructure.add(firstPanel);
-    //panelStructure.add(secondPanel);
     panelStructure.add(thirdPanel);
-    //panelStructure.add(fourthPanel);
     panelStructure.add(fifthPanel);
     panelStructure.add(sixthPanel);
-    //panelStructure.add(seventhPanel);
 
     this.add(panelStructure, BorderLayout.PAGE_START);
     this.add(displayPanel, BorderLayout.CENTER);
@@ -103,7 +100,6 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
 
   @Override
   public void addActionListener(ActionListener listener) {
-    //implementStrategy.addActionListener(listener);
     addStocks.addActionListener(listener);
     home.addActionListener(listener);
   }
@@ -120,19 +116,10 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     portfolioName.setText("");
-    //stockTicker.setText("");
     amount.setText("");
-    //proportions.setText("");
     startDate.setText("");
     interval.setText("");
-    //commissionFee.setText("");
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
   }
 }

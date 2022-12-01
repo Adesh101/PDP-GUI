@@ -14,9 +14,9 @@ import view.functionalview.MainViewFunction;
 import view.textfieldview.DollarCostAveragingView;
 import view.textfieldview.ExistingPortfolioFixedDCA;
 import view.textfieldview.InvestmentStrategy;
-import view.textfieldview.LineChartEx;
 import view.textfieldview.NewPortfolioWithFiniteRangeDCA;
 import view.textfieldview.NewPortfolioWithoutEndDateDCA;
+import view.textfieldview.PortfolioPerformance;
 import view.textfieldview.PortfolioValueByDate;
 import view.textfieldview.QueryCostBasis;
 import view.textfieldview.ReadPortfolio;
@@ -114,7 +114,7 @@ public class GUIController implements IController, ActionListener {
         operation.checkValidDate(portfolioDate);
         operation.createFlexiblePortfolio(portfolioName, portfolioDate);
         createView.setHintMess("Portfolio " + portfolioName + " on " + portfolioDate + " created.");
-        createView.clearField();
+        createView.clearInput();
       } catch (IllegalArgumentException e) {
         createView.setHintMess(e.getMessage());
       }
@@ -141,7 +141,7 @@ public class GUIController implements IController, ActionListener {
             commissionFee);
         buyStock.setHintMess(quantity + " units of " + " stock " + ticker + " added to portfolio "
             + portfolioName + " on " + date);
-        buyStock.clearField();
+        buyStock.clearInput();
       } catch (IllegalArgumentException e) {
         buyStock.setHintMess(e.getMessage());
       }
@@ -168,7 +168,7 @@ public class GUIController implements IController, ActionListener {
         operation.sellStock(portfolioName, ticker, quantity, price, sellDate, commissionFee);
         sellStock.setHintMess(quantity + " units of " + " stock " + ticker + " added to portfolio "
             + portfolioName + " on " + sellDate);
-        sellStock.clearField();
+        sellStock.clearInput();
       } catch (IllegalArgumentException e) {
         sellStock.setHintMess(e.getMessage());
       }
@@ -191,7 +191,7 @@ public class GUIController implements IController, ActionListener {
         if (operation.checkWhetherFlexible(portfolioName)) {
           operation.writeToCSV(portfolioName);
           savePortfolio.setHintMess("Portfolio " + portfolioName + " saved successfully.");
-          savePortfolio.clearField();
+          savePortfolio.clearInput();
         } else {
           savePortfolio.setHintMess("Enter valid portfolio name.");
         }
@@ -217,7 +217,7 @@ public class GUIController implements IController, ActionListener {
       try {
         operation.readFromFile(portfolioName);
         readPortfolio.setHintMess("Portfolio " + portfolioName + " read successfully.");
-        readPortfolio.clearField();
+        readPortfolio.clearInput();
       } catch (IllegalArgumentException e) {
         readPortfolio.setHintMess(e.getMessage());
       }
@@ -248,7 +248,7 @@ public class GUIController implements IController, ActionListener {
         operation.checkValidDate(startDate);
         operation.checkValidDate(endDate);
         TreeMap<String, Integer> map = operation.getGraph(portfolioName, startDate, endDate);
-        graph = new LineChartEx(map, operation.getLineChartScale());
+        graph = new PortfolioPerformance("Portfolio Graph", map, operation.getLineChartScale());
         graph.addActionListener(this);
       } catch (Exception ex) {
         readPortfolio.setHintMess(ex.getMessage());
@@ -416,7 +416,7 @@ public class GUIController implements IController, ActionListener {
       }
 
       selectStocks.setHintMess("Stock added to strategy.");
-      selectStocks.clearField();
+      selectStocks.clearInput();
     });
 
     operationMap.put("implementStrategyDCAFixed", () -> {
@@ -428,7 +428,7 @@ public class GUIController implements IController, ActionListener {
         operation.implementFixedDCAExistingPortfolio(this.portfolioName, this.amount, this.date,
             this.tickerNames, this.proportions, this.fee);
         selectStocks.setHintMess("Strategy applied successfully");
-        selectStocks.clearField();
+        selectStocks.clearInput();
       } catch (IllegalArgumentException e) {
         selectStocks.setHintMess(e.getMessage());
       }
@@ -444,7 +444,7 @@ public class GUIController implements IController, ActionListener {
             this.amount,
             this.proportions, this.startDate, this.endDate, this.intervalInDays, this.fee);
         addStockRecurringFinite.setHintMess("Strategy applied successfully");
-        addStockRecurringFinite.clearField();
+        addStockRecurringFinite.clearInput();
       } catch (IllegalArgumentException e) {
         addStockRecurringFinite.setHintMess(e.getMessage());
       }
@@ -460,7 +460,7 @@ public class GUIController implements IController, ActionListener {
             this.amount,
             this.proportions, this.startDate, this.intervalInDays, this.fee);
         addStockDCARecurringInfinite.setHintMess("Strategy applied successfully");
-        addStockDCARecurringInfinite.clearField();
+        addStockDCARecurringInfinite.clearInput();
       } catch (IllegalArgumentException e) {
         addStockDCARecurringInfinite.setHintMess(e.getMessage());
       }
@@ -572,7 +572,7 @@ public class GUIController implements IController, ActionListener {
       }
 
       addStockRecurringFinite.setHintMess("Stock added to strategy.");
-      addStockRecurringFinite.clearField();
+      addStockRecurringFinite.clearInput();
     });
 
     operationMap.put("selectStocksInfinite", () -> {
@@ -621,7 +621,7 @@ public class GUIController implements IController, ActionListener {
       }
 
       addStockDCARecurringInfinite.setHintMess("Stock added to strategy.");
-      addStockDCARecurringInfinite.clearField();
+      addStockDCARecurringInfinite.clearInput();
     });
 
     operationMap.put("selectStocksInfiniteRecurring", () -> {

@@ -31,10 +31,5 @@ public interface TextField {
   /**
    * Clear the text field.
    */
-  void clearField();
-
-  /**
-   * Reset focus.
-   */
-  void resetFocus();
+  void clearInput();
 }

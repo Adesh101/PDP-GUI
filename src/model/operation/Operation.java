@@ -29,7 +29,8 @@ import model.strategy.IDollarCostAveraging;
  */
 public class Operation implements IOperation {
 
-  protected HashMap<String, HashMap<String, List<String>>> portfolios = new HashMap<String, HashMap<String, List<String>>>();
+  protected HashMap<String, HashMap<String, List<String>>>
+      portfolios = new HashMap<String, HashMap<String, List<String>>>();
   protected String portfolioName;
   CsvFiles files = new CsvFiles();
   protected HashMap<String, HashMap<String, HashMap<String, List<String>>>>

@@ -28,7 +28,7 @@ public class BuyStock extends JFrame implements TextField {
   /**
    * A public constructor for BuyStock.
    *
-   * @param caption string
+   * @param: caption string
    */
   public BuyStock(String caption) {
     super(caption);
@@ -123,17 +123,11 @@ public class BuyStock extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     portfolioName.setText("");
     stockTicker.setText("");
     stockQuantity.setText("");
     buyingDate.setText("");
     comissionFee.setText("");
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
   }
 }

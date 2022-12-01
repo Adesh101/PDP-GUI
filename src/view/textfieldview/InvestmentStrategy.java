@@ -65,14 +65,7 @@ public class InvestmentStrategy extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
-
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
-    ;
+  public void clearInput() {
+    System.out.println("This will print a message");
   }
 }

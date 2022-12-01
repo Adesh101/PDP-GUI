@@ -90,7 +90,8 @@ public class DollarCostAveraging implements IDollarCostAveraging {
       amount = amount - Double.parseDouble(s);
     }
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    Date iterativeDate = null, currentDate = null;
+    Date iterativeDate = null;
+    Date currentDate = null;
     Calendar c = Calendar.getInstance();
     try {
       iterativeDate = formatter.parse(startDate);

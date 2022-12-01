@@ -82,13 +82,7 @@ public class ReadPortfolio extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     readPortfolio.setText("");
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
   }
 }

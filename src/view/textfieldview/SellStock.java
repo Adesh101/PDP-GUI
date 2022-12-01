@@ -123,17 +123,11 @@ public class SellStock extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     portfolioName.setText("");
     stockTicker.setText("");
     stockQuantity.setText("");
     sellingDate.setText("");
     commissionFee.setText("");
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
   }
 }

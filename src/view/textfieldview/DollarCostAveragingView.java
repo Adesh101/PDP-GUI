@@ -59,16 +59,6 @@ public class DollarCostAveragingView extends JFrame implements TextField {
     this.pack();
     setLocationRelativeTo(null);
     this.setVisible(true);
-
-//    JPanel panelStructure = new JPanel(new GridLayout(4, 4));
-//    panelStructure.add(buttonPanel);
-//
-//    this.add(panelStructure, BorderLayout.PAGE_START);
-//    this.add(displayPanel, BorderLayout.CENTER);
-//
-//    this.pack();
-//    setLocationRelativeTo(null);
-//    this.setVisible(true);
   }
 
   @Override
@@ -90,13 +80,7 @@ public class DollarCostAveragingView extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
-
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
+  public void clearInput() {
+    System.out.println("This will print a message.");
   }
 }

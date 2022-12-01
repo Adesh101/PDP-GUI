@@ -123,20 +123,11 @@ public class NewPortfolioWithFiniteRangeDCA extends JFrame implements TextField 
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     portfolioName.setText("");
-    //stockTicker.setText("");
     amount.setText("");
-    //proportions.setText("");
     startDate.setText("");
     endDate.setText("");
     interval.setText("");
-    //commissionFee.setText("");
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
   }
 }

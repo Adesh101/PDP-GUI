@@ -27,7 +27,7 @@ public class CreateFlexiblePortfolio extends JFrame implements TextField {
   /**
    * A public constructor for CreateFlexiblePortfolio.
    *
-   * @param caption string
+   * @param: caption string
    */
   public CreateFlexiblePortfolio(String caption) {
     super(caption);
@@ -91,14 +91,8 @@ public class CreateFlexiblePortfolio extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     portfolioName.setText("");
     portfolioDate.setText("");
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
   }
 }

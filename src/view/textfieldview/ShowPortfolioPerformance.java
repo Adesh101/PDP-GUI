@@ -101,32 +101,9 @@ public class ShowPortfolioPerformance extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     startDate.setText("");
     endDate.setText("");
     portfolioName.setText("");
   }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
-  }
-
-//  public void showChart(TreeMap<String, Integer> map, String porfolioName, String startDate,
-//      String endDate, int scale) {
-//    StringBuilder sb = new StringBuilder();
-//    sb.append("Performance of Portfolio " + porfolioName + " From " + startDate + " to " + endDate
-//        + "\n");
-//    for (String timestamp : map.keySet()) {
-//      sb.append(timestamp + ": ");
-//      for (int i = 0; i < map.get(timestamp); i++) {
-//        sb.append("*");
-//      }
-//      sb.append("\n");
-//    }
-//    sb.append("\n");
-//    sb.append("Scale: *= $" + scale);
-//    setHintMess(sb.toString());
-//  }
 }

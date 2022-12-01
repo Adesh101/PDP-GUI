@@ -26,7 +26,7 @@ public class AddStockDCARecurringFinite extends JFrame implements TextField {
   /**
    * A public constructor for AddStockDCARecurringFinite.
    *
-   * @param caption string
+   * @param: caption string
    */
   public AddStockDCARecurringFinite(String caption) {
     super(caption);
@@ -106,15 +106,9 @@ public class AddStockDCARecurringFinite extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     stockTicker.setText("");
     proportions.setText("");
     commissionFee.setText("");
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
   }
 }

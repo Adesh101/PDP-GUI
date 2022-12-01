@@ -100,18 +100,9 @@ public class ExistingPortfolioFixedDCA extends JFrame implements TextField {
   }
 
   @Override
-  public void clearField() {
+  public void clearInput() {
     portfolioName.setText("");
-    //stockTicker.setText("");
     amount.setText("");
-    //proportions.setText("");
     strategyDate.setText("");
-    //commissionFee.setText("");
-  }
-
-  @Override
-  public void resetFocus() {
-    this.setFocusable(true);
-    this.requestFocus();
   }
 }
