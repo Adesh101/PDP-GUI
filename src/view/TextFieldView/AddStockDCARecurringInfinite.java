@@ -64,7 +64,7 @@ public class AddStockDCARecurringInfinite extends JFrame implements TextField {
     next = new JButton("Next Stock");
     implementStrategy = new JButton("Implement Strategy");
     home = new JButton("Home");
-    next.setActionCommand("selectStocks");
+    next.setActionCommand("selectStocksInfinite");
     implementStrategy.setActionCommand("implementStrategyDCARecurringInfinite");
     home.setActionCommand("AddStockDCAHomeButton");
     buttonPanel.add(next);

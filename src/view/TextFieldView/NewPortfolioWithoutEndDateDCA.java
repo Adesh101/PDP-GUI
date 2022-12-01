@@ -50,12 +50,6 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     firstPanel.add(portfolioNameText);
     firstPanel.add(portfolioName);
 
-//    JPanel secondPanel = new JPanel();
-//    stockTickerText = new JLabel("Stock Name: ");
-//    stockTickerText.setPreferredSize(new Dimension(100,20));
-//    stockTicker = new JTextField(20);
-//    secondPanel.add(stockTickerText);
-//    secondPanel.add(stockTicker);
 
     JPanel thirdPanel = new JPanel();
     amountText = new JLabel("Total Amount: ");
@@ -63,13 +57,7 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     amount = new JTextField(20);
     thirdPanel.add(amountText);
     thirdPanel.add(amount);
-//
-//    JPanel fourthPanel = new JPanel();
-//    proportionsText = new JLabel("Weightage: ");
-//    proportionsText.setPreferredSize(new Dimension(100,20));
-//    proportions = new JTextField(20);
-//    fourthPanel.add(proportionsText);
-//    fourthPanel.add(proportions);
+
 
     JPanel fifthPanel = new JPanel();
     startDateText = new JLabel("Start Date: ");
@@ -86,12 +74,6 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     sixthPanel.add(intervalText);
     sixthPanel.add(interval);
 
-//    JPanel seventhPanel = new JPanel();
-//    commissionFeeText = new JLabel("Commission Fee: ");
-//    commissionFeeText.setPreferredSize(new Dimension(100,20));
-//    commissionFee = new JTextField(20);
-//    seventhPanel.add(commissionFeeText);
-//    seventhPanel.add(commissionFee);
 
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");

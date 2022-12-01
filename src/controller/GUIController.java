@@ -6,6 +6,8 @@ import java.util.TreeMap;
 import model.operation.IOperation;
 import view.FunctionalView.MainView;
 import view.TextFieldView.AddStockDCAFixed;
+import view.TextFieldView.AddStockDCARecurringFinite;
+import view.TextFieldView.AddStockDCARecurringInfinite;
 import view.TextFieldView.BuyStock;
 import view.TextFieldView.CreateFlexiblePortfolio;
 import view.FunctionalView.MainViewFunction;
@@ -52,6 +54,9 @@ public class GUIController implements IController, ActionListener {
   private TextField existingPortfolioStrategy;
   private TextField newPortfolioWithFiniteRange;
   private TextField newPortfolioWithoutEndDate;
+  private TextField addStockRecurringFinite;
+  private TextField addStockRecurringInfinite;
+  private TextField addStockDCARecurringInfinite;
   private TextField nextStock;
   private TextField implementStrategyDCAFixed;
   private TextField newPortfolioWithFiniteRangeDCA;
@@ -61,7 +66,10 @@ public class GUIController implements IController, ActionListener {
   private String str;
   private String portfolioName;
   private Double amount;
+  private int intervalInDays;
   private String date;
+  private String startDate;
+  private String endDate;
   private List<String> tickerNames = new ArrayList<>();
   private List<String> proportions = new ArrayList<>();
   private List<String> fee = new ArrayList<>();
@@ -324,7 +332,7 @@ public class GUIController implements IController, ActionListener {
     });
 
     operationMap.put("selectStocksExisting", () -> {
-      if (existingPortfolioStrategy.getInput().length() == 3) {
+      if (existingPortfolioStrategy.getInput().length() == 2) {
         existingPortfolioStrategy.setHintMess("Enter valid details.");
         return;
       }
@@ -341,72 +349,117 @@ public class GUIController implements IController, ActionListener {
 
       try {
         this.amount = Double.parseDouble(details[1]);
+        if (amount <= 0.0) {
+          existingPortfolioStrategy.setHintMess("Amount should be greater than Zero");
+          return;
+        }
       } catch (Exception e) {
         existingPortfolioStrategy.setHintMess("Amount should be numeric value");
-      }
-
-      if (amount <= 0.0) {
-        existingPortfolioStrategy.setHintMess("Amount should be greater than Zero");
-        return;
-      } else if (date.length() == 0) {
-        existingPortfolioStrategy.setHintMess("Date cannot be empty.");
-        return;
       }
 
       try {
         operation.checkValidDate(this.date);
       } catch (Exception ex) {
-        existingPortfolioStrategy.setHintMess("Enter valid date.");
+        existingPortfolioStrategy.setHintMess("Enter valid date");
         return;
       }
 
       selectStocks = new AddStockDCAFixed("Add Stock");
       selectStocks.addActionListener(this);
-      ((JFrame) this.mainView).dispose();
+      ((JFrame) this.existingPortfolioStrategy).dispose();
     });
 
-    operationMap.put("nextStock", () -> {
-      if (selectStocks.getInput().length() != 3) {
+    operationMap.put("selectStocks", () -> {
+      double totalProportion = 0;
+      if (selectStocks.getInput().length() == 2) {
         selectStocks.setHintMess("Enter valid portfolio details.");
         return;
       }
+
       String[] details = selectStocks.getInput().split(":");
-      tickerNames.add(details[0]); // validate
+
+      if(!operation.isTickerValid(details[0]) || details[0].length() == 0) {
+        selectStocks.setHintMess("Enter valid ticker");
+        return;
+      }
+
+      tickerNames.add(details[0]);
       double proportion = 0.0;
       double comFee = 0.0;
+
       try {
         proportion = Double.parseDouble(details[1]);
+        if (proportion == 0 || proportion < 0) {
+          selectStocks.setHintMess("Weightage cannot be empty or negative");
+          return;
+        }
         proportions.add(details[1]);
+        totalProportion += proportion;
+        if (totalProportion > 100) {
+          selectStocks.setHintMess("Proportion cannot exceed 100.");
+          return;
+        }
       } catch (Exception e) {
         selectStocks.setHintMess("Proportion should be numeric value");
       }
+
       try {
         comFee = Double.parseDouble(details[2]);
+        if (comFee == 0 || comFee < 0) {
+          selectStocks.setHintMess("Commission fee cannot be empty or negative");
+          return;
+        }
         fee.add(details[2]);
       } catch (Exception e) {
         selectStocks.setHintMess("Commission fee should be a numeric value");
       }
 
-      if (details[0].length() == 0) {
-        selectStocks.setHintMess("Ticker cannot be empty");
-      } else if (comFee == 0 || comFee < 0) {
-        selectStocks.setHintMess("Commission fee cannot be empty or negative");
-      } else if (proportion == 0 || proportion < 0) {
-        selectStocks.setHintMess("Weightage cannot be empty or negative");
-      }
-      implementStrategyDCAFixed = new AddStockDCAFixed("Add Stock");
-      implementStrategyDCAFixed.addActionListener(this);
-      ((JFrame) this.mainView).dispose();
+      selectStocks.setHintMess("Stock added to strategy.");
+      selectStocks.clearField();
     });
 
     operationMap.put("implementStrategyDCAFixed", () -> {
+      if (tickerNames.size() == 0) {
+        selectStocks.setHintMess("Add stocks to the strategy first.");
+        return;
+      }
       try {
-        operation.implementFixedDCAExistingPortfolio(portfolioName, this.amount, this.date, tickerNames,
-            proportions, fee);
+        operation.implementFixedDCAExistingPortfolio(this.portfolioName, this.amount, this.date,
+            this.tickerNames, this.proportions, this.fee);
         selectStocks.setHintMess("Strategy applied successfully");
         selectStocks.clearField();
       } catch (IllegalArgumentException e) {
         selectStocks.setHintMess(e.getMessage());
+      }
+    });
+
+    operationMap.put("implementStrategyDCARecurringFinite", () -> {
+      if (this.tickerNames.size() == 0) {
+        addStockRecurringFinite.setHintMess("Add stocks to strategy first.");
+        return;
+      }
+      try {
+        operation.implementRecurringDCANewPortfolioFinite(this.portfolioName, this.tickerNames, this.amount,
+            this.proportions, this.startDate, this.endDate, this.intervalInDays, this.fee);
+        addStockRecurringFinite.setHintMess("Strategy applied successfully");
+        addStockRecurringFinite.clearField();
+      } catch (IllegalArgumentException e) {
+        addStockRecurringFinite.setHintMess(e.getMessage());
+      }
+    });
+
+    operationMap.put("implementStrategyDCARecurringInfinite", () -> {
+      if (this.tickerNames.size() == 0) {
+        addStockDCARecurringInfinite.setHintMess("Add stocks to strategy first.");
+        return;
+      }
+      try {
+        operation.implementRecurringDCANewPortfolioInfinite(this.portfolioName, this.tickerNames, this.amount,
+            this.proportions, this.startDate, this.intervalInDays, this.fee);
+        addStockDCARecurringInfinite.setHintMess("Strategy applied successfully");
+        addStockDCARecurringInfinite.clearField();
+      } catch (IllegalArgumentException e) {
+        addStockDCARecurringInfinite.setHintMess(e.getMessage());
       }
     });
 
@@ -417,54 +470,202 @@ public class GUIController implements IController, ActionListener {
       ((JFrame) this.mainView).dispose();
     });
 
+
     operationMap.put("selectStocksFiniteRecurring", () -> {
-      if (newPortfolioWithFiniteRange.getInput().length() == 5) {
+      if (newPortfolioWithFiniteRange.getInput().length() == 4) {
         newPortfolioWithFiniteRange.setHintMess("Enter valid details.");
+        return;
       }
 
       String[] stockDetails = newPortfolioWithFiniteRange.getInput().split(":");
-      String portfolioName = stockDetails[0];
+      this.portfolioName = stockDetails[0];
       String amount = stockDetails[1];
-      double amountValue = 0;
       String startDate = stockDetails[2];
       String endDate = stockDetails[3];
       String intervalInDays = stockDetails[4];
-      int intervalInDaysValue = 0;
 
       try {
-        amountValue = Double.parseDouble(amount);
+        this.amount = Double.parseDouble(amount);
+        if (this.amount <= 0) {
+          newPortfolioWithFiniteRange.setHintMess("Amount should be positive.");
+          return;
+        }
       } catch (Exception ex) {
         newPortfolioWithFiniteRange.setHintMess("Enter valid amount.");
+        return;
       }
 
       try {
         operation.checkValidDate(startDate);
         operation.checkValidDate(endDate);
+        this.startDate = startDate;
+        this.endDate = endDate;
       } catch (Exception ex) {
-        throw new IllegalArgumentException("Enter a valid date.");
+        newPortfolioWithFiniteRange.setHintMess("Enter valid date.");
+        return;
       }
 
       try {
-        intervalInDaysValue = Integer.parseInt(intervalInDays);
+        this.intervalInDays = Integer.parseInt(intervalInDays);
       } catch (Exception ex) {
         newPortfolioWithFiniteRange.setHintMess("Interval in days should be positive number only.");
+        return;
       }
 
-      try{
-        operation.implementRecurringDCANewPortfolioFinite(portfolioName, tickerNames,
-            amountValue, proportions, startDate, endDate, intervalInDaysValue, fee);
-        newPortfolioWithFiniteRange.setHintMess("");
-      } catch (Exception ex) {
-        newPortfolioWithFiniteRange.setHintMess("Enter valid details");
-      }
+      addStockRecurringFinite = new AddStockDCARecurringFinite("Add Stock");
+      addStockRecurringFinite.addActionListener(this);
+      ((JFrame) this.newPortfolioWithFiniteRange).dispose();
     });
 
     operationMap.put("newPortfolioWithoutEndDateDCA", () -> {
       newPortfolioWithoutEndDate = new NewPortfolioWithoutEndDateDCA(
           "New Portfolio without End Date");
       newPortfolioWithoutEndDate.addActionListener(this);
-      ((JFrame) this.mainView).dispose();
+      ((JFrame) this.dollarCostAveraging).dispose();
     });
+
+
+    operationMap.put("selectStocksFinite", () -> {
+      double totalProportion = 0;
+      if (addStockRecurringFinite.getInput().length() == 2) {
+        addStockRecurringFinite.setHintMess("Enter valid portfolio details.");
+        return;
+      }
+
+      String[] details = addStockRecurringFinite.getInput().split(":");
+
+      if(!operation.isTickerValid(details[0]) || details[0].length() == 0) {
+        addStockRecurringFinite.setHintMess("Enter valid ticker");
+        return;
+      }
+
+      this.tickerNames.add(details[0]);
+      double proportion = 0.0;
+      double comFee = 0.0;
+
+      try {
+        proportion = Double.parseDouble(details[1]);
+        if (proportion == 0 || proportion < 0) {
+          addStockRecurringFinite.setHintMess("Weightage cannot be empty or negative");
+          return;
+        }
+        totalProportion += proportion;
+        if (totalProportion > 100) {
+          addStockRecurringFinite.setHintMess("Proportion cannot exceed 100.");
+          return;
+        }
+        this.proportions.add(details[1]);
+      } catch (Exception e) {
+        addStockRecurringFinite.setHintMess("Proportion should be numeric value");
+      }
+
+      try {
+        comFee = Double.parseDouble(details[2]);
+        if (comFee == 0 || comFee < 0) {
+          addStockRecurringFinite.setHintMess("Commission fee cannot be empty or negative");
+          return;
+        }
+        this.fee.add(details[2]);
+      } catch (Exception e) {
+        addStockRecurringFinite.setHintMess("Commission fee should be a numeric value");
+      }
+
+      addStockRecurringFinite.setHintMess("Stock added to strategy.");
+      addStockRecurringFinite.clearField();
+    });
+
+
+    operationMap.put("selectStocksInfinite", () -> {
+      double totalProportion = 0;
+      if (addStockDCARecurringInfinite.getInput().length() == 2) {
+        addStockDCARecurringInfinite.setHintMess("Enter valid portfolio details.");
+        return;
+      }
+
+      String[] details = addStockDCARecurringInfinite.getInput().split(":");
+
+      if(!operation.isTickerValid(details[0]) || details[0].length() == 0) {
+        addStockDCARecurringInfinite.setHintMess("Enter valid ticker");
+        return;
+      }
+
+      this.tickerNames.add(details[0]);
+      double proportion = 0.0;
+      double comFee = 0.0;
+
+      try {
+        proportion = Double.parseDouble(details[1]);
+        if (proportion == 0 || proportion < 0) {
+          addStockDCARecurringInfinite.setHintMess("Weightage cannot be empty or negative");
+          return;
+        }
+        totalProportion += proportion;
+        if (totalProportion > 100) {
+          addStockDCARecurringInfinite.setHintMess("Proportion cannot exceed 100.");
+          return;
+        }
+        this.proportions.add(details[1]);
+      } catch (Exception e) {
+        addStockDCARecurringInfinite.setHintMess("Proportion should be numeric value");
+      }
+
+      try {
+        comFee = Double.parseDouble(details[2]);
+        if (comFee == 0 || comFee < 0) {
+          addStockDCARecurringInfinite.setHintMess("Commission fee cannot be empty or negative");
+          return;
+        }
+        this.fee.add(details[2]);
+      } catch (Exception e) {
+        addStockDCARecurringInfinite.setHintMess("Commission fee should be a numeric value");
+      }
+
+      addStockDCARecurringInfinite.setHintMess("Stock added to strategy.");
+      addStockDCARecurringInfinite.clearField();
+    });
+
+
+
+    operationMap.put("selectStocksInfiniteRecurring", () -> {
+      if (newPortfolioWithoutEndDate.getInput().length() == 4) {
+        newPortfolioWithoutEndDate.setHintMess("Enter valid details.");
+        return;
+      }
+
+      String[] stockDetails = newPortfolioWithoutEndDate.getInput().split(":");
+      this.portfolioName = stockDetails[0];
+
+      try {
+        this.amount = Double.parseDouble(stockDetails[1]);
+        if (this.amount <= 0) {
+          newPortfolioWithoutEndDate.setHintMess("Amount should be positive.");
+          return;
+        }
+      } catch (Exception ex) {
+        newPortfolioWithoutEndDate.setHintMess("Enter valid amount.");
+        return;
+      }
+
+      try {
+        operation.checkValidDate(stockDetails[2]);
+        this.startDate = stockDetails[2];
+      } catch (Exception ex) {
+        newPortfolioWithoutEndDate.setHintMess("Enter valid date.");
+        return;
+      }
+
+      try {
+        this.intervalInDays = Integer.parseInt(stockDetails[3]);
+      } catch (Exception ex) {
+        newPortfolioWithoutEndDate.setHintMess("Interval in days should be positive number only.");
+        return;
+      }
+
+      addStockDCARecurringInfinite = new AddStockDCARecurringInfinite("Add Stock");
+      addStockDCARecurringInfinite.addActionListener(this);
+      ((JFrame) this.newPortfolioWithoutEndDate).dispose();
+    });
+
 
     operationMap.put("createHomeButton", () -> {
       mainView = new MainView("Home");
@@ -537,7 +738,7 @@ public class GUIController implements IController, ActionListener {
     operationMap.put("newPortfolioWithoutEndDateDCAHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
-      ((JFrame) this.investmentStrategy).dispose();
+      ((JFrame) this.newPortfolioWithoutEndDate).dispose();
     });
 
     operationMap.put("portfolioHomeButton", () -> {
