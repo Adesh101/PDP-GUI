@@ -21,17 +21,18 @@ public class DollarCostAveragingView extends JFrame implements TextField {
 
   /**
    * A public constructor for DollarCostAveragingview.
+   *
    * @param caption string
    */
-  public DollarCostAveragingView(String caption){
+  public DollarCostAveragingView(String caption) {
     super(caption);
-    this.setPreferredSize(new Dimension(500,350));
+    this.setPreferredSize(new Dimension(500, 350));
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");
-    displayText.setPreferredSize(new Dimension(400,200));
+    displayText.setPreferredSize(new Dimension(400, 200));
     displayPanel.add(displayText);
 
     JPanel buttonPanel = new JPanel();
@@ -58,7 +59,6 @@ public class DollarCostAveragingView extends JFrame implements TextField {
     this.pack();
     setLocationRelativeTo(null);
     this.setVisible(true);
-
 
 //    JPanel panelStructure = new JPanel(new GridLayout(4, 4));
 //    panelStructure.add(buttonPanel);

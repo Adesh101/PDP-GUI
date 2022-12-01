@@ -14,9 +14,7 @@ import javax.swing.JTextField;
  * A public class for adding stocks for DCA.
  */
 public class AddStockDCAFixed extends JFrame implements TextField {
-  private JLabel stockTickerText;
-  private JLabel proportionsText;
-  private JLabel commissionFeeText;
+
   private JTextField stockTicker;
   private JTextField proportions;
   private JTextField commissionFee;
@@ -27,37 +25,41 @@ public class AddStockDCAFixed extends JFrame implements TextField {
 
   /**
    * A public constructor for AddStockDCAFixed.
+   *
    * @param caption string
    */
-  public AddStockDCAFixed(String caption){
+  public AddStockDCAFixed(String caption) {
     super(caption);
-    this.setPreferredSize(new Dimension(500,350));
+    JLabel stockTickerText;
+    JLabel proportionsText;
+    JLabel commissionFeeText;
+    this.setPreferredSize(new Dimension(500, 350));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel firstPanel = new JPanel();
     stockTickerText = new JLabel("Stock Name: ");
-    stockTickerText.setPreferredSize(new Dimension(100,20));
+    stockTickerText.setPreferredSize(new Dimension(100, 20));
     stockTicker = new JTextField(20);
     firstPanel.add(stockTickerText);
     firstPanel.add(stockTicker);
 
     JPanel secondPanel = new JPanel();
     proportionsText = new JLabel("Weightage: ");
-    proportionsText.setPreferredSize(new Dimension(100,20));
+    proportionsText.setPreferredSize(new Dimension(100, 20));
     proportions = new JTextField(20);
     secondPanel.add(proportionsText);
     secondPanel.add(proportions);
 
     JPanel thirdPanel = new JPanel();
     commissionFeeText = new JLabel("Commission Fee: ");
-    commissionFeeText.setPreferredSize(new Dimension(100,20));
+    commissionFeeText.setPreferredSize(new Dimension(100, 20));
     commissionFee = new JTextField(20);
     thirdPanel.add(commissionFeeText);
     thirdPanel.add(commissionFee);
 
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");
-    displayText.setPreferredSize(new Dimension(400,20));
+    displayText.setPreferredSize(new Dimension(400, 20));
     displayPanel.add(displayText);
 
     JPanel buttonPanel = new JPanel();
@@ -71,8 +73,7 @@ public class AddStockDCAFixed extends JFrame implements TextField {
     buttonPanel.add(implementStrategy);
     buttonPanel.add(home);
 
-
-    JPanel panelStructure = new JPanel(new GridLayout(4,1));
+    JPanel panelStructure = new JPanel(new GridLayout(4, 1));
     panelStructure.add(firstPanel);
     panelStructure.add(secondPanel);
     panelStructure.add(thirdPanel);
@@ -95,7 +96,7 @@ public class AddStockDCAFixed extends JFrame implements TextField {
 
   @Override
   public String getInput() {
-     return stockTicker.getText() + ":" + proportions.getText() + ":" + commissionFee.getText();
+    return stockTicker.getText() + ":" + proportions.getText() + ":" + commissionFee.getText();
   }
 
   @Override

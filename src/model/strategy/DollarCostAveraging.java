@@ -51,7 +51,8 @@ public class DollarCostAveraging implements IDollarCostAveraging {
       amount = amount - Double.parseDouble(s);
     }
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    Date iterativeDate = null, end = null, currentDate = null;
+    Date iterativeDate = null;
+    Date end = null;
     Calendar c = Calendar.getInstance();
     try {
       iterativeDate = formatter.parse(startDate);
@@ -60,7 +61,7 @@ public class DollarCostAveraging implements IDollarCostAveraging {
       e.printStackTrace();
     }
     c.setTime(iterativeDate);
-    currentDate = new Date();
+    Date currentDate = new Date();
     while (!iterativeDate.after(currentDate)) {
       if (iterativeDate.after(end)) {
         break;

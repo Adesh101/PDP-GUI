@@ -14,9 +14,7 @@ import javax.swing.JTextField;
  * A public class for DCA for existing portfolio.
  */
 public class ExistingPortfolioFixedDCA extends JFrame implements TextField {
-  private JLabel portfolioNameText;
-  private JLabel amountText;
-  private JLabel strategyDateText;
+
   private JTextField portfolioName;
   private JTextField amount;
   private JTextField strategyDate;
@@ -26,38 +24,41 @@ public class ExistingPortfolioFixedDCA extends JFrame implements TextField {
 
   /**
    * A public constructor for ExistingPortfolioFixeDCA.
+   *
    * @param: caption string
    */
-  public ExistingPortfolioFixedDCA(String caption){
+  public ExistingPortfolioFixedDCA(String caption) {
     super(caption);
-    this.setPreferredSize(new Dimension(500,350));
+    JLabel portfolioNameText;
+    JLabel amountText;
+    JLabel strategyDateText;
+    this.setPreferredSize(new Dimension(500, 350));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
     JPanel firstPanel = new JPanel();
     portfolioNameText = new JLabel("Portfolio Name: ");
-    portfolioNameText.setPreferredSize(new Dimension(100,20));
+    portfolioNameText.setPreferredSize(new Dimension(100, 20));
     portfolioName = new JTextField(20);
     firstPanel.add(portfolioNameText);
     firstPanel.add(portfolioName);
 
     JPanel thirdPanel = new JPanel();
     amountText = new JLabel("Total Amount: ");
-    amountText.setPreferredSize(new Dimension(100,20));
+    amountText.setPreferredSize(new Dimension(100, 20));
     amount = new JTextField(20);
     thirdPanel.add(amountText);
     thirdPanel.add(amount);
 
     JPanel fifthPanel = new JPanel();
     strategyDateText = new JLabel("Date: ");
-    strategyDateText.setPreferredSize(new Dimension(100,20));
+    strategyDateText.setPreferredSize(new Dimension(100, 20));
     strategyDate = new JTextField(20);
     fifthPanel.add(strategyDateText);
     fifthPanel.add(strategyDate);
 
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");
-    displayText.setPreferredSize(new Dimension(400,20));
+    displayText.setPreferredSize(new Dimension(400, 20));
     displayPanel.add(displayText);
 
     JPanel buttonPanel = new JPanel();
@@ -68,7 +69,7 @@ public class ExistingPortfolioFixedDCA extends JFrame implements TextField {
     buttonPanel.add(addStock);
     buttonPanel.add(home);
 
-    JPanel panelStructure = new JPanel(new GridLayout(7,1));
+    JPanel panelStructure = new JPanel(new GridLayout(7, 1));
     panelStructure.add(firstPanel);
     panelStructure.add(thirdPanel);
     panelStructure.add(fifthPanel);
@@ -81,6 +82,7 @@ public class ExistingPortfolioFixedDCA extends JFrame implements TextField {
     setLocationRelativeTo(null);
     this.setVisible(true);
   }
+
   @Override
   public void addActionListener(ActionListener listener) {
     addStock.addActionListener(listener);

@@ -15,8 +15,7 @@ import javax.swing.JTextField;
  */
 public class QueryCostBasis extends JFrame implements TextField {
 
-  private JLabel portfolioNameText;
-  private JLabel costBasisDateText;
+
   private JLabel displayText;
 
   private JTextField portfolioName;
@@ -27,10 +26,13 @@ public class QueryCostBasis extends JFrame implements TextField {
 
   /**
    * A public constructor for QueryCostBasis.
+   *
    * @param caption string
    */
   public QueryCostBasis(String caption) {
     super(caption);
+    JLabel portfolioNameText;
+    JLabel costBasisDateText;
     this.setPreferredSize(new Dimension(500, 350));
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

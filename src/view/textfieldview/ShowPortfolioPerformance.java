@@ -13,10 +13,8 @@ import javax.swing.JTextField;
 /**
  * A public class for ShowPortfolioPerformance.
  */
-public class ShowPortfolioPerformance extends JFrame implements TextField{
-  private JLabel portfolioNameText;
-  private JLabel startDateText;
-  private JLabel endDateText;
+public class ShowPortfolioPerformance extends JFrame implements TextField {
+
   private JTextField portfolioName;
   private JTextField startDate;
   private JTextField endDate;
@@ -26,10 +24,14 @@ public class ShowPortfolioPerformance extends JFrame implements TextField{
 
   /**
    * A public constructor for ShowPortfolioPerformance.
+   *
    * @param caption string
    */
-  public ShowPortfolioPerformance (String caption) {
+  public ShowPortfolioPerformance(String caption) {
     super(caption);
+    JLabel portfolioNameText;
+    JLabel startDateText;
+    JLabel endDateText;
     this.setPreferredSize(new Dimension(500, 350));
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  */
 public class SavePortfolio extends JFrame implements TextField {
 
-  private JLabel portfolioNameText;
+
   private JLabel displayText;
 
   private JTextField portfolioName;
@@ -25,10 +25,12 @@ public class SavePortfolio extends JFrame implements TextField {
 
   /**
    * A public constructor for SavePortfolio.
+   *
    * @param caption string
    */
   public SavePortfolio(String caption) {
     super(caption);
+    JLabel portfolioNameText;
     this.setPreferredSize(new Dimension(450, 300));
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

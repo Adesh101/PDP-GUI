@@ -15,11 +15,7 @@ import javax.swing.JTextField;
  * A public class for selling the stock.
  */
 public class SellStock extends JFrame implements TextField {
-  private JLabel portfolioNameText;
-  private JLabel stockTickerText;
-  private JLabel stockQuantityText;
-  private JLabel buyingDateText;
-  private JLabel commissionFeeText;
+
   private JTextField portfolioName;
   private JTextField stockTicker;
   private JTextField stockQuantity;
@@ -31,10 +27,16 @@ public class SellStock extends JFrame implements TextField {
 
   /**
    * A public constructor for SellStock.
+   *
    * @param caption string
    */
   public SellStock(String caption) {
     super(caption);
+    JLabel portfolioNameText;
+    JLabel stockTickerText;
+    JLabel stockQuantityText;
+    JLabel buyingDateText;
+    JLabel commissionFeeText;
     this.setPreferredSize(new Dimension(500, 350));
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

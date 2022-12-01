@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  */
 public class ReadPortfolio extends JFrame implements TextField {
 
-  private JLabel portfolioNameText;
+
   private JLabel displayText;
 
   private JTextField portfolioName;
@@ -25,10 +25,12 @@ public class ReadPortfolio extends JFrame implements TextField {
 
   /**
    * A public constructor for ReadPortfolio.
+   *
    * @param caption string
    */
   public ReadPortfolio(String caption) {
     super(caption);
+    JLabel portfolioNameText;
     this.setPreferredSize(new Dimension(450, 300));
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -15,8 +15,7 @@ import javax.swing.JTextField;
  */
 public class PortfolioValueByDate extends JFrame implements TextField {
 
-  private JLabel portfolioNameText;
-  private JLabel portfolioValueDateText;
+
   private JLabel displayText;
 
   private JTextField portfolioName;
@@ -27,10 +26,13 @@ public class PortfolioValueByDate extends JFrame implements TextField {
 
   /**
    * A public constructor for PortfolioValueByDate.
+   *
    * @param caption string
    */
   public PortfolioValueByDate(String caption) {
     super(caption);
+    JLabel portfolioNameText;
+    JLabel portfolioValueDateText;
     this.setPreferredSize(new Dimension(500, 350));
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

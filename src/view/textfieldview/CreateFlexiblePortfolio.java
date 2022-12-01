@@ -15,21 +15,24 @@ import javax.swing.JTextField;
 /**
  * A public class to create flexible portfolio.
  */
-public class CreateFlexiblePortfolio extends JFrame implements TextField{
+public class CreateFlexiblePortfolio extends JFrame implements TextField {
+
   private JTextField portfolioName;
   private JLabel displayText;
-  private JLabel portfolioText;
-  private JLabel portfolioDateText;
+
   private JTextField portfolioDate;
   private JButton createPortfolio;
   private JButton homeButton;
 
   /**
    * A public constructor for CreateFlexiblePortfolio.
+   *
    * @param caption string
    */
   public CreateFlexiblePortfolio(String caption) {
     super(caption);
+    JLabel portfolioText;
+    JLabel portfolioDateText;
     this.setPreferredSize(new Dimension(450, 300));
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

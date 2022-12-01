@@ -32,8 +32,10 @@ public class Operation implements IOperation {
   protected HashMap<String, HashMap<String, List<String>>> portfolios = new HashMap<String, HashMap<String, List<String>>>();
   protected String portfolioName;
   CsvFiles files = new CsvFiles();
-  protected HashMap<String, HashMap<String, HashMap<String, List<String>>>> flexibleMap = new HashMap<String, HashMap<String, HashMap<String, List<String>>>>();
-  protected HashMap<String, HashMap<String, HashMap<String, List<String>>>> inflexibleMap = new HashMap<>();
+  protected HashMap<String, HashMap<String, HashMap<String, List<String>>>>
+      flexibleMap = new HashMap<String, HashMap<String, HashMap<String, List<String>>>>();
+  protected HashMap<String, HashMap<String, HashMap<String, List<String>>>>
+      inflexibleMap = new HashMap<>();
   protected double totalValue;
   protected String date;
   protected IStocks stocks;
@@ -85,7 +87,8 @@ public class Operation implements IOperation {
       portfolios.get(portfolioName).get(ticker)
           .set(0, String.valueOf(existingNoOfStocks + quantity));
       double existingPrice = Double.parseDouble(portfolios.get(portfolioName).get(ticker).get(1));
-      portfolios.get(portfolioName).get(ticker).set(1, String.valueOf((existingPrice + price) / 2));
+      portfolios.get(portfolioName).get(ticker).set(1,
+          String.valueOf((existingPrice + price) / 2));
       double existingTotalStockValue = Double.parseDouble(
           portfolios.get(portfolioName).get(ticker).get(2));
       portfolios.get(portfolioName).get(ticker)

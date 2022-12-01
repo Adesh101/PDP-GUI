@@ -12,23 +12,25 @@ import javax.swing.JPanel;
  * A public class for investment strategy.
  */
 public class InvestmentStrategy extends JFrame implements TextField {
+
   private JLabel displayText;
   private JButton dollarCostAveraging;
   private JButton home;
 
   /**
    * A public constructor for InvestmentStrategy.
+   *
    * @param caption string
    */
-  public InvestmentStrategy(String caption){
+  public InvestmentStrategy(String caption) {
     super(caption);
-    this.setPreferredSize(new Dimension(500,350));
+    this.setPreferredSize(new Dimension(500, 350));
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");
-    displayText.setPreferredSize(new Dimension(400,200));
+    displayText.setPreferredSize(new Dimension(400, 200));
     displayPanel.add(displayText);
 
     JPanel buttonPanel = new JPanel();
@@ -45,6 +47,7 @@ public class InvestmentStrategy extends JFrame implements TextField {
     setLocationRelativeTo(null);
     this.setVisible(true);
   }
+
   @Override
   public void addActionListener(ActionListener listener) {
     dollarCostAveraging.addActionListener(listener);
@@ -58,7 +61,7 @@ public class InvestmentStrategy extends JFrame implements TextField {
 
   @Override
   public void setHintMess(String message) {
-      displayText.setText(message);
+    displayText.setText(message);
   }
 
   @Override
@@ -68,7 +71,8 @@ public class InvestmentStrategy extends JFrame implements TextField {
 
   @Override
   public void resetFocus() {
-    this .setFocusable(true);
+    this.setFocusable(true);
     this.requestFocus();
-;  }
+    ;
+  }
 }

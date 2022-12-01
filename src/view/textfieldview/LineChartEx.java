@@ -37,7 +37,8 @@ public class LineChartEx extends JFrame implements TextField {
 
   /**
    * A public constructor for LineChartEx.
-   * @param map chart data
+   *
+   * @param map   chart data
    * @param scale scale
    */
   public LineChartEx(TreeMap<String, Integer> map, int scale) {
@@ -46,7 +47,8 @@ public class LineChartEx extends JFrame implements TextField {
 
   /**
    * A public method to initialise the UI.
-   * @param map chart data
+   *
+   * @param map   chart data
    * @param scale scale of the chart
    */
   public void initUI(TreeMap<String, Integer> map, int scale) {

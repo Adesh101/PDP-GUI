@@ -1,6 +1,5 @@
 package view;
 
-import controller.GUIController;
 
 /**
  * A public interface for View.
