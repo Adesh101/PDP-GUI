@@ -1,4 +1,4 @@
-package view.TextFieldView;
+package view.textfieldview;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -11,37 +11,28 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * A public class for DCA for new portfolio for infinite range.
+ * A public class for DCA for existing portfolio.
  */
-public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
+public class ExistingPortfolioFixedDCA extends JFrame implements TextField {
   private JLabel portfolioNameText;
-  //private JLabel stockTickerText;
   private JLabel amountText;
-  //private JLabel proportionsText;
-  private JLabel startDateText;
-  private JLabel intervalText;
-  //private JLabel commissionFeeText;
+  private JLabel strategyDateText;
   private JTextField portfolioName;
-  //private JTextField stockTicker;
   private JTextField amount;
-  //private JTextField proportions;
-  private JTextField startDate;
-  private JTextField interval;
-  //private JTextField commissionFee;
+  private JTextField strategyDate;
   private JLabel displayText;
-  //private JButton implementStrategy;
-  private JButton addStocks;
+  private JButton addStock;
   private JButton home;
 
   /**
-   * A public constructor for NewPortfolioWithoutEndDateDCA.
-   * @param caption string
+   * A public constructor for ExistingPortfolioFixeDCA.
+   * @param: caption string
    */
-  public NewPortfolioWithoutEndDateDCA(String caption){
+  public ExistingPortfolioFixedDCA(String caption){
     super(caption);
     this.setPreferredSize(new Dimension(500,350));
-
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
     JPanel firstPanel = new JPanel();
     portfolioNameText = new JLabel("Portfolio Name: ");
@@ -50,7 +41,6 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     firstPanel.add(portfolioNameText);
     firstPanel.add(portfolioName);
 
-
     JPanel thirdPanel = new JPanel();
     amountText = new JLabel("Total Amount: ");
     amountText.setPreferredSize(new Dimension(100,20));
@@ -58,47 +48,30 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     thirdPanel.add(amountText);
     thirdPanel.add(amount);
 
-
     JPanel fifthPanel = new JPanel();
-    startDateText = new JLabel("Start Date: ");
-    startDateText.setPreferredSize(new Dimension(100,20));
-    startDate = new JTextField(20);
-    fifthPanel.add(startDateText);
-    fifthPanel.add(startDate);
-
-
-    JPanel sixthPanel = new JPanel();
-    intervalText= new JLabel("Interval in Days: ");
-    intervalText.setPreferredSize(new Dimension(100,20));
-    interval = new JTextField(20);
-    sixthPanel.add(intervalText);
-    sixthPanel.add(interval);
-
+    strategyDateText = new JLabel("Date: ");
+    strategyDateText.setPreferredSize(new Dimension(100,20));
+    strategyDate = new JTextField(20);
+    fifthPanel.add(strategyDateText);
+    fifthPanel.add(strategyDate);
 
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");
     displayText.setPreferredSize(new Dimension(400,20));
     displayPanel.add(displayText);
 
-    JPanel buttonPanel =new JPanel();
-    //implementStrategy = new JButton("Implement Strategy");
-    addStocks = new JButton("Select Stocks");
+    JPanel buttonPanel = new JPanel();
+    addStock = new JButton("Select Stocks");
     home = new JButton("Home");
-    //implementStrategy.setActionCommand("newPortfolioWithoutEndDateDCA");
-    addStocks.setActionCommand("selectStocksInfiniteRecurring");
-    home.setActionCommand("newPortfolioWithoutEndDateDCAHomeButton");
-    //buttonPanel.add(implementStrategy);
-    buttonPanel.add(addStocks);
+    addStock.setActionCommand("selectStocksExisting");
+    home.setActionCommand("existingPortfolioFixedDCAHomeButton");
+    buttonPanel.add(addStock);
     buttonPanel.add(home);
 
-    JPanel panelStructure = new JPanel(new GridLayout(9,1));
+    JPanel panelStructure = new JPanel(new GridLayout(7,1));
     panelStructure.add(firstPanel);
-    //panelStructure.add(secondPanel);
     panelStructure.add(thirdPanel);
-    //panelStructure.add(fourthPanel);
     panelStructure.add(fifthPanel);
-    panelStructure.add(sixthPanel);
-    //panelStructure.add(seventhPanel);
 
     this.add(panelStructure, BorderLayout.PAGE_START);
     this.add(displayPanel, BorderLayout.CENTER);
@@ -107,18 +80,16 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     this.pack();
     setLocationRelativeTo(null);
     this.setVisible(true);
-
   }
   @Override
   public void addActionListener(ActionListener listener) {
-    //implementStrategy.addActionListener(listener);
-    addStocks.addActionListener(listener);
+    addStock.addActionListener(listener);
     home.addActionListener(listener);
   }
 
   @Override
   public String getInput() {
-    return portfolioName.getText() + ":" + amount.getText() + ":"  + startDate.getText() + ":" + interval.getText();
+    return portfolioName.getText() + ":" + amount.getText() + ":" + strategyDate.getText();
   }
 
   @Override
@@ -132,8 +103,7 @@ public class NewPortfolioWithoutEndDateDCA extends JFrame implements TextField {
     //stockTicker.setText("");
     amount.setText("");
     //proportions.setText("");
-    startDate.setText("");
-    interval.setText("");
+    strategyDate.setText("");
     //commissionFee.setText("");
   }
 

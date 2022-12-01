@@ -1,4 +1,4 @@
-package view.TextFieldView;
+package view.textfieldview;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -11,64 +11,52 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * A public class for querying cost basis.
+ * A public class for Reading Portfolio.
  */
-public class QueryCostBasis extends JFrame implements TextField {
+public class ReadPortfolio extends JFrame implements TextField {
 
   private JLabel portfolioNameText;
-  private JLabel costBasisDateText;
   private JLabel displayText;
 
   private JTextField portfolioName;
-  private JTextField costBasisDate;
 
-  private JButton costBasis;
+  private JButton readPortfolio;
   private JButton home;
 
   /**
-   * A public constructor for QueryCostBasis.
+   * A public constructor for ReadPortfolio.
    * @param caption string
    */
-  public QueryCostBasis(String caption) {
+  public ReadPortfolio(String caption) {
     super(caption);
-    this.setPreferredSize(new Dimension(500, 350));
+    this.setPreferredSize(new Dimension(450, 300));
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel firstPanel = new JPanel();
     portfolioNameText = new JLabel("Portfolio Name: ");
-    portfolioNameText.setPreferredSize(new Dimension(100, 20));
-    portfolioName = new JTextField(20);
+    portfolioName = new JTextField(30);
     firstPanel.add(portfolioNameText);
     firstPanel.add(portfolioName);
 
     JPanel secondPanel = new JPanel();
-    costBasisDateText = new JLabel("Date: ");
-    costBasisDateText.setPreferredSize(new Dimension(100, 20));
-    costBasisDate = new JTextField(20);
-    secondPanel.add(costBasisDateText);
-    secondPanel.add(costBasisDate);
+    readPortfolio = new JButton("Read Portfolio");
+    home = new JButton("Home");
+    readPortfolio.setActionCommand("readPortfolioButton");
+    home.setActionCommand("readHomeButton");
+    secondPanel.add(readPortfolio);
+    secondPanel.add(home);
 
     JPanel displayPanel = new JPanel();
     displayText = new JLabel("");
-    displayText.setPreferredSize(new Dimension(400, 20));
     displayPanel.add(displayText);
 
-    JPanel buttonPanel = new JPanel();
-    costBasis = new JButton("Cost Stock");
-    home = new JButton("Home");
-    costBasis.setActionCommand("costBasisButton");
-    home.setActionCommand("costHomeButton");
-    buttonPanel.add(costBasis);
-    buttonPanel.add(home);
-
-    JPanel panelStructure = new JPanel(new GridLayout(6, 1));
+    JPanel panelStructure = new JPanel(new GridLayout(1, 1));
     panelStructure.add(firstPanel);
-    panelStructure.add(secondPanel);
 
     this.add(panelStructure, BorderLayout.PAGE_START);
     this.add(displayPanel, BorderLayout.CENTER);
-    this.add(buttonPanel, BorderLayout.AFTER_LAST_LINE);
+    this.add(secondPanel, BorderLayout.AFTER_LAST_LINE);
 
     this.pack();
     setLocationRelativeTo(null);
@@ -77,13 +65,13 @@ public class QueryCostBasis extends JFrame implements TextField {
 
   @Override
   public void addActionListener(ActionListener listener) {
-    costBasis.addActionListener(listener);
+    readPortfolio.addActionListener(listener);
     home.addActionListener(listener);
   }
 
   @Override
   public String getInput() {
-    return portfolioName.getText() + ":" + costBasisDate.getText();
+    return portfolioName.getText();
   }
 
   @Override
@@ -93,8 +81,7 @@ public class QueryCostBasis extends JFrame implements TextField {
 
   @Override
   public void clearField() {
-    portfolioName.setText("");
-    costBasisDate.setText("");
+    readPortfolio.setText("");
   }
 
   @Override

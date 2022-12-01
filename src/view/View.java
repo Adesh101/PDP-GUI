@@ -108,10 +108,6 @@ public class View extends JFrame implements TextUI {
     displayInput(sb.toString());
   }
 
-  @Override
-  public void addFeatures(GUIController guiController) {
-
-  }
 
   @Override
   public String showEnterNewPortfolioName() {

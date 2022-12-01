@@ -267,7 +267,7 @@ public class CsvFiles implements FileHandling {
     String splitBy = ",";
     StringBuilder input = new StringBuilder();
     HashMap<String, String> map = new HashMap<>();
-    String portfolioName= "";
+    String portfolioName = "";
     try {
       BufferedReader br = new BufferedReader(new FileReader(fileName));
       while ((line = br.readLine()) != null) {
@@ -280,14 +280,14 @@ public class CsvFiles implements FileHandling {
           if (portfolioNames[0].equals("Portfolio Date")) {
             map.put(portfolioName, portfolioNames[1]);
             break;
-            }
-          } else {
-            throw new IllegalArgumentException();
           }
+        } else {
+          throw new IllegalArgumentException();
         }
-      } catch (Exception ex) {
-        return new HashMap<String, String>();
       }
+    } catch (Exception ex) {
+      return new HashMap<String, String>();
+    }
     return map;
   }
 

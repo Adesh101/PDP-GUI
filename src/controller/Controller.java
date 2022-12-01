@@ -19,7 +19,8 @@ import view.TextUI;
  * This is the main controller of the program. This controller will handle input and pass them to
  * the appropriate child controllers.
  */
-public class Controller implements IController{
+public class Controller implements IController {
+
   private IOperation operation;
   private TextUI view;
   private IActions action;

@@ -1,10 +1,7 @@
-package view.TextFieldView;
+package view.textfieldview;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-
-import javax.swing.SwingUtilities;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;

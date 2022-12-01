@@ -4,26 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 import model.operation.IOperation;
-import view.FunctionalView.MainView;
-import view.TextFieldView.AddStockDCAFixed;
-import view.TextFieldView.AddStockDCARecurringFinite;
-import view.TextFieldView.AddStockDCARecurringInfinite;
-import view.TextFieldView.BuyStock;
-import view.TextFieldView.CreateFlexiblePortfolio;
-import view.FunctionalView.MainViewFunction;
-import view.TextFieldView.DollarCostAveragingView;
-import view.TextFieldView.ExistingPortfolioFixedDCA;
-import view.TextFieldView.InvestmentStrategy;
-import view.TextFieldView.LineChartEx;
-import view.TextFieldView.NewPortfolioWithFiniteRangeDCA;
-import view.TextFieldView.NewPortfolioWithoutEndDateDCA;
-import view.TextFieldView.PortfolioValueByDate;
-import view.TextFieldView.QueryCostBasis;
-import view.TextFieldView.ReadPortfolio;
-import view.TextFieldView.SavePortfolio;
-import view.TextFieldView.SellStock;
-import view.TextFieldView.ShowPortfolioPerformance;
-import view.TextFieldView.TextField;
+import view.functionalview.MainView;
+import view.textfieldview.AddStockDCAFixed;
+import view.textfieldview.AddStockDCARecurringFinite;
+import view.textfieldview.AddStockDCARecurringInfinite;
+import view.textfieldview.BuyStock;
+import view.textfieldview.CreateFlexiblePortfolio;
+import view.functionalview.MainViewFunction;
+import view.textfieldview.DollarCostAveragingView;
+import view.textfieldview.ExistingPortfolioFixedDCA;
+import view.textfieldview.InvestmentStrategy;
+import view.textfieldview.LineChartEx;
+import view.textfieldview.NewPortfolioWithFiniteRangeDCA;
+import view.textfieldview.NewPortfolioWithoutEndDateDCA;
+import view.textfieldview.PortfolioValueByDate;
+import view.textfieldview.QueryCostBasis;
+import view.textfieldview.ReadPortfolio;
+import view.textfieldview.SavePortfolio;
+import view.textfieldview.SellStock;
+import view.textfieldview.ShowPortfolioPerformance;
+import view.textfieldview.TextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -326,7 +326,8 @@ public class GUIController implements IController, ActionListener {
     });
 
     operationMap.put("existingPortfolioDCA", () -> {
-      existingPortfolioStrategy = new ExistingPortfolioFixedDCA("Existing Portfolio Fixed Amount");
+      existingPortfolioStrategy = new ExistingPortfolioFixedDCA("Existing Portfolio "
+          + "Fixed Amount");
       existingPortfolioStrategy.addActionListener(this);
       ((JFrame) this.dollarCostAveraging).dispose();
     });
@@ -378,7 +379,7 @@ public class GUIController implements IController, ActionListener {
 
       String[] details = selectStocks.getInput().split(":");
 
-      if(!operation.isTickerValid(details[0]) || details[0].length() == 0) {
+      if (!operation.isTickerValid(details[0]) || details[0].length() == 0) {
         selectStocks.setHintMess("Enter valid ticker");
         return;
       }
@@ -439,7 +440,8 @@ public class GUIController implements IController, ActionListener {
         return;
       }
       try {
-        operation.implementRecurringDCANewPortfolioFinite(this.portfolioName, this.tickerNames, this.amount,
+        operation.implementRecurringDCANewPortfolioFinite(this.portfolioName, this.tickerNames,
+            this.amount,
             this.proportions, this.startDate, this.endDate, this.intervalInDays, this.fee);
         addStockRecurringFinite.setHintMess("Strategy applied successfully");
         addStockRecurringFinite.clearField();
@@ -454,7 +456,8 @@ public class GUIController implements IController, ActionListener {
         return;
       }
       try {
-        operation.implementRecurringDCANewPortfolioInfinite(this.portfolioName, this.tickerNames, this.amount,
+        operation.implementRecurringDCANewPortfolioInfinite(this.portfolioName, this.tickerNames,
+            this.amount,
             this.proportions, this.startDate, this.intervalInDays, this.fee);
         addStockDCARecurringInfinite.setHintMess("Strategy applied successfully");
         addStockDCARecurringInfinite.clearField();
@@ -469,7 +472,6 @@ public class GUIController implements IController, ActionListener {
       newPortfolioWithFiniteRange.addActionListener(this);
       ((JFrame) this.mainView).dispose();
     });
-
 
     operationMap.put("selectStocksFiniteRecurring", () -> {
       if (newPortfolioWithFiniteRange.getInput().length() == 4) {
@@ -524,7 +526,6 @@ public class GUIController implements IController, ActionListener {
       ((JFrame) this.dollarCostAveraging).dispose();
     });
 
-
     operationMap.put("selectStocksFinite", () -> {
       double totalProportion = 0;
       if (addStockRecurringFinite.getInput().length() == 2) {
@@ -534,7 +535,7 @@ public class GUIController implements IController, ActionListener {
 
       String[] details = addStockRecurringFinite.getInput().split(":");
 
-      if(!operation.isTickerValid(details[0]) || details[0].length() == 0) {
+      if (!operation.isTickerValid(details[0]) || details[0].length() == 0) {
         addStockRecurringFinite.setHintMess("Enter valid ticker");
         return;
       }
@@ -574,7 +575,6 @@ public class GUIController implements IController, ActionListener {
       addStockRecurringFinite.clearField();
     });
 
-
     operationMap.put("selectStocksInfinite", () -> {
       double totalProportion = 0;
       if (addStockDCARecurringInfinite.getInput().length() == 2) {
@@ -584,7 +584,7 @@ public class GUIController implements IController, ActionListener {
 
       String[] details = addStockDCARecurringInfinite.getInput().split(":");
 
-      if(!operation.isTickerValid(details[0]) || details[0].length() == 0) {
+      if (!operation.isTickerValid(details[0]) || details[0].length() == 0) {
         addStockDCARecurringInfinite.setHintMess("Enter valid ticker");
         return;
       }
@@ -623,8 +623,6 @@ public class GUIController implements IController, ActionListener {
       addStockDCARecurringInfinite.setHintMess("Stock added to strategy.");
       addStockDCARecurringInfinite.clearField();
     });
-
-
 
     operationMap.put("selectStocksInfiniteRecurring", () -> {
       if (newPortfolioWithoutEndDate.getInput().length() == 4) {
@@ -665,7 +663,6 @@ public class GUIController implements IController, ActionListener {
       addStockDCARecurringInfinite.addActionListener(this);
       ((JFrame) this.newPortfolioWithoutEndDate).dispose();
     });
-
 
     operationMap.put("createHomeButton", () -> {
       mainView = new MainView("Home");
@@ -727,13 +724,11 @@ public class GUIController implements IController, ActionListener {
       ((JFrame) this.investmentStrategy).dispose();
     });
 
-
     operationMap.put("newPortfolioWithFiniteRangeDCAHomeButton", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
       ((JFrame) this.investmentStrategy).dispose();
     });
-
 
     operationMap.put("newPortfolioWithoutEndDateDCAHomeButton", () -> {
       mainView = new MainView("Home");
@@ -759,13 +754,11 @@ public class GUIController implements IController, ActionListener {
       ((JFrame) this.selectStocks).dispose();
     });
 
-
     operationMap.put("dollarCostAveragingHome", () -> {
       mainView = new MainView("Home");
       mainView.addActionListener(this);
       ((JFrame) this.selectStocks).dispose();
     });
-
 
     operationMap.put("quit", () -> {
       System.exit(0);

@@ -1,4 +1,4 @@
-package view.FunctionalView;
+package view.functionalview;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -8,7 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * A public class for main view.
+ */
 public class MainView extends JFrame implements MainViewFunction {
+
   private JButton createFlexiblePortfolio;
   private JButton buyStock;
   private JButton sellStock;
@@ -20,13 +24,18 @@ public class MainView extends JFrame implements MainViewFunction {
   private JButton portfolioValueByDate;
   private JButton quit;
 
-  public MainView (String str) {
+  /**
+   * A public constructor for the public class MainView.
+   *
+   * @param str String
+   */
+  public MainView(String str) {
     super(str);
     this.setPreferredSize(new Dimension(700, 500));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new BorderLayout(5, 5));
 
-    JPanel panel = new JPanel();;
+    JPanel panel = new JPanel();
     panel.setLayout(new GridLayout(10, 1, 10, 0));
 
     createFlexiblePortfolio = new JButton("Create Flexible Portfolio");

@@ -84,7 +84,7 @@ public class Stocks implements IStocks {
   }
 
   @Override
-  public String isWeekendAfterHoliday(String date){
+  public String isWeekendAfterHoliday(String date) {
     try {
       DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
       Calendar c1 = Calendar.getInstance();
@@ -102,6 +102,7 @@ public class Stocks implements IStocks {
     }
     return date;
   }
+
   @Override
   public void updateFile(String file) {
     CsvFiles files = new CsvFiles();
@@ -132,7 +133,7 @@ public class Stocks implements IStocks {
             break;
           }
         }
-        try{
+        try {
           newData = output.substring(output.indexOf("\n") + 1, output.lastIndexOf("\r"));
           files.updateFile(file, newData);
         } catch (IndexOutOfBoundsException ex) {
@@ -156,18 +157,6 @@ public class Stocks implements IStocks {
       LocalDate dt = LocalDate.parse(date, formatter);
       String result = dt.minusDays(1).format(formatter);
       price = getPriceByDate(ticker, result);
-//      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//      Date newDate;
-//      Calendar c = Calendar.getInstance();
-//      try {
-//        c.setTime(sdf.parse(date));
-//        c.add(Calendar.DATE, -1);
-//        newDate = sdf.parse(sdf.format(c.getTime()));
-//        String validDate = sdf.format(newDate);
-//        price = getPriceByDate(ticker, validDate);
-//      } catch (ParseException ex) {
-//        System.out.println(ex.getMessage());
-//      }
     }
     return price;
   }

@@ -1,4 +1,4 @@
-package view.FunctionalView;
+package view.functionalview;
 
 import java.awt.event.ActionListener;
 

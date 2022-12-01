@@ -48,8 +48,8 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
   }
 
   @Override
-  public void buyStock(String portfolioName, String ticker, String quantity, double price, String date,
-      double fee) {
+  public void buyStock(String portfolioName, String ticker, String quantity, double price,
+      String date, double fee) {
     this.commissionFee = fee;
     if (!map.containsKey(portfolioName)) {
       throw new IllegalArgumentException("Enter valid portfolio name.");
@@ -69,10 +69,13 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
         double existingTotalStockValue = Double.parseDouble(
             map.get(portfolioName).get(date).get(ticker).get(2));
         map.get(portfolioName).get(date).get(ticker)
-            .set(2, String.valueOf(existingTotalStockValue + (Double.parseDouble(quantity) * price)));
-        this.totalValue = totalValue + Math.round(Double.parseDouble(quantity) * price) + commissionFee;
+            .set(2, String.valueOf(existingTotalStockValue
+                + (Double.parseDouble(quantity) * price)));
+        this.totalValue = totalValue + Math.round(Double.parseDouble(quantity) * price)
+            + commissionFee;
       } else {
-        addStockDataHelper(portfolioName, ticker, Double.parseDouble(quantity), price, date, 0);
+        addStockDataHelper(portfolioName, ticker, Double.parseDouble(quantity), price,
+            date, 0);
         this.totalValue = totalValue + (Double.parseDouble(quantity) * price) + commissionFee;
       }
 
@@ -100,17 +103,21 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
           double existingTotalValue = Integer.parseInt(
               map.get(portfolioName).get(date).get(ticker).get(2));
           map.get(portfolioName).get(date).get(ticker).set(1, String.valueOf(
-              (existingTotalValue + (Double.parseDouble(quantity) * price)) / (existingQuantity + Double.parseDouble(quantity))));
+              (existingTotalValue + (Double.parseDouble(quantity) * price)) / (existingQuantity
+                  + Double.parseDouble(quantity))));
           map.get(portfolioName).get(date).get(ticker)
-              .set(2, String.valueOf((existingTotalValue + (Double.parseDouble(quantity) * price))));
+              .set(2,
+                  String.valueOf((existingTotalValue + (Double.parseDouble(quantity) * price))));
           this.totalValue = totalValue + (Double.parseDouble(quantity) * price) + commissionFee;
         } else {
-          addStockDataHelper(portfolioName, ticker, Double.parseDouble(quantity), price, date, 0);
+          addStockDataHelper(portfolioName, ticker, Double.parseDouble(quantity), price, date,
+              0);
           this.totalValue = totalValue + (Double.parseDouble(quantity) * price) + commissionFee;
         }
       } else {
         map.get(portfolioName).put(date, new HashMap<>());
-        addStockDataHelper(portfolioName, ticker, Double.parseDouble(quantity), price, date, 0);
+        addStockDataHelper(portfolioName, ticker, Double.parseDouble(quantity), price, date,
+            0);
         this.totalValue = totalValue + (Double.parseDouble(quantity) * price) + commissionFee;
       }
     }
@@ -119,8 +126,8 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
     updateFutureRecords(portfolioName, ticker, date, Double.parseDouble(quantity), price);
   }
 
-  private void updateFutureRecords(String portfolioName, String ticker, String date, Double quantity,
-      double price) {
+  private void updateFutureRecords(String portfolioName, String ticker, String date,
+      Double quantity, double price) {
     List<String> dates = sortDateHelper(map.get(portfolioName).keySet(), portfolioName);
     for (String s : dates) {
       if (s.compareTo(date) > 0) {
@@ -157,10 +164,11 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
     return dates;
   }
 
-  private void addStockDataHelper(String portfolioName, String ticker, Double quantity, double price,
-      String date, int previousQuantity) {
+  private void addStockDataHelper(String portfolioName, String ticker, Double quantity,
+      double price, String date, int previousQuantity) {
     map.get(portfolioName).get(date).put(ticker, new ArrayList<>());
-    map.get(portfolioName).get(date).get(ticker).add(String.valueOf(previousQuantity + quantity));
+    map.get(portfolioName).get(date).get(ticker).
+        add(String.valueOf(previousQuantity + quantity));
     map.get(portfolioName).get(date).get(ticker).add(String.valueOf(price));
     map.get(portfolioName).get(date).get(ticker).add(String.valueOf(quantity * price));
   }
@@ -193,7 +201,8 @@ public class FlexiblePortfolio implements IFlexiblePortfolio {
             .set(2, String.valueOf(existingTotalStockValue - (quantity * price)));
         this.totalValue = totalValue - Math.round(quantity * price);
       }
-      updateFutureRecords(portfolioName, ticker, date, Double.parseDouble(String.valueOf(quantity)), price);
+      updateFutureRecords(portfolioName, ticker, date, Double.parseDouble(String.valueOf(quantity)),
+          price);
     } else {
       throw new IllegalArgumentException("No such stock present.");
     }

@@ -6,6 +6,7 @@ import controller.GUIController;
  * A public interface for View.
  */
 public interface IView {
+
   /**
    * A method to print welcome message.
    */
@@ -24,5 +25,4 @@ public interface IView {
 
   void showMenu();
 
-  void addFeatures(GUIController guiController);
 }

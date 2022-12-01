@@ -273,6 +273,6 @@ public class LineChart implements ILineChart {
 
   @Override
   public int scale() {
-    return this.scale/10;
+    return this.scale / 10;
   }
 }

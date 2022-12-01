@@ -29,14 +29,11 @@ import model.strategy.IDollarCostAveraging;
  */
 public class Operation implements IOperation {
 
-  protected HashMap<String, HashMap<String, List<String>>> portfolios
-      = new HashMap<String, HashMap<String, List<String>>>();
+  protected HashMap<String, HashMap<String, List<String>>> portfolios = new HashMap<String, HashMap<String, List<String>>>();
   protected String portfolioName;
   CsvFiles files = new CsvFiles();
-  protected HashMap<String, HashMap<String, HashMap<String, List<String>>>> flexibleMap
-      = new HashMap<String, HashMap<String, HashMap<String, List<String>>>>();
-  protected HashMap<String, HashMap<String, HashMap<String,
-      List<String>>>> inflexibleMap = new HashMap<>();
+  protected HashMap<String, HashMap<String, HashMap<String, List<String>>>> flexibleMap = new HashMap<String, HashMap<String, HashMap<String, List<String>>>>();
+  protected HashMap<String, HashMap<String, HashMap<String, List<String>>>> inflexibleMap = new HashMap<>();
   protected double totalValue;
   protected String date;
   protected IStocks stocks;
@@ -71,8 +68,7 @@ public class Operation implements IOperation {
       if (getMapSize(portfolioName) != 0) {
         throw new IllegalArgumentException("CANNOT MODIFY A LOCKED PORTFOLIO.");
       } else {
-        throw new IllegalArgumentException(
-            "PORTFOLIO ALREADY PRESENT. ADD STOCKS.");
+        throw new IllegalArgumentException("PORTFOLIO ALREADY PRESENT. ADD STOCKS.");
       }
     }
     this.portfolios.put(portfolioName, new HashMap<String, List<String>>());
@@ -118,7 +114,8 @@ public class Operation implements IOperation {
     HashMap<String, Integer> map = new HashMap<>();
     for (String stockDates : flexibleMap.get(portfolioName).keySet()) {
       for (String ticker : flexibleMap.get(portfolioName).get(stockDates).keySet()) {
-        Double newData = new Double(flexibleMap.get(portfolioName).get(stockDates).get(ticker).get(0));
+        Double newData = new Double(
+            flexibleMap.get(portfolioName).get(stockDates).get(ticker).get(0));
         int quantity = newData.intValue();
         if (map.containsKey(ticker)) {
           map.put(ticker, map.get(ticker) + quantity);
@@ -326,8 +323,8 @@ public class Operation implements IOperation {
     String previousDate = getPreviousDate(map, date, name);
     double portfolioValue = 0.00;
     for (String stock : map.get(name).get(previousDate).keySet()) {
-      portfolioValue = portfolioValue + (stocks.getPriceByDate(stock, date)
-          * Double.parseDouble(map.get(name).get(previousDate).get(stock).get(0)));
+      portfolioValue = portfolioValue + (stocks.getPriceByDate(stock, date) * Double.parseDouble(
+          map.get(name).get(previousDate).get(stock).get(0)));
     }
     return portfolioValue;
   }
@@ -414,13 +411,14 @@ public class Operation implements IOperation {
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date d = new Date();
     String cdate = dateFormat.format(d);
-    if (date.compareTo(cdate)>0)
+    if (date.compareTo(cdate) > 0) {
       throw new IllegalArgumentException("DATA NOT AVAILABLE FOR THE GIVEN DATE");
+    }
     if (resultStock[0] == null) {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
       LocalDate dt = LocalDate.parse(date, formatter);
       String result = dt.plusDays(1).format(formatter);
-      result=stocks.isWeekendAfterHoliday(result);
+      result = stocks.isWeekendAfterHoliday(result);
 
       //String result = dt.minusDays(1).format(formatter);
       resultStock = callStockAPI(ticker, result);
@@ -481,16 +479,16 @@ public class Operation implements IOperation {
   }
 
   @Override
-  public String[] returnTickerNames(String portfolioName){
+  public String[] returnTickerNames(String portfolioName) {
     StringBuilder sb = new StringBuilder();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date d = new Date();
     String cdate = dateFormat.format(d);
     cdate = getPreviousDate(flexibleMap, cdate, portfolioName);
-    String[] names= new String[flexibleMap.get(portfolioName).get(cdate).keySet().size()];
-    int i=0;
+    String[] names = new String[flexibleMap.get(portfolioName).get(cdate).keySet().size()];
+    int i = 0;
     for (String stockName : flexibleMap.get(portfolioName).get(cdate).keySet()) {
-      names[i]=stockName;
+      names[i] = stockName;
       i++;
     }
     return names;
@@ -499,21 +497,24 @@ public class Operation implements IOperation {
   @Override
   public void implementFixedDCAExistingPortfolio(String portfolioName, Double amount, String date,
       List<String> tickerNames, List<String> proportions, List<String> commissionFee) {
-    dca.strategyForExistingPortfolio(portfolioName, tickerNames, amount, proportions, date, commissionFee);
+    dca.strategyForExistingPortfolio(portfolioName, tickerNames, amount, proportions, date,
+        commissionFee);
   }
 
   @Override
   public void implementRecurringDCANewPortfolioFinite(String portfolioName, List<String> stockNames,
       double amount, List<String> proportions, String startDate, String endDate, int interval,
       List<String> commissionFee) {
-    dca.strategyForNewPortfolioWithEndDate(portfolioName, stockNames, amount, proportions, startDate, endDate, interval, commissionFee);
+    dca.strategyForNewPortfolioWithEndDate(portfolioName, stockNames, amount, proportions,
+        startDate, endDate, interval, commissionFee);
   }
 
   @Override
   public void implementRecurringDCANewPortfolioInfinite(String portfolioName,
       List<String> stockNames, double amount, List<String> proportions, String startDate,
       int interval, List<String> commissionFee) {
-    dca.strategyForNewPortfolioWithoutEndDate(portfolioName, stockNames, amount, proportions,startDate, interval, commissionFee);
+    dca.strategyForNewPortfolioWithoutEndDate(portfolioName, stockNames, amount, proportions,
+        startDate, interval, commissionFee);
   }
 
 

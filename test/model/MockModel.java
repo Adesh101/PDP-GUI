@@ -189,26 +189,33 @@ public class MockModel implements IOperation {
 
   @Override
   public String[] returnTickerNames(String portfolioName) {
+    log.append("Portfolio Name: " + portfolioName);
     return new String[0];
   }
 
   @Override
   public void implementFixedDCAExistingPortfolio(String portfolioName, Double amount, String date,
       List<String> tickerNames, List<String> proportions, List<String> commissionFee) {
-
+    log.append("Portfolio Name: " + portfolioName + "Amount: " + amount + "Date: " + date
+        + "Ticker Names: " + tickerNames + "Proportions: " + proportions + "Commission Fee:"
+        + commissionFee);
   }
 
   @Override
   public void implementRecurringDCANewPortfolioFinite(String portfolioName, List<String> stockNames,
       double amount, List<String> proportions, String startDate, String endDate, int interval,
       List<String> commissionFee) {
-
+    log.append("Portfolio Name: " + portfolioName + "Amount: " + amount + "Start Date: " + startDate
+        + "End Date: " + endDate + "Ticker Names: " + stockNames + "Proportions: "
+        + proportions + "Commission Fee:" + commissionFee + "Interval: " + interval);
   }
 
   @Override
   public void implementRecurringDCANewPortfolioInfinite(String portfolioName,
       List<String> stockNames, double amount, List<String> proportions, String startDate,
       int interval, List<String> commissionFee) {
-
+    log.append("Portfolio Name: " + portfolioName + "Amount: " + amount + "Start Date: " + startDate
+        + "Ticker Names: " + stockNames + "Proportions: "
+        + proportions + "Commission Fee:" + commissionFee + "Interval: " + interval);
   }
 }
